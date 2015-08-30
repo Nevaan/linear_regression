@@ -18,9 +18,9 @@ public class TreeGraphGenerator {
 
 	public void generateTreeGraph(TreeNode root) {
 
-		for(int i = 0; i < root.data.getChildAmount(); i++) {
-			treeGraph.addChild(new Edge(), root, root.children.get(i));
-			generateTreeGraph(root.children.get(i));
+		for(int i = 0; i < root.getData().getChildAmount(); i++) {
+			treeGraph.addChild(new Edge(), root, root.getChildren().get(i));
+			generateTreeGraph(root.getChildren().get(i));
 		}
 	}
 
