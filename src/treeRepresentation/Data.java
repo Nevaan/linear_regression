@@ -48,7 +48,23 @@ public class Data {
 
 	@Override
 	public String toString() {
-		return "Type=" + type ;
+		switch (type) {
+		case 10:
+			return "add";
+		case 11:
+			return "substract";
+		case 12:
+			return "multiply";
+		case 13:
+			return "divide";
+		case 20:
+			return "constant";
+		case 21:
+			return "variable";
+		default:
+			return "something gone badly wrong, incorrect type number";
+		}
+		
 	}
 
 }
