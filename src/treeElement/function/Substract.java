@@ -1,5 +1,5 @@
 package treeElement.function;
 
-public class Substract {
+public class Substract extends Function{
 
 }

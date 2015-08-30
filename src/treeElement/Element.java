@@ -1,5 +1,5 @@
 package treeElement;
 
-public class Element {
-
+public abstract class Element {
+	public abstract double getValue();
 }

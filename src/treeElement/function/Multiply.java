@@ -1,5 +1,5 @@
 package treeElement.function;
 
-public class Multiply {
+public class Multiply extends Function{
 
 }

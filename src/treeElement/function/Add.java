@@ -1,5 +1,5 @@
 package treeElement.function;
 
-public class Add {
+public class Add extends Function{
 
 }

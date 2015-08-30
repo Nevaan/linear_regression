@@ -1,5 +1,5 @@
 package treeElement.function;
 
-public class Divide {
+public class Divide extends Function{
 
 }

@@ -1,5 +1,7 @@
 package treeElement.function;
 
-public class Function {
+import treeElement.Element;
+
+public abstract class Function extends Element{
 
 }
