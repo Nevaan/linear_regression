@@ -17,13 +17,13 @@ public class Data {
 	private long id;
 	private int type;
 	private int childAmount;
-	private double constant;
+	private int constant;
 
-	public double getConstant() {
+	public int getConstant() {
 		return constant;
 	}
 
-	public void setConstant(double constant) {
+	public void setConstant(int constant) {
 		this.constant = constant;
 	}
 
@@ -67,7 +67,7 @@ public class Data {
 		case 13:
 			return "/";
 		case 20:
-			return Double.toString(constant);
+			return Integer.toString(constant);
 		case 21:
 			return "x";
 		default:
