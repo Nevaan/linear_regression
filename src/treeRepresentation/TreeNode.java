@@ -60,7 +60,7 @@ public class TreeNode implements Iterable<TreeNode> {
 	}
 
 	public TreeNode addChild(Data childType, TreeNode child) {
-		TreeNode childNode = selectSubClass(childType);
+		TreeNode childNode = TreeNode.copyTree(child);
 		childNode.parent = this;
 		this.children.add(childNode);
 		this.registerChildForSearch(childNode);
