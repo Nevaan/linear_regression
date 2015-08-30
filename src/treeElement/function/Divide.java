@@ -4,7 +4,7 @@ import treeRepresentation.TreeNode;
 
 public class Divide extends Function{
 
-	public Divide(Object data) {
+	public Divide(String data) {
 		super(data);
 	}
 

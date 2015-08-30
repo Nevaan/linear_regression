@@ -4,7 +4,7 @@ import treeRepresentation.TreeNode;
 
 public class Substract extends Function{
 
-	public Substract(Object data) {
+	public Substract(String data) {
 		super(data);
 	}
 
