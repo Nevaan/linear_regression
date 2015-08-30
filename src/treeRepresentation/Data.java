@@ -46,4 +46,9 @@ public class Data {
 		this.childAmount = childAmount;
 	}
 
+	@Override
+	public String toString() {
+		return "Type=" + type ;
+	}
+
 }

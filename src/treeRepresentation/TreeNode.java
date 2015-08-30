@@ -111,7 +111,7 @@ public class TreeNode implements Iterable<TreeNode> {
 
 	@Override
 	public String toString() {
-		return data != null ? data.toString() : "[data null]";
+		return ((data!=null)? this.getData().toString() : "[null]");
 	}
 
 	@Override
@@ -152,4 +152,5 @@ public class TreeNode implements Iterable<TreeNode> {
 		this.elementsIndex = elementsIndex;
 	}
 
+	
 }
