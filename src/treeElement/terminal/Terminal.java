@@ -1,5 +1,7 @@
 package treeElement.terminal;
 
-public class Terminal {
+import treeElement.Element;
+
+public abstract class Terminal extends Element {
 
 }

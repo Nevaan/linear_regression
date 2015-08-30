@@ -4,11 +4,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TreeNode<T> implements Iterable<TreeNode<T>> {
+public class TreeNode implements Iterable<TreeNode> {
 
-	public T data;
-	public TreeNode<T> parent;
-	public List<TreeNode<T>> children;
+	public String data;
+	public TreeNode parent;
+	public List<TreeNode> children;
 
 	public double getValue(double xValue){
 		return 0;
@@ -22,17 +22,17 @@ public class TreeNode<T> implements Iterable<TreeNode<T>> {
 		return children.size() == 0;
 	}
 
-	private List<TreeNode<T>> elementsIndex;
+	private List<TreeNode> elementsIndex;
 
-	public TreeNode(T data) {
+	public TreeNode(String data) {
 		this.data = data;
-		this.children = new LinkedList<TreeNode<T>>();
-		this.elementsIndex = new LinkedList<TreeNode<T>>();
+		this.children = new LinkedList<TreeNode>();
+		this.elementsIndex = new LinkedList<TreeNode>();
 		this.elementsIndex.add(this);
 	}
 
-	public TreeNode<T> addChild(T child) {
-		TreeNode<T> childNode = new TreeNode<T>(child);
+	public TreeNode addChild(String child) {
+		TreeNode childNode = new TreeNode(child);
 		childNode.parent = this;
 		this.children.add(childNode);
 		this.registerChildForSearch(childNode);
@@ -46,15 +46,15 @@ public class TreeNode<T> implements Iterable<TreeNode<T>> {
 			return parent.getLevel() + 1;
 	}
 
-	private void registerChildForSearch(TreeNode<T> node) {
+	private void registerChildForSearch(TreeNode node) {
 		elementsIndex.add(node);
 		if (parent != null)
 			parent.registerChildForSearch(node);
 	}
 
-	public TreeNode<T> findTreeNode(Comparable<T> cmp) {
-		for (TreeNode<T> element : this.elementsIndex) {
-			T elData = element.data;
+	public TreeNode findTreeNode(Comparable<String> cmp) {
+		for (TreeNode element : this.elementsIndex) {
+			String elData = element.data;
 			if (cmp.compareTo(elData) == 0)
 				return element;
 		}
@@ -68,8 +68,8 @@ public class TreeNode<T> implements Iterable<TreeNode<T>> {
 	}
 
 	@Override
-	public Iterator<TreeNode<T>> iterator() {
-		TreeNodeIter<T> iter = new TreeNodeIter<T>(this);
+	public Iterator<TreeNode> iterator() {
+		TreeNodeIter iter = new TreeNodeIter(this);
 		return iter;
 	}
 
