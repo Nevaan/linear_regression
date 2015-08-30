@@ -17,6 +17,15 @@ public class Data {
 	private long id;
 	private int type;
 	private int childAmount;
+	private double constant;
+
+	public double getConstant() {
+		return constant;
+	}
+
+	public void setConstant(double constant) {
+		this.constant = constant;
+	}
 
 	public long getId() {
 		return id;
@@ -50,17 +59,17 @@ public class Data {
 	public String toString() {
 		switch (type) {
 		case 10:
-			return "add";
+			return "+";
 		case 11:
-			return "substract";
+			return "-";
 		case 12:
-			return "multiply";
+			return "*";
 		case 13:
-			return "divide";
+			return "/";
 		case 20:
-			return "constant";
+			return Double.toString(constant);
 		case 21:
-			return "variable";
+			return "x";
 		default:
 			return "something gone badly wrong, incorrect type number";
 		}
