@@ -47,8 +47,23 @@ public class TreeNode implements Iterable<TreeNode> {
 	}
 
 	public static TreeNode copyTree(TreeNode original) {
-		TreeNode clone = new TreeNode(new Data(0));
-
+		TreeNode clone;
+		switch(original.getData().getType()) {
+		case 10:
+			clone = new Add(new Data(0));
+		case 11:
+			clone = new Substract(new Data(0));
+		case 12:
+			clone = new Multiply(new Data(0));
+		case 13:
+			clone = new Divide(new Data(0));
+		case 20:
+			clone = new Constant(new Data(0));
+		case 21:
+			clone = new Variable(new Data(0));
+		default:
+			clone = new Variable(new Data(0));
+		}
 		clone.setData(original.getData());
 		clone.setParent(original.getParent());
 		clone.setChildren(original.getChildren());
