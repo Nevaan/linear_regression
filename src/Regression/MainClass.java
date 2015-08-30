@@ -11,7 +11,9 @@ public class MainClass {
 
 		TreeNode tree = TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH);
 		TreeGraphView.displayTreeGraph(tree, "drzewko");
-		System.out.println("Tree Height: " + tree.calculateTreeHeight());
+		Chromosome chromosome = new Chromosome();
+		chromosome.generateIndividual();
+		System.out.println("Tree Height: " + chromosome.getTreeHeight() + " Fitness: " + chromosome.getFitness());
 	}
 
 }

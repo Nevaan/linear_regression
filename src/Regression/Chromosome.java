@@ -12,6 +12,10 @@ public class Chromosome {
 	private Cartesian cartesian;
 	private int treeHeight;
 
+	public Chromosome() {
+		cartesian = new Cartesian();
+	}
+
 	public void generateIndividual() {
 		cartesian.init();
 		try {

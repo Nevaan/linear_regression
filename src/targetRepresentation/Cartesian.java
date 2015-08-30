@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Cartesian {
 
-	List<Point> board;
+	private List<Point> board;
 
 	public void init() {
 		board = new ArrayList<Point>();
