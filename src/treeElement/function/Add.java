@@ -6,6 +6,8 @@ public class Add extends Function{
 
 	public Add(String data) {
 		super(data);
+		TreeNode.IDENTIFIER++;
+		this.data = "Add, id: " + TreeNode.IDENTIFIER;
 	}
 
 	public double getValue(double xValue){

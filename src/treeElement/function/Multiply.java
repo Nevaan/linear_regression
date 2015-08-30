@@ -6,6 +6,8 @@ public class Multiply extends Function{
 
 	public Multiply(String data) {
 		super(data);
+		TreeNode.IDENTIFIER++;
+		this.data = "Multiply, id: " + TreeNode.IDENTIFIER;
 	}
 
 	public double getValue(double xValue){

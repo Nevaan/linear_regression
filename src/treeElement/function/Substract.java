@@ -6,6 +6,8 @@ public class Substract extends Function{
 
 	public Substract(String data) {
 		super(data);
+		TreeNode.IDENTIFIER++;
+		this.data = "Substract, id: " + TreeNode.IDENTIFIER;
 	}
 
 

@@ -6,6 +6,8 @@ public class Divide extends Function{
 
 	public Divide(String data) {
 		super(data);
+		TreeNode.IDENTIFIER++;
+		this.data = "Divide, id: " + TreeNode.IDENTIFIER;
 	}
 
 	public double getValue(double xValue){

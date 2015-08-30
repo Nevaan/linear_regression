@@ -9,6 +9,7 @@ public class TreeNode implements Iterable<TreeNode> {
 	public String data;
 	public TreeNode parent;
 	public List<TreeNode> children;
+	public static Long IDENTIFIER = 0L;
 
 	public double getValue(double xValue){
 		return 0;
