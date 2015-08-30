@@ -47,7 +47,7 @@ public class TreeNode implements Iterable<TreeNode> {
 	}
 
 	public static TreeNode copyTree(TreeNode original) {
-		TreeNode clone =  new TreeNode(new Data(0));
+		TreeNode clone = new TreeNode(new Data(0));
 
 		clone.setData(original.getData());
 		clone.setParent(original.getParent());
@@ -152,5 +152,5 @@ public class TreeNode implements Iterable<TreeNode> {
 		this.elementsIndex = elementsIndex;
 	}
 
-
+	
 }
