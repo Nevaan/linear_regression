@@ -1,7 +1,11 @@
 package treeElement.function;
 
-import treeElement.Element;
+import treeRepresentation.TreeNode;
 
-public abstract class Function extends Element{
+public abstract class Function extends TreeNode{
+
+	public Function(Object data) {
+		super(data);
+	}
 
 }

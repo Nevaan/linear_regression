@@ -10,6 +10,10 @@ public class TreeNode<T> implements Iterable<TreeNode<T>> {
 	public TreeNode<T> parent;
 	public List<TreeNode<T>> children;
 
+	public double getValue(double xValue){
+		return 0;
+	};
+	
 	public boolean isRoot() {
 		return parent == null;
 	}
