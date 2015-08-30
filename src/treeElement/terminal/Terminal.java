@@ -1,7 +1,11 @@
 package treeElement.terminal;
 
-import treeElement.Element;
+import treeRepresentation.TreeNode;
 
-public abstract class Terminal extends Element {
+public abstract class Terminal extends TreeNode {
+
+	public Terminal(String data) {
+		super(data);
+	}
 
 }
