@@ -50,19 +50,25 @@ public class TreeNode implements Iterable<TreeNode> {
 		TreeNode clone;
 		switch(original.getData().getType()) {
 		case 10:
-			clone = new Add(new Data(0));
+			clone = new Add(new Data(10));
+			break;
 		case 11:
-			clone = new Substract(new Data(0));
+			clone = new Substract(new Data(11));
+			break;
 		case 12:
-			clone = new Multiply(new Data(0));
+			clone = new Multiply(new Data(12));
+			break;
 		case 13:
-			clone = new Divide(new Data(0));
+			clone = new Divide(new Data(13));
+			break;
 		case 20:
-			clone = new Constant(new Data(0));
+			clone = new Constant(new Data(20));
+			break;
 		case 21:
-			clone = new Variable(new Data(0));
+			clone = new Variable(new Data(21));
+			break;
 		default:
-			clone = new Variable(new Data(0));
+			return null;
 		}
 		clone.setData(original.getData());
 		clone.setParent(original.getParent());
