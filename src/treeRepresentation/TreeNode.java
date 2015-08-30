@@ -15,9 +15,9 @@ import treeElement.terminal.Variable;
 
 public class TreeNode implements Iterable<TreeNode> {
 
-	public Data data;
-	public TreeNode parent;
-	public List<TreeNode> children;
+	private Data data;
+	private TreeNode parent;
+	private List<TreeNode> children;
 	public static Long IDENTIFIER = 0L;
 
 	public double getValue(double xValue) {
@@ -46,6 +46,19 @@ public class TreeNode implements Iterable<TreeNode> {
 			this.data.setChildAmount(0);
 	}
 
+	public TreeNode copyTree(TreeNode original) {
+		TreeNode clone = new TreeNode(new Data(0));
+			
+		clone.setData(original.getData());
+		clone.setParent(original.getParent());
+		clone.setChildren(original.getChildren());
+		clone.setElementsIndex(original.getElementsIndex());
+		
+		
+		return clone;
+		
+	}
+	
 	public TreeNode addChild(Data child) {
 		TreeNode childNode = selectSubClass(child);
 		childNode.parent = this;
@@ -105,6 +118,38 @@ public class TreeNode implements Iterable<TreeNode> {
 	public Iterator<TreeNode> iterator() {
 		TreeNodeIter iter = new TreeNodeIter(this);
 		return iter;
+	}
+
+	public Data getData() {
+		return data;
+	}
+
+	public void setData(Data data) {
+		this.data = data;
+	}
+
+	public TreeNode getParent() {
+		return parent;
+	}
+
+	public void setParent(TreeNode parent) {
+		this.parent = parent;
+	}
+
+	public List<TreeNode> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<TreeNode> children) {
+		this.children = children;
+	}
+
+	public List<TreeNode> getElementsIndex() {
+		return elementsIndex;
+	}
+
+	public void setElementsIndex(List<TreeNode> elementsIndex) {
+		this.elementsIndex = elementsIndex;
 	}
 
 }

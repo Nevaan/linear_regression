@@ -19,10 +19,12 @@ public class TreeGenerator {
 			root = NodeFactory.getTerminal();
 		}
 
-		for (int i = 0; i < root.data.getChildAmount(); i++) {
-			root.addChild(new Data(root.data.getType()));
+		for (int i = 0; i < root.getData().getChildAmount(); i++) {
+			root.addChild(new Data(root.getData().getType()));
 			generateGrowTree(maxDepth - 1);
 		}
+		
+		
 
 		return root;
 	}
