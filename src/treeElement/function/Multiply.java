@@ -8,6 +8,7 @@ public class Multiply extends Function{
 	public Multiply(Data data) {
 		super(data);
 		data.setChildAmount(2);
+		data.setType(12);
 	}
 
 	public double getValue(double xValue){

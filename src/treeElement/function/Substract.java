@@ -8,6 +8,7 @@ public class Substract extends Function{
 	public Substract(Data data) {
 		super(data);
 		data.setChildAmount(2);
+		data.setType(11);
 	}
 
 
