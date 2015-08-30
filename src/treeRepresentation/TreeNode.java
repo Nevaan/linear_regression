@@ -34,6 +34,7 @@ public class TreeNode implements Iterable<TreeNode> {
 	}
 
 	public TreeNode addChild(Data child) {
+		
 		TreeNode childNode = new TreeNode(child);
 		childNode.parent = this;
 		this.children.add(childNode);

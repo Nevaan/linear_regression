@@ -6,6 +6,8 @@ import treeElement.function.Add;
 import treeElement.function.Divide;
 import treeElement.function.Multiply;
 import treeElement.function.Substract;
+import treeElement.terminal.Constant;
+import treeElement.terminal.Variable;
 import treeRepresentation.Data;
 
 public class NodeFactory {
@@ -24,13 +26,13 @@ public class NodeFactory {
 		int option = random.nextInt(3);
 		switch (option) {
 		case 0:
-			return new Add(new Data());
+			return new Add(new Data(10));
 		case 1:
-			return new Divide(new Data());
+			return new Divide(new Data(13));
 		case 2:
-			return new Multiply(new Data());
+			return new Multiply(new Data(12));
 		case 4:
-			return new Substract(new Data());
+			return new Substract(new Data(11));
 		}
 		return null;
 	}
@@ -40,9 +42,9 @@ public class NodeFactory {
 		int option = random.nextInt(3);
 		switch (option) {
 		case 0:
-			return new Constant(new Data());
+			return new Constant(new Data(20));
 		case 1:
-			return new Variable(new Data());
+			return new Variable(new Data(21));
 		}
 		return null;
 	}

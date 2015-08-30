@@ -20,7 +20,8 @@ public class TreeGenerator {
 		}
 
 		for (int i = 0; i < root.data.getChildAmount(); i++) {
-			root.addChild(i, generateGrowTree(maxDepth - 1));
+			root.addChild(new Data(root.data.getType()));
+			generateGrowTree(maxDepth - 1);
 		}
 
 		return root;

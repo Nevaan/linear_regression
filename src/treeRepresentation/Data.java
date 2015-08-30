@@ -3,7 +3,7 @@ package treeRepresentation;
 public class Data {
 
 	private long id;
-	private String type;
+	private int type;
 	private int childAmount;
 
 	public long getId() {
@@ -14,16 +14,16 @@ public class Data {
 		this.id = id;
 	}
 
-	public Data() {
-		type = null;
+	public Data(int type) {
+		this.type = type;
 		childAmount = 0;
 	}
 
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 
