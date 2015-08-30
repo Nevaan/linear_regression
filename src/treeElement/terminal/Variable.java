@@ -6,6 +6,7 @@ public class Variable extends Terminal {
 
 	public Variable(Data data) {
 		super(data);
+		data.setChildAmount(0);
 	}
 
 	public double getValue(double xValue) {

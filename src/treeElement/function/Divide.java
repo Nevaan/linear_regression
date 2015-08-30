@@ -7,6 +7,7 @@ public class Divide extends Function{
 
 	public Divide(Data data) {
 		super(data);
+		data.setChildAmount(2);
 	}
 
 	public double getValue(double xValue){

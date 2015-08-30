@@ -28,7 +28,6 @@ public class Data {
 
 	public Data(int type) {
 		this.type = type;
-		childAmount = 0;
 	}
 
 	public int getType() {
