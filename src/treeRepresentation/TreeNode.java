@@ -6,15 +6,15 @@ import java.util.List;
 
 public class TreeNode implements Iterable<TreeNode> {
 
-	public String data;
+	public Data data;
 	public TreeNode parent;
 	public List<TreeNode> children;
 	public static Long IDENTIFIER = 0L;
 
-	public double getValue(double xValue){
+	public double getValue(double xValue) {
 		return 0;
 	};
-	
+
 	public boolean isRoot() {
 		return parent == null;
 	}
@@ -25,14 +25,15 @@ public class TreeNode implements Iterable<TreeNode> {
 
 	private List<TreeNode> elementsIndex;
 
-	public TreeNode(String data) {
+	public TreeNode(Data data) {
 		this.data = data;
 		this.children = new LinkedList<TreeNode>();
 		this.elementsIndex = new LinkedList<TreeNode>();
 		this.elementsIndex.add(this);
+		this.data.setId(IDENTIFIER++);
 	}
 
-	public TreeNode addChild(String child) {
+	public TreeNode addChild(Data child) {
 		TreeNode childNode = new TreeNode(child);
 		childNode.parent = this;
 		this.children.add(childNode);
@@ -53,9 +54,9 @@ public class TreeNode implements Iterable<TreeNode> {
 			parent.registerChildForSearch(node);
 	}
 
-	public TreeNode findTreeNode(Comparable<String> cmp) {
+	public TreeNode findTreeNode(Comparable<Data> cmp) {
 		for (TreeNode element : this.elementsIndex) {
-			String elData = element.data;
+			Data elData = element.data;
 			if (cmp.compareTo(elData) == 0)
 				return element;
 		}
@@ -75,4 +76,3 @@ public class TreeNode implements Iterable<TreeNode> {
 	}
 
 }
-

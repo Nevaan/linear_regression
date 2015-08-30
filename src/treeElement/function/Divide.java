@@ -1,13 +1,12 @@
 package treeElement.function;
 
+import treeRepresentation.Data;
 import treeRepresentation.TreeNode;
 
 public class Divide extends Function{
 
-	public Divide(String data) {
+	public Divide(Data data) {
 		super(data);
-		TreeNode.IDENTIFIER++;
-		this.data = "Divide, id: " + TreeNode.IDENTIFIER;
 	}
 
 	public double getValue(double xValue){

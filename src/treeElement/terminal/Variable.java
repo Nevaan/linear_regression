@@ -1,8 +1,10 @@
 package treeElement.terminal;
 
+import treeRepresentation.Data;
+
 public class Variable extends Terminal {
 
-	public Variable(String data) {
+	public Variable(Data data) {
 		super(data);
 	}
 
