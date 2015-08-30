@@ -2,6 +2,18 @@ package treeRepresentation;
 
 public class Data {
 
+	/*
+	 * Type:
+	 * 10 - Add
+	 * 11 - Substract
+	 * 12 - Multiply
+	 * 13 - Divide
+	 *
+	 * 20 - Constant
+	 * 21 - Variable
+	 *
+	 */
+
 	private long id;
 	private int type;
 	private int childAmount;
