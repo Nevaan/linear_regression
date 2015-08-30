@@ -59,8 +59,8 @@ public class TreeNode implements Iterable<TreeNode> {
 		
 	}
 	
-	public TreeNode addChild(Data child) {
-		TreeNode childNode = selectSubClass(child);
+	public TreeNode addChild(Data childType, TreeNode child) {
+		TreeNode childNode = selectSubClass(childType);
 		childNode.parent = this;
 		this.children.add(childNode);
 		this.registerChildForSearch(childNode);
