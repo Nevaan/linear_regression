@@ -2,8 +2,20 @@ package treeRepresentation;
 
 public class Data {
 
+	/*
+	 * Type:
+	 * 10 - Add
+	 * 11 - Substract
+	 * 12 - Multiply
+	 * 13 - Divide
+	 *
+	 * 20 - Constant
+	 * 21 - Variable
+	 *
+	 */
+
 	private long id;
-	private String type;
+	private int type;
 	private int childAmount;
 
 	public long getId() {
@@ -15,15 +27,15 @@ public class Data {
 	}
 
 	public Data() {
-		type = null;
+		type = 0;
 		childAmount = 0;
 	}
 
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 

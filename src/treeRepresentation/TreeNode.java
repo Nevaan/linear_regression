@@ -4,6 +4,15 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import treeElement.function.Add;
+import treeElement.function.Divide;
+import treeElement.function.Function;
+import treeElement.function.Multiply;
+import treeElement.function.Substract;
+import treeElement.terminal.Constant;
+import treeElement.terminal.Terminal;
+import treeElement.terminal.Variable;
+
 public class TreeNode implements Iterable<TreeNode> {
 
 	public Data data;
@@ -31,10 +40,14 @@ public class TreeNode implements Iterable<TreeNode> {
 		this.elementsIndex = new LinkedList<TreeNode>();
 		this.elementsIndex.add(this);
 		this.data.setId(IDENTIFIER++);
+		if(this instanceof Function)
+			this.data.setChildAmount(2);
+		else if (this instanceof Terminal)
+			this.data.setChildAmount(0);
 	}
 
 	public TreeNode addChild(Data child) {
-		TreeNode childNode = new TreeNode(child);
+		TreeNode childNode = selectSubClass(child);
 		childNode.parent = this;
 		this.children.add(childNode);
 		this.registerChildForSearch(childNode);
@@ -46,6 +59,25 @@ public class TreeNode implements Iterable<TreeNode> {
 			return 0;
 		else
 			return parent.getLevel() + 1;
+	}
+
+	private TreeNode selectSubClass(Data data) {
+		switch (data.getType()) {
+		case 10:
+			return new Add(data);
+		case 11:
+			return new Substract(data);
+		case 12:
+			return new Multiply(data);
+		case 13:
+			return new Divide(data);
+		case 20:
+			return new Constant(data);
+		case 21:
+			return new Variable(data);
+		default:
+			return null;
+		}
 	}
 
 	private void registerChildForSearch(TreeNode node) {

@@ -6,7 +6,8 @@ import treeElement.function.Add;
 import treeElement.function.Divide;
 import treeElement.function.Multiply;
 import treeElement.function.Substract;
-import treeRepresentation.Data;
+import treeElement.terminal.Constant;
+import treeElement.terminal.Variable;
 
 public class NodeFactory {
 
@@ -46,5 +47,5 @@ public class NodeFactory {
 		}
 		return null;
 	}
-	
+
 }
