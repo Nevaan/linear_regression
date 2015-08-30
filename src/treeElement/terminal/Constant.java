@@ -13,4 +13,5 @@ public class Constant extends Terminal {
 		return 4;
 	}
 
+
 }
