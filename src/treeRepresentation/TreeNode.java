@@ -130,15 +130,6 @@ public class TreeNode implements Iterable<TreeNode> {
 		return null;
 	}
 
-	// TODO
-	public int calculateTreeHeight() {
-		int currentHeight = 0;
-		for(TreeNode element : this.children) {
-			currentHeight++;
-		}
-		return currentHeight;
-	}
-
 	@Override
 	public String toString() {
 		return ((data!=null)? this.getData().toString() : "[null]");
