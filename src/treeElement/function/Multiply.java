@@ -4,7 +4,7 @@ import treeRepresentation.TreeNode;
 
 public class Multiply extends Function{
 
-	public Multiply(Object data) {
+	public Multiply(String data) {
 		super(data);
 	}
 

@@ -4,7 +4,7 @@ import treeRepresentation.TreeNode;
 
 public abstract class Function extends TreeNode{
 
-	public Function(Object data) {
+	public Function(String data) {
 		super(data);
 	}
 
