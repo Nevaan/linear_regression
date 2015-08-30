@@ -6,19 +6,19 @@ import treeRepresentation.Data;
 
 public class Constant extends Terminal {
 
-	private double value;
+	private int value;
 	
 	public Constant(Data data) {
 		super(data);
 		data.setChildAmount(0);
 		data.setType(20);
 	    Random r = new Random(); 
-	    value = -10.0 + r.nextDouble() * 10.0; 	
+	    value = r.nextInt(20) - 10; 	
 	    data.setConstant(value);
 	}
 
 	public double getValue(double xValue) {
-		return value;
+		return (double) value;
 	}
 
 }
