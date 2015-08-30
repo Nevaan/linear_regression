@@ -52,7 +52,7 @@ public class TreeGraphView {
 		else if (n instanceof Terminal)
 			return Color.BLUE;
 		else
-			return null;
+			return Color.YELLOW;
 	}
 
 }
