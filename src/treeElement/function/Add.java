@@ -1,13 +1,12 @@
 package treeElement.function;
 
+import treeRepresentation.Data;
 import treeRepresentation.TreeNode;
 
 public class Add extends Function{
 
-	public Add(String data) {
+	public Add(Data data) {
 		super(data);
-		TreeNode.IDENTIFIER++;
-		this.data = "Add, id: " + TreeNode.IDENTIFIER;
 	}
 
 	public double getValue(double xValue){

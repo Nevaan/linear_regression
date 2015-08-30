@@ -1,8 +1,10 @@
 package treeElement.terminal;
 
+import treeRepresentation.Data;
+
 public class Constant extends Terminal {
 
-	public Constant(String data) {
+	public Constant(Data data) {
 		super(data);
 	}
 

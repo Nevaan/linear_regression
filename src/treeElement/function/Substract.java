@@ -1,13 +1,12 @@
 package treeElement.function;
 
+import treeRepresentation.Data;
 import treeRepresentation.TreeNode;
 
 public class Substract extends Function{
 
-	public Substract(String data) {
+	public Substract(Data data) {
 		super(data);
-		TreeNode.IDENTIFIER++;
-		this.data = "Substract, id: " + TreeNode.IDENTIFIER;
 	}
 
 
