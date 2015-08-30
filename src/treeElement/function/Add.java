@@ -8,6 +8,7 @@ public class Add extends Function{
 	public Add(Data data) {
 		super(data);
 		data.setChildAmount(2);
+		data.setType(10);
 	}
 
 	public double getValue(double xValue){
