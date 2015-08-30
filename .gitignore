@@ -5,3 +5,5 @@
 *.zip
 /.metadata/*
 /RemoteSystemsTempFiles/*
+
+*.orig
