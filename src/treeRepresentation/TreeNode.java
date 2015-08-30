@@ -48,17 +48,17 @@ public class TreeNode implements Iterable<TreeNode> {
 
 	public TreeNode copyTree(TreeNode original) {
 		TreeNode clone = new TreeNode(new Data(0));
-			
+
 		clone.setData(original.getData());
 		clone.setParent(original.getParent());
 		clone.setChildren(original.getChildren());
 		clone.setElementsIndex(original.getElementsIndex());
-		
-		
+
+
 		return clone;
-		
+
 	}
-	
+
 	public TreeNode addChild(Data childType, TreeNode child) {
 		TreeNode childNode = selectSubClass(childType);
 		childNode.parent = this;
