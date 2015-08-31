@@ -23,7 +23,7 @@ public class Chromosome {
 		try {
 			schema = TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH);
 			TreeGenerator.CAN_CHOOSE_TERMINAL = false;
-			this.treeHeight = this.calculateTreeHeight();
+			this.treeHeight = this.countTreeDepth(this.getSchema());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -33,7 +33,7 @@ public class Chromosome {
 		int maxLevel = 0;
 		TreeNode chosenNode = null;
 		if(isInitial) {
-			this.treeHeight = calculateTreeHeight();
+			this.treeHeight = countTreeDepth(this.getSchema());
 			Random random = new Random();
 			maxLevel = random.nextInt(treeHeight);
 		} else {
@@ -52,13 +52,14 @@ public class Chromosome {
 
 		return chosenNode;
 	}
-	public int calculateTreeHeight() {
+	
+/*	public int calculateTreeHeight() {
 		int currentHeight = 0;
 		for(TreeNode element : this.schema) {
 			currentHeight = Math.max(currentHeight, element.getLevel());
 		}
 		return currentHeight;
-	}
+	}*/
 	
 	public int countTreeDepth(TreeNode node) {
 		if(node.equals(null)) {
