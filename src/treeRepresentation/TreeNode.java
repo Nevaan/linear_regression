@@ -134,6 +134,17 @@ public class TreeNode implements Iterable<TreeNode> {
 		return ((data != null) ? this.getData().toString() : "[null]");
 	}
 
+	public String printFunction() {
+		String left;
+		String right;
+		if (!this.getChildren().isEmpty()) {
+			left = this.getChildren().get(0).printFunction();
+			right = this.getChildren().get(1).printFunction();
+			return "(" + left + ")" + this.getData().toString() + "(" + right + ")";
+		}
+		return this.getData().toString();
+	}
+
 	@Override
 	public Iterator<TreeNode> iterator() {
 		TreeNodeIter iter = new TreeNodeIter(this);

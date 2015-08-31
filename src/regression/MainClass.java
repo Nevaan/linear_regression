@@ -15,6 +15,7 @@ public class MainClass {
 		System.out.println("wynik 2(x=7) "+fittest.getValue(7.0));
 
 		System.out.println("Random: " + population.getFittest().chooseRandomNode(population.getFittest().getSchema(), true, 0, 0));
+		System.out.println(population.getFittest().getSchema().printFunction());
 	}
 
 }
