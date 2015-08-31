@@ -3,13 +3,9 @@ package regression;
 import java.util.Random;
 
 import targetRepresentation.Cartesian;
-<<<<<<< HEAD
-import targetRepresentation.Parameters;
+import targetRepresentation.GPParameters;
 import treeElement.function.Function;
 import treeElement.terminal.Terminal;
-=======
-import targetRepresentation.GPParameters;
->>>>>>> 3f5559aeb0cd0cbccfc206bdf25ec140e87945c3
 import treeRepresentation.TreeGenerator;
 import treeRepresentation.TreeNode;
 
@@ -55,7 +51,7 @@ public class Chromosome {
 				return remainingSubtree;
 			this.treeHeight = countTreeDepth(this.getSchema());
 			Random random = new Random();
-			maxLevel = random.nextInt(treeHeight);
+			maxLevel = random.nextInt(treeHeight) + 1;
 		} else {
 			maxLevel = chosenMaxLevel;
 		}
