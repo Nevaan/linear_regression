@@ -4,6 +4,8 @@ import java.util.Random;
 
 import targetRepresentation.Cartesian;
 import targetRepresentation.Parameters;
+import treeElement.function.Function;
+import treeElement.terminal.Terminal;
 import treeRepresentation.TreeGenerator;
 import treeRepresentation.TreeNode;
 
@@ -44,9 +46,9 @@ public class Chromosome {
 		int maxLevel = 0;
 		TreeNode chosenNode = remainingSubtree.getParent();
 		if (isInitial) {
-			if (chosenNode == null) {
+			// if method was called on tree with single node
+			if (remainingSubtree instanceof Terminal)
 				return remainingSubtree;
-			}
 			this.treeHeight = countTreeDepth(this.getSchema());
 			Random random = new Random();
 			maxLevel = random.nextInt(treeHeight);
@@ -55,13 +57,11 @@ public class Chromosome {
 		}
 
 		if (currentLevel < maxLevel) {
-			TreeNode temp = null;
-			for (int i = 0; i < remainingSubtree.getChildren().size(); i++) {
-				temp = chooseRandomNode(remainingSubtree.getChildren().get(i), false, maxLevel, currentLevel++);
-			}
-			if (temp != null) {
+			TreeNode temp = remainingSubtree.chooseRandomChild();
+			if (temp instanceof Function)
+				chosenNode = chooseRandomNode(temp, false, maxLevel, currentLevel + 1);
+			else
 				chosenNode = temp;
-			}
 		}
 
 		return chosenNode;

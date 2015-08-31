@@ -10,4 +10,9 @@ public abstract class Terminal extends TreeNode {
 		data.setChildAmount(0);
 	}
 
+	@Override
+	public TreeNode chooseRandomChild() {
+		return null;
+	}
+
 }

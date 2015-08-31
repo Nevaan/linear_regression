@@ -15,9 +15,9 @@ import treeElement.terminal.Variable;
 
 public class TreeNode implements Iterable<TreeNode> {
 
-	private Data data;
-	private TreeNode parent;
-	private List<TreeNode> children;
+	protected Data data;
+	protected TreeNode parent;
+	protected List<TreeNode> children;
 	public static Long IDENTIFIER = 0L;
 
 	public double getValue(double xValue) {
@@ -181,6 +181,11 @@ public class TreeNode implements Iterable<TreeNode> {
 
 	public void setElementsIndex(List<TreeNode> elementsIndex) {
 		this.elementsIndex = elementsIndex;
+	}
+
+	// Ghost Method - should be always overriden
+	public TreeNode chooseRandomChild() {
+		return null;
 	}
 
 	@Override

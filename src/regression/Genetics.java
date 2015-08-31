@@ -25,11 +25,11 @@ public class Genetics {
 		}
 
 		// Mutation
-		/*for (Chromosome chromosome : evolvedPopulation.getPopulation()) {
-			if (Math.random() < Parameters.MUTATION_RATE) {
-				chromosome = mutate(chromosome);
-			}
-		}*/
+		/*
+		 * for (Chromosome chromosome : evolvedPopulation.getPopulation()) { if
+		 * (Math.random() < Parameters.MUTATION_RATE) { chromosome =
+		 * mutate(chromosome); } }
+		 */
 
 		return evolvedPopulation;
 	}
@@ -49,7 +49,7 @@ public class Genetics {
 
 	// Subtree Crossover
 	public static Chromosome crossover(Chromosome father, Chromosome mother) {
-		TreeNode child = father.getSchema().copyTree();
+		TreeNode child = father.getSchema();
 		TreeGraphView.displayTreeGraph(child, "Init Child");
 
 		TreeNode insertionPoint = father.chooseRandomNode(child, true, 0, 0);
