@@ -16,10 +16,13 @@ public class MainClass {
 
 		System.out.println("Random: " + population.getFittest().chooseRandomNode(population.getFittest().getSchema(), true, 0, 0));
 
+
 		for(int i = 0; i < Parameters.POPULATION_SIZE; i++) {
 			population = Genetics.evolve(population);
 			System.out.println("~~~~~~~~~~~" + i + " Population ~~~~~~~~~~~~");
 		}
+
+		System.out.println(population.getFittest().getSchema().printFunction());
 
 	}
 
