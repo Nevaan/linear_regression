@@ -46,9 +46,9 @@ public class TreeNode implements Iterable<TreeNode> {
 			this.data.setChildAmount(0);
 	}
 
-	public static TreeNode copyTree(TreeNode original) {
+	public TreeNode copyTree() {
 		TreeNode clone;
-		switch (original.getData().getType()) {
+		switch (this.getData().getType()) {
 		case 10:
 			clone = new Add(new Data(10));
 			break;
@@ -70,17 +70,17 @@ public class TreeNode implements Iterable<TreeNode> {
 		default:
 			return null;
 		}
-		clone.setData(original.getData());
-		clone.setParent(original.getParent());
-		clone.setChildren(original.getChildren());
-		clone.setElementsIndex(original.getElementsIndex());
+		clone.setData(this.getData());
+		clone.setParent(this.getParent());
+		clone.setChildren(this.getChildren());
+		clone.setElementsIndex(this.getElementsIndex());
 
 		return clone;
 
 	}
 
 	public TreeNode addChild(Data childType, TreeNode child) {
-		TreeNode childNode = TreeNode.copyTree(child);
+		TreeNode childNode = child.copyTree();
 		childNode.parent = this;
 		this.children.add(childNode);
 		this.registerChildForSearch(childNode);

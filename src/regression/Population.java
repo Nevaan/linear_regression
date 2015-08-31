@@ -48,4 +48,12 @@ public class Population {
 		return this.population.size();
 	}
 
+	public void saveChromosomeAt(int index, Chromosome chromosome) {
+		population.add(index, chromosome);
+	}
+
+	public Chromosome getChromosomeAt(int index) {
+		return population.get(index);
+	}
+
 }

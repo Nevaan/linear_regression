@@ -29,6 +29,16 @@ public class Chromosome {
 		}
 	}
 
+	public void copyIndividual(TreeNode schema) {
+		cartesian.init();
+		try {
+			this.schema = schema;
+			this.treeHeight = this.countTreeDepth(this.getSchema());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public TreeNode chooseRandomNode(TreeNode remainingSubtree, boolean isInitial, int chosenMaxLevel,
 			int currentLevel) {
 		int maxLevel = 0;
