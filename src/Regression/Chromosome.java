@@ -64,9 +64,12 @@ public class Chromosome {
 		if(node.equals(null)) {
 			return 0;
 		}
+		if(!node.getChildren().isEmpty()){
 		int leftChild = countTreeDepth(node.getChildren().get(0));
 		int rightChild = countTreeDepth(node.getChildren().get(1));
 		return (leftChild > rightChild) ? leftChild + 1 : rightChild + 1;
+		}
+		return 1;
 	}
 
 	public double calculateRawFitness() {
