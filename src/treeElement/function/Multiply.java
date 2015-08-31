@@ -12,7 +12,8 @@ public class Multiply extends Function{
 	}
 
 	public double getValue(double xValue){
-		return ((TreeNode) this.getChildren().get(0)).getValue(xValue) * ((TreeNode)this.getChildren().get(1)).getValue(xValue);
+		return ((TreeNode) this.getChildren().get(0)).getValue(xValue) * 
+				((TreeNode)this.getChildren().get(1)).getValue(xValue);
 	}
 
 }
