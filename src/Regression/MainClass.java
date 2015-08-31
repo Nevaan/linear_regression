@@ -15,8 +15,8 @@ public class MainClass {
 		population.initializePopulation();
 		TreeNode fittest = population.getFittest().getSchema();
 		TreeGraphView.displayTreeGraph(fittest,"chuj");
-		System.out.println(fittest.getValue(3));
-								
+		System.out.println(fittest.getValue(7.0));
+
 	}
 
 }
