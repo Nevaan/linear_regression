@@ -4,12 +4,12 @@ public class Data {
 
 	/*
 	 * Type:
-	 * 10 - Add
-	 * 11 - Substract
-	 * 12 - Multiply
+	 * 10 - Add 
+	 * 11 - Substract 
+	 * 12 - Multiply 
 	 * 13 - Divide
 	 *
-	 * 20 - Constant
+	 * 20 - Constant 
 	 * 21 - Variable
 	 *
 	 */
@@ -73,7 +73,7 @@ public class Data {
 		default:
 			return "something gone badly wrong, incorrect type number";
 		}
-		
+
 	}
 
 	@Override

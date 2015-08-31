@@ -40,7 +40,7 @@ public class TreeNode implements Iterable<TreeNode> {
 		this.elementsIndex = new LinkedList<TreeNode>();
 		this.elementsIndex.add(this);
 		this.data.setId(IDENTIFIER++);
-		if(this instanceof Function)
+		if (this instanceof Function)
 			this.data.setChildAmount(2);
 		else if (this instanceof Terminal)
 			this.data.setChildAmount(0);
@@ -48,7 +48,7 @@ public class TreeNode implements Iterable<TreeNode> {
 
 	public static TreeNode copyTree(TreeNode original) {
 		TreeNode clone;
-		switch(original.getData().getType()) {
+		switch (original.getData().getType()) {
 		case 10:
 			clone = new Add(new Data(10));
 			break;
@@ -74,7 +74,6 @@ public class TreeNode implements Iterable<TreeNode> {
 		clone.setParent(original.getParent());
 		clone.setChildren(original.getChildren());
 		clone.setElementsIndex(original.getElementsIndex());
-
 
 		return clone;
 
@@ -132,7 +131,7 @@ public class TreeNode implements Iterable<TreeNode> {
 
 	@Override
 	public String toString() {
-		return ((data!=null)? this.getData().toString() : "[null]");
+		return ((data != null) ? this.getData().toString() : "[null]");
 	}
 
 	@Override
@@ -173,8 +172,6 @@ public class TreeNode implements Iterable<TreeNode> {
 		this.elementsIndex = elementsIndex;
 	}
 
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -206,6 +203,5 @@ public class TreeNode implements Iterable<TreeNode> {
 			return false;
 		return true;
 	}
-
 
 }

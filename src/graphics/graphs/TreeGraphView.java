@@ -23,8 +23,8 @@ public class TreeGraphView {
 
 		TreeGraphGenerator treeGraphGenerator = new TreeGraphGenerator(root);
 
-		BasicVisualizationServer<TreeNode, Edge> vv = new BasicVisualizationServer<TreeNode, Edge>
-			(new TreeLayout<TreeNode, Edge>(treeGraphGenerator.getTreeGraph()), new Dimension(1100, 640));
+		BasicVisualizationServer<TreeNode, Edge> vv = new BasicVisualizationServer<TreeNode, Edge>(
+				new TreeLayout<TreeNode, Edge>(treeGraphGenerator.getTreeGraph()), new Dimension(1100, 640));
 		vv.setPreferredSize(new Dimension(1100, 640));
 
 		Transformer<TreeNode, Paint> vertexPaint = new Transformer<TreeNode, Paint>() {
@@ -35,8 +35,7 @@ public class TreeGraphView {
 
 		vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);
 		vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
-		vv.getRenderer().getVertexLabelRenderer()
-			.setPosition(Renderer.VertexLabel.Position.CNTR);
+		vv.getRenderer().getVertexLabelRenderer().setPosition(Renderer.VertexLabel.Position.CNTR);
 
 		JFrame frame = new JFrame(title);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,7 +46,7 @@ public class TreeGraphView {
 	}
 
 	public static Paint determineTreeNodeColor(TreeNode n) {
-		if(n instanceof Function)
+		if (n instanceof Function)
 			return Color.RED;
 		else if (n instanceof Terminal)
 			return Color.ORANGE;

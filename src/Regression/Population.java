@@ -5,9 +5,6 @@ import java.util.List;
 
 import targetRepresentation.Parameters;
 import treeRepresentation.TreeGenerator;
-import treeRepresentation.TreeNode;
-import Regression.Chromosome;
-
 
 public class Population {
 
@@ -24,18 +21,18 @@ public class Population {
 	public Population() {
 		population = new ArrayList<Chromosome>();
 	}
-	
-	public void initializePopulation() throws Exception{
+
+	public void initializePopulation() throws Exception {
 		population = new ArrayList<Chromosome>();
 
-		for (int i = 0; i < Parameters.POPULATION_SIZE; i++) {			
+		for (int i = 0; i < Parameters.POPULATION_SIZE; i++) {
 			Chromosome individual = new Chromosome();
 			individual.setSchema(TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH));
 			population.add(individual);
 		}
 	}
-	
-	public Chromosome getFittest(){
+
+	public Chromosome getFittest() {
 		Chromosome fittest = population.get(0);
 
 		for (Chromosome individual : population) {
@@ -46,9 +43,9 @@ public class Population {
 
 		return fittest;
 	}
-	
+
 	public int getPopulationSize() {
 		return this.population.size();
 	}
-	
+
 }

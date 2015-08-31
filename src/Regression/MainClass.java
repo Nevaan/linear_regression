@@ -7,8 +7,6 @@ public class MainClass {
 
 	public static void main(String[] args) throws Exception {
 
-		//TreeGraphView.displayTreeGraph(chromosome.getSchema(), "drzewko");
-
 		Population population = new Population();
 		population.initializePopulation();
 		TreeNode fittest = population.getFittest().getSchema();

@@ -7,7 +7,7 @@ public class Cartesian {
 
 	private List<Point> board;
 
-	public Cartesian(){
+	public Cartesian() {
 		init();
 	}
 
@@ -27,6 +27,5 @@ public class Cartesian {
 	public void setBoard(List<Point> board) {
 		this.board = board;
 	}
-
 
 }

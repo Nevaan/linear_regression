@@ -29,10 +29,11 @@ public class Chromosome {
 		}
 	}
 
-	public TreeNode chooseRandomNode(TreeNode remainingSubtree, boolean isInitial, int chosenMaxLevel, int currentLevel) {
+	public TreeNode chooseRandomNode(TreeNode remainingSubtree, boolean isInitial, int chosenMaxLevel,
+			int currentLevel) {
 		int maxLevel = 0;
 		TreeNode chosenNode = null;
-		if(isInitial) {
+		if (isInitial) {
 			this.treeHeight = countTreeDepth(this.getSchema());
 			Random random = new Random();
 			maxLevel = random.nextInt(treeHeight);
@@ -40,9 +41,9 @@ public class Chromosome {
 			maxLevel = chosenMaxLevel;
 		}
 
-		if(currentLevel < maxLevel) {
+		if (currentLevel < maxLevel) {
 			TreeNode temp = null;
-			for(int i = 0; i < remainingSubtree.getChildren().size(); i++) {
+			for (int i = 0; i < remainingSubtree.getChildren().size(); i++) {
 				temp = chooseRandomNode(remainingSubtree.getChildren().get(i), false, maxLevel, currentLevel++);
 			}
 			if (temp != null) {
@@ -52,31 +53,30 @@ public class Chromosome {
 
 		return chosenNode;
 	}
-	
-/*	public int calculateTreeHeight() {
-		int currentHeight = 0;
-		for(TreeNode element : this.schema) {
-			currentHeight = Math.max(currentHeight, element.getLevel());
-		}
-		return currentHeight;
-	}*/
-	
+
+	/*
+	 * public int calculateTreeHeight() { int currentHeight = 0; for(TreeNode
+	 * element : this.schema) { currentHeight = Math.max(currentHeight,
+	 * element.getLevel()); } return currentHeight; }
+	 */
+
 	public int countTreeDepth(TreeNode node) {
-		if(node.equals(null)) {
+		if (node.equals(null)) {
 			return 0;
 		}
-		if(!node.getChildren().isEmpty()){
-		int leftChild = countTreeDepth(node.getChildren().get(0));
-		int rightChild = countTreeDepth(node.getChildren().get(1));
-		return (leftChild > rightChild) ? leftChild + 1 : rightChild + 1;
+		if (!node.getChildren().isEmpty()) {
+			int leftChild = countTreeDepth(node.getChildren().get(0));
+			int rightChild = countTreeDepth(node.getChildren().get(1));
+			return (leftChild > rightChild) ? leftChild + 1 : rightChild + 1;
 		}
 		return 1;
 	}
 
 	public double calculateRawFitness() {
 		double sum = 0;
-		for(int i = 0; i < cartesian.getBoard().size(); i++) {
-			double residual = cartesian.getBoard().get(i).getY() - this.schema.getValue(cartesian.getBoard().get(i).getX());
+		for (int i = 0; i < cartesian.getBoard().size(); i++) {
+			double residual = cartesian.getBoard().get(i).getY()
+					- this.schema.getValue(cartesian.getBoard().get(i).getX());
 			sum += residual * residual;
 		}
 		return sum;
