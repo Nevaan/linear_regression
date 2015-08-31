@@ -13,7 +13,7 @@ public class MainClass {
 		TreeGraphView.displayTreeGraph(tree, "drzewko");
 		Chromosome chromosome = new Chromosome();
 		chromosome.generateIndividual();
-		System.out.println("Tree Height: " + chromosome.getTreeHeight() + " Fitness: " + chromosome.getFitness());
+		System.out.println("Random Node: " + chromosome.chooseRandomNode(chromosome.getSchema(), true, 0, 0) + " Fitness: " + chromosome.getFitness());
 	}
 
 }

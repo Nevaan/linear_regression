@@ -1,5 +1,7 @@
 package Regression;
 
+import java.util.Random;
+
 import targetRepresentation.Cartesian;
 import targetRepresentation.Parameters;
 import treeRepresentation.TreeGenerator;
@@ -27,10 +29,33 @@ public class Chromosome {
 		}
 	}
 
+	public TreeNode chooseRandomNode(TreeNode remainingSubtree, boolean isInitial, int chosenMaxLevel, int currentLevel) {
+		int maxLevel = 0;
+		TreeNode chosenNode = null;
+		if(isInitial) {
+			this.treeHeight = calculateTreeHeight();
+			Random random = new Random();
+			maxLevel = random.nextInt(treeHeight);
+		} else {
+			maxLevel = chosenMaxLevel;
+		}
+
+		if(currentLevel < maxLevel) {
+			TreeNode temp = null;
+			for(int i = 0; i < remainingSubtree.getChildren().size(); i++) {
+				temp = chooseRandomNode(remainingSubtree.getChildren().get(i), false, maxLevel, currentLevel++);
+			}
+			if (temp != null) {
+				chosenNode = temp;
+			}
+		}
+
+		return chosenNode;
+	}
 	public int calculateTreeHeight() {
 		int currentHeight = 0;
 		for(TreeNode element : this.schema) {
-			currentHeight++;
+			currentHeight = Math.max(currentHeight, element.getLevel());
 		}
 		return currentHeight;
 	}
