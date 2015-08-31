@@ -12,7 +12,13 @@ public class Divide extends Function{
 	}
 
 	public double getValue(double xValue){
-		return ((TreeNode) this.getChildren().get(0)).getValue(xValue) / ((TreeNode)this.getChildren().get(1)).getValue(xValue);
+		if(((TreeNode)this.getChildren().get(1)).getValue(xValue) != 0){
+		return ((TreeNode) this.getChildren().get(0)).getValue(xValue) / 
+				((TreeNode)this.getChildren().get(1)).getValue(xValue);
+		} else {
+			return 0;
+		}
+		
 	}
 
 }
