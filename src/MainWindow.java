@@ -49,9 +49,7 @@ public class MainWindow extends Application {
 		Label searchedFunction = new Label("6x^3 + 2x^2 - 9x-7");
 		grid.add(searchedFunction, 1, 1);
 
-		Slider slider = new Slider();
-		slider.setMin(0);
-		slider.setMax(GPParameters.MUTATION_NUMBER);
+		final Slider slider = new Slider(1, GPParameters.MUTATION_NUMBER, 0);
 		slider.setShowTickLabels(true);
 		slider.setShowTickMarks(true);
 		slider.setMajorTickUnit(10);
@@ -64,7 +62,9 @@ public class MainWindow extends Application {
 		slider.valueProperty().addListener(new ChangeListener<Number>(){
 			@Override
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
-				chosenMutation.setText(new_val.toString());	
+				chosenMutation.textProperty().setValue(
+							String.valueOf((int) slider.getValue())
+						);
 			}	
 		});
 		
