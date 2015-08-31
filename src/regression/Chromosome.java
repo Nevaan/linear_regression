@@ -3,7 +3,7 @@ package regression;
 import java.util.Random;
 
 import targetRepresentation.Cartesian;
-import targetRepresentation.Parameters;
+import targetRepresentation.GPParameters;
 import treeRepresentation.TreeGenerator;
 import treeRepresentation.TreeNode;
 
@@ -21,7 +21,7 @@ public class Chromosome {
 	public void generateIndividual() {
 		cartesian.init();
 		try {
-			schema = TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH);
+			schema = TreeGenerator.generateGrowTree(GPParameters.GROW_TREE_MAX_DEPTH);
 			TreeGenerator.CAN_CHOOSE_TERMINAL = false;
 			this.treeHeight = this.countTreeDepth(this.getSchema());
 		} catch (Exception e) {

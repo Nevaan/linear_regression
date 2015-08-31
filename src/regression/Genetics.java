@@ -1,7 +1,7 @@
 package regression;
 
 import graphics.graphs.TreeGraphView;
-import targetRepresentation.Parameters;
+import targetRepresentation.GPParameters;
 import treeRepresentation.TreeNode;
 
 public class Genetics {
@@ -13,7 +13,7 @@ public class Genetics {
 		evolvedPopulation.saveChromosomeAt(0, population.getFittest());
 
 		// Crossover
-		for (int i = 1; i < Parameters.POPULATION_SIZE; i++) {
+		for (int i = 1; i < GPParameters.POPULATION_SIZE; i++) {
 
 			// Select parents
 			Chromosome father = selectIndividual(population);
@@ -38,8 +38,8 @@ public class Genetics {
 	public static Chromosome selectIndividual(Population population) {
 
 		Population tournament = new Population();
-		for (int i = 0; i < Parameters.TOURNAMENT_SIZE; i++) {
-			int index = (int) (Math.random() * Parameters.POPULATION_SIZE);
+		for (int i = 0; i < GPParameters.TOURNAMENT_SIZE; i++) {
+			int index = (int) (Math.random() * GPParameters.POPULATION_SIZE);
 			tournament.saveChromosomeAt(i, population.getChromosomeAt(index));
 		}
 

@@ -3,7 +3,7 @@ package regression;
 import java.util.ArrayList;
 import java.util.List;
 
-import targetRepresentation.Parameters;
+import targetRepresentation.GPParameters;
 import treeRepresentation.TreeGenerator;
 
 public class Population {
@@ -25,9 +25,9 @@ public class Population {
 	public void initializePopulation() throws Exception {
 		population = new ArrayList<Chromosome>();
 
-		for (int i = 0; i < Parameters.POPULATION_SIZE; i++) {
+		for (int i = 0; i < GPParameters.POPULATION_SIZE; i++) {
 			Chromosome individual = new Chromosome();
-			individual.setSchema(TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH));
+			individual.setSchema(TreeGenerator.generateGrowTree(GPParameters.GROW_TREE_MAX_DEPTH));
 			population.add(individual);
 		}
 	}
