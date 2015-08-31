@@ -1,7 +1,7 @@
 package regression;
 
 import graphics.graphs.TreeGraphView;
-import targetRepresentation.Parameters;
+import targetRepresentation.GPParameters;
 import treeRepresentation.TreeNode;
 
 public class MainClass {
@@ -16,7 +16,7 @@ public class MainClass {
 
 		//TreeGraphView.displayTreeGraph(fittest, "TEST");
 
-		for(int i = 0; i < Parameters.POPULATION_SIZE; i++) {
+		for(int i = 0; i < GPParameters.POPULATION_SIZE; i++) {
 			population = Genetics.evolve(population);
 			System.out.println("~~~~~~~~~~~" + i + " Population ~~~~~~~~~~~~");
 		}
