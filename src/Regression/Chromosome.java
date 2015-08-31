@@ -32,8 +32,11 @@ public class Chromosome {
 	public TreeNode chooseRandomNode(TreeNode remainingSubtree, boolean isInitial, int chosenMaxLevel,
 			int currentLevel) {
 		int maxLevel = 0;
-		TreeNode chosenNode = null;
+		TreeNode chosenNode = remainingSubtree.getParent();
 		if (isInitial) {
+			if (chosenNode == null) {
+				return remainingSubtree;
+			}
 			this.treeHeight = countTreeDepth(this.getSchema());
 			Random random = new Random();
 			maxLevel = random.nextInt(treeHeight);
@@ -53,12 +56,6 @@ public class Chromosome {
 
 		return chosenNode;
 	}
-
-	/*
-	 * public int calculateTreeHeight() { int currentHeight = 0; for(TreeNode
-	 * element : this.schema) { currentHeight = Math.max(currentHeight,
-	 * element.getLevel()); } return currentHeight; }
-	 */
 
 	public int countTreeDepth(TreeNode node) {
 		if (node.equals(null)) {
