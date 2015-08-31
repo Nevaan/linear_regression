@@ -15,7 +15,8 @@ public class MainClass {
 		System.out.println("wynik 2(x=7) "+fittest.getValue(7.0));
 
 		//TreeGraphView.displayTreeGraph(fittest, "TEST");
-
+		//TreeNode random = population.getFittest().chooseRandomNode(fittest, true, 0, 0);
+		//System.out.println("Random :" + random);
 		for(int i = 0; i < GPParameters.POPULATION_SIZE; i++) {
 			population = Genetics.evolve(population);
 			System.out.println("~~~~~~~~~~~" + i + " Population ~~~~~~~~~~~~");

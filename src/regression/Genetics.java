@@ -2,6 +2,7 @@ package regression;
 
 import graphics.graphs.TreeGraphView;
 import targetRepresentation.GPParameters;
+import treeRepresentation.Data;
 import treeRepresentation.TreeNode;
 
 public class Genetics {
@@ -53,25 +54,59 @@ public class Genetics {
 		TreeGraphView.displayTreeGraph(child, "Init Child");
 
 		TreeNode insertionPoint = father.chooseRandomNode(child, true, 0, 0);
+		TreeNode temp = insertionPoint.copyTree();
 		TreeGraphView.displayTreeGraph(insertionPoint, "Insertion Point");
 
 		TreeNode motherSubTree = mother.chooseRandomNode(mother.getSchema(), true, 0, 0);
 		TreeGraphView.displayTreeGraph(motherSubTree, "Mother SubTree");
 
-		insertionPoint = motherSubTree.copyTree();
+		//insertionPoint = motherSubTree.copyTree();
 		TreeGraphView.displayTreeGraph(insertionPoint, "InsertionPoint after change");
 
-		TreeGraphView.displayTreeGraph(child, "Changed child");
-		Chromosome offspring = new Chromosome();
-		offspring.copyIndividual(child);
+		temp = search(child, insertionPoint);
+		if (temp.getParent() != null) {
+			for (int i = 0; i < temp.getChildren().size(); i++) {
+				if (temp.getChildren().get(i) != null && temp.getChildren().get(i).equals(temp))
+					temp.getParent().getChildren().set(i, motherSubTree.copyTree());
+			}
 
-		return offspring;
+			TreeGraphView.displayTreeGraph(child, "Changed child");
+			Chromosome offspring = new Chromosome();
+			offspring.copyIndividual(child);
+
+			return offspring;
+
+		} else {
+
+			TreeGraphView.displayTreeGraph(child, "Changed child");
+			Chromosome offspring = new Chromosome();
+			offspring.copyIndividual(insertionPoint);
+
+			return offspring;
+		}
 	}
 
 	// TODO
 	// Subtree Mutation
 	public static Chromosome mutate(Chromosome chromosome) {
 		return new Chromosome();
+	}
+
+	// Node Search
+	private static TreeNode search(TreeNode base, TreeNode target) {
+
+		Comparable<Data> searchCriteria = new Comparable<Data>() {
+			@Override
+			public int compareTo(Data data) {
+				if (data == null)
+					return 1;
+				boolean nodeOk = data.equals(target.getData());
+				return nodeOk ? 0 : 1;
+			}
+		};
+
+		TreeNode found = base.findTreeNode(searchCriteria);
+		return found;
 	}
 
 }
