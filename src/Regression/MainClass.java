@@ -11,13 +11,9 @@ public class MainClass {
 
 		TreeNode tree = TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH);
 		TreeGraphView.displayTreeGraph(tree, "drzewko");
-
 		Chromosome chromosome = new Chromosome();
 		chromosome.generateIndividual();
-		//System.out.println("Tree Height: " + chromosome.countTreeDepth(chromosome.getSchema()) + " Fitness: " + chromosome.getFitness());
-		System.out.println(chromosome.getSchema().getElementsIndex());
-		Chromosome a = new Chromosome();
-		a.generateIndividual();
+		System.out.println("Random Node: " + chromosome.chooseRandomNode(chromosome.getSchema(), true, 0, 0) + " Fitness: " + chromosome.getFitness());
 	}
 
 }
