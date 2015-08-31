@@ -12,7 +12,7 @@ public class Constant extends Terminal {
 		data.setChildAmount(0);
 		data.setType(20);
 	    Random r = new Random(); 
-	    data.setConstant(r.nextInt(20) - 10);
+	    data.setConstant((double) (r.nextInt(20) - 10));
 	}
 
 	public double getValue(double xValue) {

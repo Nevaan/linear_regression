@@ -17,13 +17,13 @@ public class Data {
 	private long id;
 	private int type;
 	private int childAmount;
-	private int constant;
+	private double constant;
 
-	public int getConstant() {
+	public double getConstant() {
 		return constant;
 	}
 
-	public void setConstant(int constant) {
+	public void setConstant(double constant) {
 		this.constant = constant;
 	}
 
@@ -67,7 +67,7 @@ public class Data {
 		case 13:
 			return "/";
 		case 20:
-			return Integer.toString(constant);
+			return Double.toString(constant);
 		case 21:
 			return "x";
 		default:
@@ -81,7 +81,7 @@ public class Data {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + childAmount;
-		result = prime * result + constant;
+		result = (int) (prime * result + constant);
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + type;
 		return result;

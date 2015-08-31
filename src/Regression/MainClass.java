@@ -1,8 +1,6 @@
 package Regression;
 
 import graphics.graphs.TreeGraphView;
-import targetRepresentation.Parameters;
-import treeRepresentation.TreeGenerator;
 import treeRepresentation.TreeNode;
 
 public class MainClass {
@@ -14,9 +12,14 @@ public class MainClass {
 		Population population = new Population();
 		population.initializePopulation();
 		TreeNode fittest = population.getFittest().getSchema();
-		TreeGraphView.displayTreeGraph(fittest,"chuj");
-		System.out.println(fittest.getValue(7.0));
+		System.out.println("wynik 1(x=3) "+fittest.getValue(3.0d));
+		TreeGraphView.displayTreeGraph(fittest,"Najlepsza populacja");
+		System.out.println("wynik 2(x=7) "+fittest.getValue(7.0));
 
+		int a = 0;
+		for(Chromosome pop :population.getPopulation()){
+			TreeGraphView.displayTreeGraph(pop.getSchema(),"graf nr: "+(++a));
+		}
 	}
 
 }
