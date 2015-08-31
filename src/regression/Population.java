@@ -1,4 +1,4 @@
-package Regression;
+package regression;
 
 import java.util.ArrayList;
 import java.util.List;

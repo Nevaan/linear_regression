@@ -1,4 +1,4 @@
-package Regression;
+package regression;
 
 import graphics.graphs.TreeGraphView;
 import treeRepresentation.TreeNode;
