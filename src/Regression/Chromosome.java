@@ -34,6 +34,15 @@ public class Chromosome {
 		}
 		return currentHeight;
 	}
+	
+	public int countTreeDepth(TreeNode node) {
+		if(node.equals(null)) {
+			return 0;
+		}
+		int leftChild = countTreeDepth(node.getChildren().get(0));
+		int rightChild = countTreeDepth(node.getChildren().get(1));
+		return (leftChild > rightChild) ? leftChild + 1 : rightChild + 1;
+	}
 
 	public double calculateRawFitness() {
 		double sum = 0;

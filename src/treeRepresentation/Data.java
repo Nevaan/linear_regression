@@ -76,4 +76,35 @@ public class Data {
 		
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + childAmount;
+		result = prime * result + constant;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + type;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Data other = (Data) obj;
+		if (childAmount != other.childAmount)
+			return false;
+		if (constant != other.constant)
+			return false;
+		if (id != other.id)
+			return false;
+		if (type != other.type)
+			return false;
+		return true;
+	}
+
 }

@@ -173,5 +173,48 @@ public class TreeNode implements Iterable<TreeNode> {
 		this.elementsIndex = elementsIndex;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((children.isEmpty()) ? 0 : children.hashCode());
+		result = prime * result + ((data == null) ? 0 : data.hashCode());
+		result = prime * result + ((elementsIndex.isEmpty()) ? 0 : elementsIndex.hashCode());
+		result = prime * result + ((parent.equals(null)) ? 0 : parent.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TreeNode other = (TreeNode) obj;
+		if (children == null) {
+			if (other.children != null)
+				return false;
+		} else if (!children.equals(other.children))
+			return false;
+		if (data == null) {
+			if (other.data != null)
+				return false;
+		} else if (!data.equals(other.data))
+			return false;
+		if (elementsIndex == null) {
+			if (other.elementsIndex != null)
+				return false;
+		} else if (!elementsIndex.equals(other.elementsIndex))
+			return false;
+		if (parent == null) {
+			if (other.parent != null)
+				return false;
+		} else if (!parent.equals(other.parent))
+			return false;
+		return true;
+	}
+
 
 }

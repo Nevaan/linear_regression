@@ -8,6 +8,7 @@ import treeRepresentation.TreeGenerator;
 import treeRepresentation.TreeNode;
 import Regression.Chromosome;
 
+
 public class Population {
 
 	private List<Chromosome> population;
@@ -28,8 +29,9 @@ public class Population {
 		population = new ArrayList<Chromosome>();
 
 		for (int i = 0; i < Parameters.POPULATION_SIZE; i++) {			
-		//	Chromosome individual.setSchema(TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH);
-			//population.add(individual);
+			Chromosome individual = new Chromosome();
+			individual.setSchema(TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH));
+			population.add(individual);
 		}
 	}
 	
@@ -37,9 +39,9 @@ public class Population {
 		Chromosome fittest = population.get(0);
 
 		for (Chromosome individual : population) {
-			//if (Chromosome.getFitness() >= fittest.getFitness()) {
-			//	fittest = individual;
-			//}
+			if (individual.getFitness() >= fittest.getFitness()) {
+				fittest = individual;
+			}
 		}
 
 		return fittest;
