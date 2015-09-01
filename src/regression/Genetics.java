@@ -43,15 +43,15 @@ public class Genetics {
 
 	// Subtree Crossover
 	public static Chromosome crossover(Chromosome father, Chromosome mother) {
-		TreeNode child = father.getSchema();
-		TreeGraphView.displayTreeGraph(child, "Init Child");
+		TreeNode child = (father.getSchema()).copyTree();
+		//TreeGraphView.displayTreeGraph(child, "Init Child");
 
 		TreeNode insertionPoint = father.chooseRandomNode(child, true, 0, 0);
 		TreeNode temp = insertionPoint;
-		TreeGraphView.displayTreeGraph(insertionPoint, "Insertion Point");
+		//TreeGraphView.displayTreeGraph(insertionPoint, "Insertion Point");
 
 		TreeNode motherSubTree = mother.chooseRandomNode(mother.getSchema(), true, 0, 0);
-		TreeGraphView.displayTreeGraph(motherSubTree, "Mother SubTree");
+		//TreeGraphView.displayTreeGraph(motherSubTree, "Mother SubTree");
 
 		//insertionPoint = motherSubTree.copyTree();
 		for (int i = 0; i < motherSubTree.getChildren().size(); i++) {
@@ -77,7 +77,7 @@ public class Genetics {
 
 				return offspring;
 			} else {
-				TreeGraphView.displayTreeGraph(motherSubTree, "Changed child (null parent)");
+			//	TreeGraphView.displayTreeGraph(motherSubTree, "Changed child (null parent)");
 				Chromosome offspring = new Chromosome();
 				offspring.copyIndividual(motherSubTree);
 
@@ -85,7 +85,7 @@ public class Genetics {
 			}
 		} else {
 			// to nie powinno nigdy zajsc
-			TreeGraphView.displayTreeGraph(temp2, "Changed child (null)");
+			//TreeGraphView.displayTreeGraph(temp2, "Changed child (null)");
 			Chromosome offspring = new Chromosome();
 			offspring.copyIndividual(temp2);
 
@@ -100,7 +100,7 @@ public class Genetics {
 	}
 
 	// Node Search
-	private static TreeNode search(TreeNode base, TreeNode target) {
+	private static TreeNode search(TreeNode base, final TreeNode target) {
 
 		Comparable<Data> searchCriteria = new Comparable<Data>() {
 			@Override
@@ -112,7 +112,9 @@ public class Genetics {
 			}
 		};
 
+		
 		TreeNode found = base.findTreeNode(searchCriteria);
+		
 		return found;
 	}
 
