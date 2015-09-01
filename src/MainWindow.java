@@ -21,7 +21,6 @@ public class MainWindow extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 
-		
 		primaryStage.setTitle("Program demonstruj¹cy dzia³anie programowania genetycznego");
 
 		GridPane grid = new GridPane();
@@ -42,10 +41,10 @@ public class MainWindow extends Application {
 
 		Label chosenMutationLabel = new Label("Akutalnie wybrana generacja: ");
 		grid.add(chosenMutationLabel, 0, 3);
-		
-		final Label chosenMutation = new Label();
+
+		final Label chosenMutation = new Label("1");
 		grid.add(chosenMutation, 1, 3);
-		
+
 		Label searchedFunction = new Label("6x^3 + 2x^2 - 9x-7");
 		grid.add(searchedFunction, 1, 1);
 
@@ -55,27 +54,19 @@ public class MainWindow extends Application {
 		slider.setMajorTickUnit(10);
 		slider.setMinorTickCount(5);
 		slider.setBlockIncrement(1);
-		
-		
-		
-		
-		slider.valueProperty().addListener(new ChangeListener<Number>(){
+
+		slider.valueProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
-				chosenMutation.textProperty().setValue(
-							String.valueOf((int) slider.getValue())
-						);
-			}	
+				chosenMutation.textProperty().setValue(String.valueOf((int) slider.getValue()));
+			}
 		});
-		
-		grid.add(slider,1,4);
+
+		grid.add(slider, 1, 4);
 
 		Button showTree = new Button("Wyœwietl drzewo");
 		grid.add(showTree, 0, 5);
 
-
-		PasswordField pwBox = new PasswordField();
-		grid.add(pwBox, 1, 2);
 
 		Scene scene = new Scene(grid, 500, 400);
 		primaryStage.setScene(scene);
@@ -86,4 +77,5 @@ public class MainWindow extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+
 }
