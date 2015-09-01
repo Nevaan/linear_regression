@@ -44,7 +44,7 @@ public class Chromosome {
 	public TreeNode chooseRandomNode(TreeNode remainingSubtree, boolean isInitial, int chosenMaxLevel,
 			int currentLevel) {
 		int maxLevel = 0;
-		TreeNode chosenNode = remainingSubtree.getParent();
+		TreeNode chosenNode = remainingSubtree;
 		if (isInitial) {
 			// if method was called on tree with single node
 			if (remainingSubtree instanceof Terminal)
@@ -57,7 +57,7 @@ public class Chromosome {
 		}
 
 		if (currentLevel < maxLevel) {
-			TreeNode temp = remainingSubtree.chooseRandomChild();
+			TreeNode temp = remainingSubtree.chooseRandomChild().copyTree();
 			if (temp instanceof Function)
 				chosenNode = chooseRandomNode(temp, false, maxLevel, currentLevel + 1).copyTree();
 			else
