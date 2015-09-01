@@ -27,7 +27,7 @@ public class Population {
 
 		for (int i = 0; i < GPParameters.POPULATION_SIZE; i++) {
 			Chromosome individual = new Chromosome();
-			individual.setSchema(TreeGenerator.generateGrowTree(GPParameters.GROW_TREE_MAX_DEPTH));
+			individual.generateIndividual();
 			population.add(individual);
 		}
 	}

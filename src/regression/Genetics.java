@@ -2,6 +2,7 @@ package regression;
 
 import graphics.graphs.TreeGraphView;
 import targetRepresentation.GPParameters;
+import treeRepresentation.Data;
 import treeRepresentation.TreeNode;
 
 public class Genetics {
@@ -23,13 +24,6 @@ public class Genetics {
 
 			evolvedPopulation.saveChromosomeAt(i, child);
 		}
-
-		// Mutation
-		/*
-		 * for (Chromosome chromosome : evolvedPopulation.getPopulation()) { if
-		 * (Math.random() < Parameters.MUTATION_RATE) { chromosome =
-		 * mutate(chromosome); } }
-		 */
 
 		return evolvedPopulation;
 	}
@@ -53,19 +47,50 @@ public class Genetics {
 		TreeGraphView.displayTreeGraph(child, "Init Child");
 
 		TreeNode insertionPoint = father.chooseRandomNode(child, true, 0, 0);
+		TreeNode temp = insertionPoint;
 		TreeGraphView.displayTreeGraph(insertionPoint, "Insertion Point");
 
 		TreeNode motherSubTree = mother.chooseRandomNode(mother.getSchema(), true, 0, 0);
 		TreeGraphView.displayTreeGraph(motherSubTree, "Mother SubTree");
 
-		insertionPoint = motherSubTree.copyTree();
-		TreeGraphView.displayTreeGraph(insertionPoint, "InsertionPoint after change");
+		//insertionPoint = motherSubTree.copyTree();
+		for (int i = 0; i < motherSubTree.getChildren().size(); i++) {
+			insertionPoint.getChildren().add(motherSubTree.getChildren().get(i));
+		}
+		//insertionPoint.setParent(temp.getParent());
 
-		TreeGraphView.displayTreeGraph(child, "Changed child");
-		Chromosome offspring = new Chromosome();
-		offspring.copyIndividual(child);
+		//TreeGraphView.displayTreeGraph(insertionPoint, "InsertionPoint after change");
 
-		return offspring;
+		TreeNode temp2 = temp.copyTree();
+		temp = search(child, temp);
+
+		if (temp != null) {
+			if (temp.getParent() != null) {
+				for (int i = 0; i < temp.getParent().getChildren().size(); i++) {
+					if (temp.getParent().getChildren().get(i) != null && temp.getParent().getChildren().get(i).equals(temp))
+						temp.getParent().getChildren().set(i, motherSubTree);
+				}
+
+				//TreeGraphView.displayTreeGraph(child, "Changed child (normal)");
+				Chromosome offspring = new Chromosome();
+				offspring.copyIndividual(child);
+
+				return offspring;
+			} else {
+				TreeGraphView.displayTreeGraph(motherSubTree, "Changed child (null parent)");
+				Chromosome offspring = new Chromosome();
+				offspring.copyIndividual(motherSubTree);
+
+				return offspring;
+			}
+		} else {
+			// to nie powinno nigdy zajsc
+			TreeGraphView.displayTreeGraph(temp2, "Changed child (null)");
+			Chromosome offspring = new Chromosome();
+			offspring.copyIndividual(temp2);
+
+			return offspring;
+		}
 	}
 
 	// TODO
@@ -73,5 +98,31 @@ public class Genetics {
 	public static Chromosome mutate(Chromosome chromosome) {
 		return new Chromosome();
 	}
+
+	// Node Search
+	private static TreeNode search(TreeNode base, TreeNode target) {
+
+		Comparable<Data> searchCriteria = new Comparable<Data>() {
+			@Override
+			public int compareTo(Data data) {
+				if (data == null)
+					return 1;
+				boolean nodeOk = data.equals(target.getData());
+				return nodeOk ? 0 : 1;
+			}
+		};
+
+		TreeNode found = base.findTreeNode(searchCriteria);
+		return found;
+	}
+
+	/*
+	 * private static TreeNode search2(TreeNode mainTree, TreeNode target) { if
+	 * (mainTree != null) { if (mainTree.equals(target)) { return mainTree; }
+	 * else { if (!mainTree.getChildren().isEmpty()) { TreeNode foundNode =
+	 * search2(mainTree.getChildren().get(0), target); if (foundNode == null) {
+	 * foundNode = search2(mainTree.getChildren().get(1), target); } return
+	 * foundNode; } else { return null; } } } else { return null; } }
+	 */
 
 }
