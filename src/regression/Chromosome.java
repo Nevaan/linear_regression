@@ -14,10 +14,14 @@ public class Chromosome {
 	private TreeNode schema;
 	private double fitness;
 	private Cartesian cartesian;
-	private int treeHeight;
 
 	public Chromosome() {
 		cartesian = new Cartesian();
+	}
+
+	public Chromosome(TreeNode root) {
+		cartesian = new Cartesian();
+		schema = root;
 	}
 
 	public void generateIndividual() {
@@ -25,59 +29,52 @@ public class Chromosome {
 		try {
 			schema = TreeGenerator.generateGrowTree(GPParameters.GROW_TREE_MAX_DEPTH);
 			TreeGenerator.CAN_CHOOSE_TERMINAL = false;
-			this.treeHeight = this.countTreeDepth(this.getSchema());
+			schema.setTreeHeight(countTreeDepth(this.getSchema()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void copyIndividual(TreeNode schema) {
+/*	public void copyIndividual(TreeNode schema) {
 		cartesian.init();
 		try {
 			this.schema = schema;
-			this.treeHeight = this.countTreeDepth(this.getSchema());
+			schema.setTreeHeight(countTreeDepth(this.getSchema()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
-	public TreeNode chooseRandomNode(TreeNode remainingSubtree, boolean isInitial, int chosenMaxLevel,
-			int currentLevel) {
-		int maxLevel = 0;
-		TreeNode chosenNode = remainingSubtree;
-		if (isInitial) {
-			// if method was called on tree with single node
-			if (remainingSubtree instanceof Terminal)
-				return remainingSubtree;
-			this.treeHeight = countTreeDepth(this.getSchema());
-			Random random = new Random();
-			maxLevel = random.nextInt(treeHeight) + 1;
-		} else {
-			maxLevel = chosenMaxLevel;
-		}
+	/*
+	 * public TreeNode chooseRandomNode(TreeNode remainingSubtree, boolean
+	 * isInitial, int chosenMaxLevel, int currentLevel) { int maxLevel = 0;
+	 * TreeNode chosenNode = remainingSubtree; if (isInitial) { // if method was
+	 * called on tree with single node if (remainingSubtree instanceof Terminal)
+	 * return remainingSubtree;
+	 * schema.setTreeHeight(countTreeDepth(this.getSchema())); Random random =
+	 * new Random(); maxLevel = random.nextInt(schema.getTreeHeight()) + 1; }
+	 * else { maxLevel = chosenMaxLevel; }
+	 * 
+	 * if (currentLevel < maxLevel) { TreeNode temp =
+	 * remainingSubtree.chooseRandomChild().copyTree(); if (temp instanceof
+	 * Function) chosenNode = chooseRandomNode(temp, false, maxLevel,
+	 * currentLevel + 1).copyTree(); else chosenNode = remainingSubtree; }
+	 * 
+	 * 
+	 * return chosenNode; }
+	 */
 
-		if (currentLevel < maxLevel) {
-			TreeNode temp = remainingSubtree.chooseRandomChild().copyTree();
-			if (temp instanceof Function)
-				chosenNode = chooseRandomNode(temp, false, maxLevel, currentLevel + 1).copyTree();
-			else
-				chosenNode = remainingSubtree;
-			}
+	public static int countTreeDepth(TreeNode node) {
 		
-
-		return chosenNode;
-	}
-
-	public int countTreeDepth(TreeNode node) {
-		if (node.equals(null)) {
-			return 0;
+		if (node instanceof Terminal) {
+			return 1;
 		}
-		if (!(node.getChildren().isEmpty())) {
+		if (node instanceof Function) {
 			int leftChild = countTreeDepth(node.getChildren().get(0));
 			int rightChild = countTreeDepth(node.getChildren().get(1));
 			return (leftChild > rightChild) ? leftChild + 1 : rightChild + 1;
 		}
-		return 1;
+		return 0;
 	}
 
 	public double calculateRawFitness() {
@@ -122,11 +119,4 @@ public class Chromosome {
 		this.cartesian = cartesian;
 	}
 
-	public int getTreeHeight() {
-		return treeHeight;
-	}
-
-	public void setTreeHeight(int treeHeight) {
-		this.treeHeight = treeHeight;
-	}
 }
