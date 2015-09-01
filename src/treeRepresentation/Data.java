@@ -4,12 +4,12 @@ public class Data {
 
 	/*
 	 * Type:
-	 * 10 - Add 
-	 * 11 - Substract 
-	 * 12 - Multiply 
+	 * 10 - Add
+	 * 11 - Substract
+	 * 12 - Multiply
 	 * 13 - Divide
 	 *
-	 * 20 - Constant 
+	 * 20 - Constant
 	 * 21 - Variable
 	 *
 	 */
@@ -18,6 +18,10 @@ public class Data {
 	private int type;
 	private int childAmount;
 	private double constant;
+
+	public Data(int type) {
+		this.type = type;
+	}
 
 	public double getConstant() {
 		return constant;
@@ -33,10 +37,6 @@ public class Data {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public Data(int type) {
-		this.type = type;
 	}
 
 	public int getType() {

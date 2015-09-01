@@ -17,12 +17,12 @@ public class MainClass {
 		//TreeGraphView.displayTreeGraph(fittest, "TEST");
 		//TreeNode random = population.getFittest().chooseRandomNode(fittest, true, 0, 0);
 		//System.out.println("Random :" + random);
-		for(int i = 0; i < GPParameters.POPULATION_SIZE; i++) {
+		for(int i = 0; i < GPParameters.GENERATIONS_AMOUNT; i++) {
 			population = Genetics.evolve(population);
 			System.out.println("~~~~~~~~~~~" + i + " Population ~~~~~~~~~~~~");
 		}
 
-		System.out.println(population.getFittest().getSchema().printFunction());
+		//System.out.println(population.getFittest().getSchema().printFunction());
 
 	}
 

@@ -25,13 +25,6 @@ public class Genetics {
 			evolvedPopulation.saveChromosomeAt(i, child);
 		}
 
-		// Mutation
-		/*
-		 * for (Chromosome chromosome : evolvedPopulation.getPopulation()) { if
-		 * (Math.random() < Parameters.MUTATION_RATE) { chromosome =
-		 * mutate(chromosome); } }
-		 */
-
 		return evolvedPopulation;
 	}
 
@@ -51,36 +44,50 @@ public class Genetics {
 	// Subtree Crossover
 	public static Chromosome crossover(Chromosome father, Chromosome mother) {
 		TreeNode child = father.getSchema();
-		TreeGraphView.displayTreeGraph(child, "Init Child");
+		//TreeGraphView.displayTreeGraph(child, "Init Child");
 
 		TreeNode insertionPoint = father.chooseRandomNode(child, true, 0, 0);
-		TreeNode temp = insertionPoint.copyTree();
-		TreeGraphView.displayTreeGraph(insertionPoint, "Insertion Point");
+		TreeNode temp = insertionPoint;
+		//TreeGraphView.displayTreeGraph(insertionPoint, "Insertion Point");
 
 		TreeNode motherSubTree = mother.chooseRandomNode(mother.getSchema(), true, 0, 0);
-		TreeGraphView.displayTreeGraph(motherSubTree, "Mother SubTree");
+		//TreeGraphView.displayTreeGraph(motherSubTree, "Mother SubTree");
 
-		//insertionPoint = motherSubTree.copyTree();
-		TreeGraphView.displayTreeGraph(insertionPoint, "InsertionPoint after change");
+		insertionPoint = motherSubTree;
+		for (int i = 0; i < motherSubTree.getChildren().size(); i++) {
+			insertionPoint.getChildren().add(motherSubTree.getChildren().get(i));
+		}
+		insertionPoint.setParent(temp.getParent());
 
-		temp = search(child, insertionPoint);
-		if (temp.getParent() != null) {
-			for (int i = 0; i < temp.getChildren().size(); i++) {
-				if (temp.getChildren().get(i) != null && temp.getChildren().get(i).equals(temp))
-					temp.getParent().getChildren().set(i, motherSubTree.copyTree());
+		//TreeGraphView.displayTreeGraph(insertionPoint, "InsertionPoint after change");
+
+		TreeNode temp2 = temp.copyTree();
+		temp = search(child, temp);
+
+		if (temp != null) {
+			if (temp.getParent() != null) {
+				for (int i = 0; i < temp.getParent().getChildren().size(); i++) {
+					if (temp.getParent().getChildren().get(i) != null
+							&& temp.getParent().getChildren().get(i).equals(temp))
+						temp.getParent().getChildren().set(i, motherSubTree);
+				}
+
+				//TreeGraphView.displayTreeGraph(child, "Changed child (normal)");
+				Chromosome offspring = new Chromosome();
+				offspring.copyIndividual(child);
+
+				return offspring;
+			} else {
+				//TreeGraphView.displayTreeGraph(motherSubTree, "Changed child (null parent)");
+				Chromosome offspring = new Chromosome();
+				offspring.copyIndividual(motherSubTree);
+
+				return offspring;
 			}
-
-			TreeGraphView.displayTreeGraph(child, "Changed child");
-			Chromosome offspring = new Chromosome();
-			offspring.copyIndividual(child);
-
-			return offspring;
-
 		} else {
-
-			TreeGraphView.displayTreeGraph(child, "Changed child");
+			//TreeGraphView.displayTreeGraph(temp2, "Changed child (null)");
 			Chromosome offspring = new Chromosome();
-			offspring.copyIndividual(insertionPoint);
+			offspring.copyIndividual(temp2);
 
 			return offspring;
 		}
@@ -108,5 +115,14 @@ public class Genetics {
 		TreeNode found = base.findTreeNode(searchCriteria);
 		return found;
 	}
+
+	/*
+	 * private static TreeNode search2(TreeNode mainTree, TreeNode target) { if
+	 * (mainTree != null) { if (mainTree.equals(target)) { return mainTree; }
+	 * else { if (!mainTree.getChildren().isEmpty()) { TreeNode foundNode =
+	 * search2(mainTree.getChildren().get(0), target); if (foundNode == null) {
+	 * foundNode = search2(mainTree.getChildren().get(1), target); } return
+	 * foundNode; } else { return null; } } } else { return null; } }
+	 */
 
 }
