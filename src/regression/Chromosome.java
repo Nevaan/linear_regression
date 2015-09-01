@@ -61,9 +61,7 @@ public class Chromosome {
 			if (temp instanceof Function)
 				chosenNode = chooseRandomNode(temp, false, maxLevel, currentLevel + 1).copyTree();
 			else
-			{
-				if(temp == null) System.out.println("temp jest nullem");
-				chosenNode = temp;
+				chosenNode = remainingSubtree;
 			}
 		}
 
