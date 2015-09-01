@@ -46,12 +46,13 @@ public class Genetics {
 
 		TreeNode f = father.getSchema().copyTree();
 		TreeNode m = mother.getSchema().copyTree();
-		//TreeGraphView.displayTreeGraph(f, "Init Child");
+		TreeGraphView.displayTreeGraph(f, "Init Child");
 
 		int id = 0;
 
 		for (TreeNode node : f) {
 			node.getData().setId(id++);
+			System.out.println(node);
 		}
 
 		for (TreeNode node2 : m) {
@@ -62,10 +63,10 @@ public class Genetics {
 		insertionPoint.getData().setId(f.getData().getId());
 		TreeNode temp = insertionPoint.copyTree();
 		temp.getData().setId(insertionPoint.getData().getId());
-		//TreeGraphView.displayTreeGraph(insertionPoint, "Insertion Point");
+		TreeGraphView.displayTreeGraph(insertionPoint, "Insertion Point");
 
 		TreeNode motherSubTree = mother.chooseRandomNode(m, true, 0, 0);
-		//TreeGraphView.displayTreeGraph(insertionPoint, "Insertion Point");
+		TreeGraphView.displayTreeGraph(motherSubTree, "Mother SubTree");
 
 		for (int i = 0; i < motherSubTree.getChildren().size(); i++) {
 			insertionPoint.getChildren().add(motherSubTree.getChildren().get(i));
@@ -74,8 +75,10 @@ public class Genetics {
 		TreeNode temp2 = temp.copyTree();
 		temp2.getData().setId(temp.getData().getId());
 
-		temp = search(f, temp);
-
+		if(insertionPoint.getParent() == null)
+			temp = search(f, temp);
+		else
+			temp.setParent(insertionPoint.getParent());
 
 		if (temp != null) {
 			if (temp.getParent() != null) {
@@ -83,10 +86,9 @@ public class Genetics {
 					if (temp.getParent().getChildren().get(i) != null && temp.getParent().getChildren().get(i).equals(temp))
 						temp.getParent().getChildren().set(i, motherSubTree);
 				}
-
-				//TreeGraphView.displayTreeGraph(child, "Changed child (normal)");
+				TreeGraphView.displayTreeGraph(temp, "Changed child (normal)");
 				Chromosome offspring = new Chromosome();
-				offspring.copyIndividual(f);
+				offspring.copyIndividual(temp);
 
 				return offspring;
 			} else {
@@ -138,7 +140,7 @@ public class Genetics {
 						temp.getParent().getChildren().set(i, motherSubTree);
 				}
 
-				//TreeGraphView.displayTreeGraph(child, "Changed child (normal)");
+				TreeGraphView.displayTreeGraph(child, "Changed child (normal)");
 				Chromosome offspring = new Chromosome();
 				offspring.copyIndividual(child);
 
