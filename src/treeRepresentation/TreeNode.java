@@ -242,7 +242,7 @@ public class TreeNode implements Iterable<TreeNode> {
     }
 
     public void setElementsIndex(List<TreeNode> elementsIndex) {
-        this.elementsIndex = elementsIndex;
+        this.elementsIndex.addAll(elementsIndex);
     }
 
     // Ghost Method - should be always overriden
@@ -262,8 +262,8 @@ public class TreeNode implements Iterable<TreeNode> {
         if (children == null) {
             if (other.children != null)
                 return false;
-        } else if (!children.equals(other.children))
-            return false;
+        } //else if (!children.equals(other.children))
+            //return false;
         if (data == null) {
             if (other.data != null)
                 return false;
@@ -272,8 +272,8 @@ public class TreeNode implements Iterable<TreeNode> {
         if (elementsIndex == null) {
             if (other.elementsIndex != null)
                 return false;
-        } else if (!elementsIndex.equals(other.elementsIndex))
-            return false;
+        } //else if (!elementsIndex.equals(other.elementsIndex))
+            //return false;
         if (parent == null) {
             if (other.parent != null)
                 return false;

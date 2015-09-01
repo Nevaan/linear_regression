@@ -44,20 +44,20 @@ public class Genetics {
 	// Subtree Crossover
 	public static Chromosome crossover(Chromosome father, Chromosome mother) {
 		TreeNode child = father.getSchema();
-		//TreeGraphView.displayTreeGraph(child, "Init Child");
+		TreeGraphView.displayTreeGraph(child, "Init Child");
 
 		TreeNode insertionPoint = father.chooseRandomNode(child, true, 0, 0);
 		TreeNode temp = insertionPoint;
-		//TreeGraphView.displayTreeGraph(insertionPoint, "Insertion Point");
+		TreeGraphView.displayTreeGraph(insertionPoint, "Insertion Point");
 
 		TreeNode motherSubTree = mother.chooseRandomNode(mother.getSchema(), true, 0, 0);
-		//TreeGraphView.displayTreeGraph(motherSubTree, "Mother SubTree");
+		TreeGraphView.displayTreeGraph(motherSubTree, "Mother SubTree");
 
-		insertionPoint = motherSubTree;
+		//insertionPoint = motherSubTree.copyTree();
 		for (int i = 0; i < motherSubTree.getChildren().size(); i++) {
 			insertionPoint.getChildren().add(motherSubTree.getChildren().get(i));
 		}
-		insertionPoint.setParent(temp.getParent());
+		//insertionPoint.setParent(temp.getParent());
 
 		//TreeGraphView.displayTreeGraph(insertionPoint, "InsertionPoint after change");
 
@@ -67,8 +67,7 @@ public class Genetics {
 		if (temp != null) {
 			if (temp.getParent() != null) {
 				for (int i = 0; i < temp.getParent().getChildren().size(); i++) {
-					if (temp.getParent().getChildren().get(i) != null
-							&& temp.getParent().getChildren().get(i).equals(temp))
+					if (temp.getParent().getChildren().get(i) != null && temp.getParent().getChildren().get(i).equals(temp))
 						temp.getParent().getChildren().set(i, motherSubTree);
 				}
 
@@ -78,14 +77,15 @@ public class Genetics {
 
 				return offspring;
 			} else {
-				//TreeGraphView.displayTreeGraph(motherSubTree, "Changed child (null parent)");
+				TreeGraphView.displayTreeGraph(motherSubTree, "Changed child (null parent)");
 				Chromosome offspring = new Chromosome();
 				offspring.copyIndividual(motherSubTree);
 
 				return offspring;
 			}
 		} else {
-			//TreeGraphView.displayTreeGraph(temp2, "Changed child (null)");
+			// to nie powinno nigdy zajsc
+			TreeGraphView.displayTreeGraph(temp2, "Changed child (null)");
 			Chromosome offspring = new Chromosome();
 			offspring.copyIndividual(temp2);
 

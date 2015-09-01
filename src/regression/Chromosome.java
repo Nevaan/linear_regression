@@ -59,7 +59,7 @@ public class Chromosome {
 		if (currentLevel < maxLevel) {
 			TreeNode temp = remainingSubtree.chooseRandomChild();
 			if (temp instanceof Function)
-				chosenNode = chooseRandomNode(temp, false, maxLevel, currentLevel + 1);
+				chosenNode = chooseRandomNode(temp, false, maxLevel, currentLevel + 1).copyTree();
 			else
 				chosenNode = temp;
 		}
