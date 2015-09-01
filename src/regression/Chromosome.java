@@ -63,7 +63,7 @@ public class Chromosome {
 			else
 				chosenNode = remainingSubtree;
 			}
-		}
+		
 
 		return chosenNode;
 	}
