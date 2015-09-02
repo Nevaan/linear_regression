@@ -6,7 +6,7 @@ public class GPParameters {
 
 	// Main Class parameters
 	public static final int GROW_TREE_MAX_DEPTH = 30;
-	public static final int GENERATIONS_AMOUNT = 300;
+	public static final int GENERATIONS_AMOUNT = 150;
 
 	// Population parameter
 	public static final int POPULATION_SIZE = 50;
