@@ -35,8 +35,15 @@ public class Population {
 	public Chromosome getFittest() {
 		Chromosome fittest = population.get(0);
 
+		/*for(int i = 1; i < population.size(); i++) {
+			if(population.get(i).getFitness() >= fittest.getFitness()) {
+				fittest = population.get(i);
+			}
+		}
+		return fittest;
+	}*/
 		for (Chromosome individual : population) {
-			if (individual.getFitness() >= fittest.getFitness()) {
+			if (individual.getFitness() < fittest.getFitness()) {
 				fittest = individual;
 			}
 		}

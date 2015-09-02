@@ -11,8 +11,6 @@ public class MainClass {
 		Population population = new Population();
 		population.initializePopulation();
 		TreeNode fittest = population.getFittest().getSchema();
-		System.out.println("wynik 1(x=3) "+fittest.getValue(3.0d));
-		System.out.println("wynik 2(x=7) "+fittest.getValue(7.0));
 
 		//TreeGraphView.displayTreeGraph(fittest, "TEST");
 		//TreeNode random = population.getFittest().chooseRandomNode(fittest, true, 0, 0);
@@ -20,6 +18,9 @@ public class MainClass {
 		for(int i = 0; i < GPParameters.GENERATIONS_AMOUNT; i++) {
 			population = Genetics.evolve(population);
 			System.out.println("~~~~~~~~~~~" + i + " Population ~~~~~~~~~~~~");
+			System.out.println("Fittest fitness: " + population.getFittest().getFitness());
+			//TreeGraphView.displayTreeGraph(population.getFittest().getSchema(), "Fittest");
+			System.out.println(population.getFittest().getSchema().printFunction());
 		}
 
 		//System.out.println(population.getFittest().getSchema().printFunction());
