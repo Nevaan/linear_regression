@@ -45,13 +45,13 @@ public class Genetics {
 
 	public static Chromosome crossover3(Chromosome father, Chromosome mother) {
 		Random r = new Random();
-		TreeNode child = father.getSchema();
-		TreeNode m = mother.getSchema();
-		//TreeGraphView.displayTreeGraph(child, "Init Child");
-		//TreeGraphView.displayTreeGraph(m, "Mother");
-		//child.chooseRandomNodeMINE(child).replaceChild(r.nextInt(2),m);
-		child.chooseRandomNodeNEW(child,true,0,0).replaceChild(r.nextInt(2),m);
-		//TreeGraphView.displayTreeGraph(child, "Swapped");
+		TreeNode child = father.getSchema().copyTree();
+		TreeNode m = mother.getSchema().copyTree();
+		TreeGraphView.displayTreeGraph(child, "Init Child");
+		TreeGraphView.displayTreeGraph(m, "Mother");
+		child.chooseRandomNodeMINE(child).replaceChild(r.nextInt(2),m);
+		//child.chooseRandomNodeNEW(child,true,0,0).replaceChild(r.nextInt(2),m);
+		TreeGraphView.displayTreeGraph(child, "Swapped");
 
 		return new Chromosome(child);
 	}

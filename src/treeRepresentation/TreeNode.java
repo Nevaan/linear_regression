@@ -23,7 +23,7 @@ public class TreeNode implements Iterable<TreeNode> {
 	protected List<TreeNode> children;
 	public static Long IDENTIFIER = 0L;
 	private int treeHeight;
-	private int whichChildIs; // 0 - lewe jajo 1 - prawe jajo
+	private int whichChildIs = -1; // 0 - lewe jajo 1 - prawe jajo
 
 	public double getValue(double xValue) {
 		return 0;
@@ -93,7 +93,7 @@ public class TreeNode implements Iterable<TreeNode> {
 		clone.setChildren(this.getChildren());
 		clone.setElementsIndex(this.getElementsIndex());
 
-		TreeNode.IDENTIFIER--;
+		
 		if (this.parent != null)
 			this.parent.registerChildForSearch(clone);
 
@@ -151,7 +151,7 @@ public class TreeNode implements Iterable<TreeNode> {
 		childNode.parent = this;
 		this.children.add(childNode);
 		this.registerChildForSearch(childNode);
-		this.setWhichChildIs(whichChild);
+		childNode.setWhichChildIs(whichChild);
 		return childNode;
 	}
 
@@ -347,7 +347,6 @@ public class TreeNode implements Iterable<TreeNode> {
 
 	public void replaceChild(int r, TreeNode child) {
 		this.getChildren().add(r, child);
-		child.setParent(this);
 		this.getChildren().remove(2);
 	}
 
