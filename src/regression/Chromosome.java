@@ -91,7 +91,7 @@ public class Chromosome {
 
 	public double calculateAdjustedFitness() {
 		double denominator = 1 + this.calculateRawFitness();
-		return 1 / denominator;
+		return (1 / denominator);
 	}
 
 	public double getFitness() {
