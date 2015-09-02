@@ -11,17 +11,17 @@ public class Genetics {
 		Population evolvedPopulation = new Population();
 
 		// Reproduction
-		evolvedPopulation.saveChromosomeAt(0, population.getFittest());
+		//evolvedPopulation.saveChromosomeAt(0, population.getFittest());
 
 		// Crossover
-		for (int i = 1; i < GPParameters.POPULATION_SIZE; i++) {
+		for (int i = 0; i < GPParameters.POPULATION_SIZE; i++) {
 
 			// Select parents
 			Chromosome father = selectIndividual(population);
 			Chromosome mother = selectIndividual(population);
 
 			Chromosome child = crossover(father, mother);
-
+			
 			evolvedPopulation.saveChromosomeAt(i, child);
 		}
 
@@ -44,14 +44,14 @@ public class Genetics {
 	// Subtree Crossover
 	public static Chromosome crossover(Chromosome father, Chromosome mother) {
 		TreeNode child = father.getSchema();
-		TreeGraphView.displayTreeGraph(child, "Init Child");
+	//	TreeGraphView.displayTreeGraph(child, "Init Child");
 
 		TreeNode insertionPoint = father.chooseRandomNode(child, true, 0, 0);
 		TreeNode temp = insertionPoint;
-		TreeGraphView.displayTreeGraph(insertionPoint, "Insertion Point");
+		//TreeGraphView.displayTreeGraph(insertionPoint, "Insertion Point");
 
 		TreeNode motherSubTree = mother.chooseRandomNode(mother.getSchema(), true, 0, 0);
-		TreeGraphView.displayTreeGraph(motherSubTree, "Mother SubTree");
+		//TreeGraphView.displayTreeGraph(motherSubTree, "Mother SubTree");
 
 		//insertionPoint = motherSubTree.copyTree();
 		for (int i = 0; i < motherSubTree.getChildren().size(); i++) {
@@ -76,26 +76,20 @@ public class Genetics {
 						temp.getParent().getChildren().set(i, motherSubTree);
 				}
 
-				TreeGraphView.displayTreeGraph(child, "Changed child (normal)");
+				//TreeGraphView.displayTreeGraph(child, "Changed child (normal)");
 				Chromosome offspring = new Chromosome();
 				offspring.copyIndividual(child);
 
 				return offspring;
 			} else {
-				TreeGraphView.displayTreeGraph(motherSubTree, "Changed child (null parent)");
+				//TreeGraphView.displayTreeGraph(motherSubTree, "Changed child (null parent)");
 				Chromosome offspring = new Chromosome();
 				offspring.copyIndividual(motherSubTree);
 
 				return offspring;
 			}
-		} else {
-			// to nie powinno nigdy zajsc
-			TreeGraphView.displayTreeGraph(temp2, "Changed child (null)");
-			Chromosome offspring = new Chromosome();
-			offspring.copyIndividual(temp2);
-
-			return offspring;
-		}
+		} 
+		return null;
 	}
 
 	// TODO
@@ -104,8 +98,9 @@ public class Genetics {
 		return new Chromosome();
 	}
 
+	
 	// Node Search
-	private static TreeNode search(TreeNode base, TreeNode target) {
+	private static TreeNode search(TreeNode base, final TreeNode target) {
 
 		Comparable<Data> searchCriteria = new Comparable<Data>() {
 			@Override

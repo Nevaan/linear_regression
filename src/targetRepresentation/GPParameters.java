@@ -7,7 +7,7 @@ public class GPParameters {
 	public static final int GENERATIONS_AMOUNT = 50;
 
 	// Population parameter
-	public static final int POPULATION_SIZE = 15;
+	public static final int POPULATION_SIZE = 10;
 	public static final int MUTATION_NUMBER = 50;
 
 	// Genetics parameters
