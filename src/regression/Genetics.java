@@ -44,7 +44,19 @@ public class Genetics {
 			tournament.saveChromosomeAt(i, population.getChromosomeAt(index));
 		}
 
-		Chromosome bestIndividual = tournament.getFittest();
+		//Chromosome bestIndividual = tournament.getFittest();
+		//return bestIndividual;
+
+		Chromosome bestIndividual = tournament.getChromosomeAt(0);
+		double bestFitness = bestIndividual.calculateRawFitness();
+
+		for(int i = 1; i < tournament.getPopulationSize(); i++) {
+			if (tournament.getChromosomeAt(i).calculateRawFitness() > bestFitness) {
+				bestIndividual = tournament.getChromosomeAt(i);
+				bestFitness = tournament.getChromosomeAt(i).calculateRawFitness();
+			}
+		}
+
 		return bestIndividual;
 	}
 
@@ -98,14 +110,8 @@ public class Genetics {
 
 				return offspring;
 			}
-		} else {
-			// to nie powinno nigdy zajsc
-			TreeGraphView.displayTreeGraph(temp2, "Changed child (null)");
-			Chromosome offspring = new Chromosome();
-			offspring.copyIndividual(temp2);
-
-			return offspring;
 		}
+		return new Chromosome();
 	}
 
 	// TODO
@@ -164,13 +170,6 @@ public class Genetics {
 
 					return offspring;
 				}
-			} else {
-				// to nie powinno nigdy zajsc
-				TreeGraphView.displayTreeGraph(temp2, "Changed child (null)");
-				Chromosome offspring = new Chromosome();
-				offspring.copyIndividual(temp2);
-
-				return offspring;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -194,14 +193,5 @@ public class Genetics {
 		TreeNode found = base.findTreeNode(searchCriteria);
 		return found;
 	}
-
-	/*
-	 * private static TreeNode search2(TreeNode mainTree, TreeNode target) { if
-	 * (mainTree != null) { if (mainTree.equals(target)) { return mainTree; }
-	 * else { if (!mainTree.getChildren().isEmpty()) { TreeNode foundNode =
-	 * search2(mainTree.getChildren().get(0), target); if (foundNode == null) {
-	 * foundNode = search2(mainTree.getChildren().get(1), target); } return
-	 * foundNode; } else { return null; } } } else { return null; } }
-	 */
 
 }

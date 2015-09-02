@@ -1,9 +1,8 @@
+import graphics.graphs.TreeGraphView;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 import regression.Genetics;
@@ -38,12 +37,12 @@ public class LineChartSample extends Application {
 			System.out.println(population.getFittest().getSchema().printFunction());
 		}
 
-        lineChart.setTitle("Guwno gandora");
+        lineChart.setTitle("Regresja");
 
         XYChart.Series series = new XYChart.Series();
         series.setName("Wykres");
         XYChart.Series series2 = new XYChart.Series();
-        series2.setName("dupa gandora");
+        series2.setName("");
 
         Cartesian uno = new Cartesian();
         for (int i = 0; i< GPParameters.board.size();i++) {
@@ -56,7 +55,7 @@ public class LineChartSample extends Application {
         Scene scene  = new Scene(lineChart,800,600);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         lineChart.getData().addAll(series,series2);
-        
+
         stage.setScene(scene);
         stage.show();
     }

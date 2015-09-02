@@ -5,11 +5,11 @@ import java.util.List;
 public class GPParameters {
 
 	// Main Class parameters
-	public static final int GROW_TREE_MAX_DEPTH = 30;
-	public static final int GENERATIONS_AMOUNT = 150;
+	public static final int GROW_TREE_MAX_DEPTH = 20;
+	public static final int GENERATIONS_AMOUNT = 30;
 
 	// Population parameter
-	public static final int POPULATION_SIZE = 50;
+	public static final int POPULATION_SIZE = 25;
 	public static final int MUTATION_NUMBER = 50;
 
 	// Genetics parameters
