@@ -21,8 +21,8 @@ public class LineChartSample extends Application {
         final NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("Month");
 
-        final ScatterChart<Number,Number> lineChart =
-                new ScatterChart<Number,Number>(xAxis,yAxis);
+        final LineChart<Number,Number> lineChart =
+                new LineChart<Number,Number>(xAxis,yAxis);
 
         Cartesian.init();
 
@@ -42,19 +42,21 @@ public class LineChartSample extends Application {
 
         XYChart.Series series = new XYChart.Series();
         series.setName("Wykres");
-
+        XYChart.Series series2 = new XYChart.Series();
+        series2.setName("dupa gandora");
 
         Cartesian uno = new Cartesian();
         for (int i = 0; i< GPParameters.board.size();i++) {
-
         	series.getData().add(new XYChart.Data(GPParameters.board.get(i).getX(), GPParameters.board.get(i).getY()));
+        	series2.getData().add(new XYChart.Data(GPParameters.board.get(i).getX(), fittest.getValue(GPParameters.board.get(i).getX())));
         }
 
 
 
         Scene scene  = new Scene(lineChart,800,600);
-        lineChart.getData().add(series);
-
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        lineChart.getData().addAll(series,series2);
+        
         stage.setScene(scene);
         stage.show();
     }
