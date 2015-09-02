@@ -1,5 +1,7 @@
 package targetRepresentation;
 
+import java.util.List;
+
 public class GPParameters {
 
 	// Main Class parameters
@@ -13,5 +15,8 @@ public class GPParameters {
 	// Genetics parameters
 	public static final int TOURNAMENT_SIZE = 5;
 	public static final double MUTATION_RATE = 0.015;
+
+	// Board parameters
+	public static List<Point> board;
 
 }
