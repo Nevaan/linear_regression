@@ -14,7 +14,7 @@ import treeRepresentation.TreeNode;
  
  
 public class LineChartSample extends Application {
- 
+
     @Override public void start(Stage stage) throws Exception{
         stage.setTitle("Line Chart Sample");
         final NumberAxis xAxis = new NumberAxis();
@@ -37,25 +37,26 @@ public class LineChartSample extends Application {
 		}
 		
         lineChart.setTitle("Guwno gandora");
-                                
+
         XYChart.Series series = new XYChart.Series();
         series.setName("Wykres");
+
         
         Cartesian uno = new Cartesian();
         for (int i = 0; i< uno.getBoard().size();i++) {
         	
         	series.getData().add(new XYChart.Data(uno.getBoard().get(i).getX(), uno.getBoard().get(i).getY()));
         }
-        
-        
+
+
         
         Scene scene  = new Scene(lineChart,800,600);
         lineChart.getData().add(series);
-       
+
         stage.setScene(scene);
         stage.show();
     }
- 
+
     public static void main(String[] args) {
         launch(args);
     }

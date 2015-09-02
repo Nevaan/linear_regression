@@ -13,15 +13,15 @@ public class Chromosome {
 
 	private TreeNode schema;
 	private double fitness;
-	private Cartesian cartesian;
+	//private Cartesian cartesian;
 	private int treeHeight;
 
 	public Chromosome() {
-		cartesian = new Cartesian();
+		//cartesian = new Cartesian();
 	}
 
 	public void generateIndividual() {
-		cartesian.init();
+		//cartesian.init();
 		try {
 			schema = TreeGenerator.generateGrowTree(GPParameters.GROW_TREE_MAX_DEPTH);
 			TreeGenerator.CAN_CHOOSE_TERMINAL = false;
@@ -32,7 +32,7 @@ public class Chromosome {
 	}
 
 	public void copyIndividual(TreeNode schema) {
-		cartesian.init();
+		//cartesian.init();
 		try {
 			this.schema = schema;
 			this.treeHeight = this.countTreeDepth(this.getSchema());
@@ -81,9 +81,9 @@ public class Chromosome {
 
 	public double calculateRawFitness() {
 		double sum = 0;
-		for (int i = 0; i < cartesian.getBoard().size(); i++) {
-			double residual = cartesian.getBoard().get(i).getY()
-					- this.schema.getValue(cartesian.getBoard().get(i).getX());
+		for (int i = 0; i < GPParameters.board.size(); i++) {
+			double residual = GPParameters.board.get(i).getY()
+					- this.schema.getValue(GPParameters.board.get(i).getX());
 			sum += residual * residual;
 		}
 		return sum;
@@ -111,14 +111,6 @@ public class Chromosome {
 
 	public void setFitness(double fitness) {
 		this.fitness = fitness;
-	}
-
-	public Cartesian getCartesian() {
-		return cartesian;
-	}
-
-	public void setCartesian(Cartesian cartesian) {
-		this.cartesian = cartesian;
 	}
 
 	public int getTreeHeight() {

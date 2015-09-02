@@ -1,6 +1,7 @@
 package regression;
 
 import graphics.graphs.TreeGraphView;
+import targetRepresentation.Cartesian;
 import targetRepresentation.GPParameters;
 import treeRepresentation.TreeNode;
 
@@ -8,6 +9,7 @@ public class MainClass {
 
 	public static void main(String[] args) throws Exception {
 
+		Cartesian.init();
 		Population population = new Population();
 		population.initializePopulation();
 		TreeNode fittest = population.getFittest().getSchema();
@@ -15,6 +17,7 @@ public class MainClass {
 		//TreeGraphView.displayTreeGraph(fittest, "TEST");
 		//TreeNode random = population.getFittest().chooseRandomNode(fittest, true, 0, 0);
 		//System.out.println("Random :" + random);
+
 		for(int i = 0; i < GPParameters.GENERATIONS_AMOUNT; i++) {
 			population = Genetics.evolve(population);
 			System.out.println("~~~~~~~~~~~" + i + " Population ~~~~~~~~~~~~");
