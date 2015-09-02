@@ -62,7 +62,12 @@ public class Genetics {
 		//TreeGraphView.displayTreeGraph(insertionPoint, "InsertionPoint after change");
 
 		TreeNode temp2 = temp.copyTree();
-		temp = search(child, temp);
+		//temp = search(child, temp);
+
+		for(TreeNode tN : child) {
+			if(tN.equals(insertionPoint))
+				temp = tN;
+		}
 
 		if (temp != null) {
 			if (temp.getParent() != null) {
@@ -71,7 +76,7 @@ public class Genetics {
 						temp.getParent().getChildren().set(i, motherSubTree);
 				}
 
-				//TreeGraphView.displayTreeGraph(child, "Changed child (normal)");
+				TreeGraphView.displayTreeGraph(child, "Changed child (normal)");
 				Chromosome offspring = new Chromosome();
 				offspring.copyIndividual(child);
 
