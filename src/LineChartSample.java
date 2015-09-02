@@ -3,38 +3,50 @@ import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
+import regression.Genetics;
+import regression.Population;
+import targetRepresentation.Cartesian;
+import targetRepresentation.GPParameters;
+import treeRepresentation.TreeNode;
  
  
 public class LineChartSample extends Application {
  
-    @Override public void start(Stage stage) {
+    @Override public void start(Stage stage) throws Exception{
         stage.setTitle("Line Chart Sample");
-        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("Month");       
         
-        final LineChart<String,Number> lineChart = 
-                new LineChart<String,Number>(xAxis,yAxis);
+        final ScatterChart<Number,Number> lineChart = 
+                new ScatterChart<Number,Number>(xAxis,yAxis);
                 
+		Population population = new Population();
+		population.initializePopulation();
+		TreeNode fittest = population.getFittest().getSchema();
+        
+		for(int i = 0; i < GPParameters.GENERATIONS_AMOUNT; i++) {
+			population = Genetics.evolve(population);
+			System.out.println("~~~~~~~~~~~" + i + " Population ~~~~~~~~~~~~");
+			System.out.println("Fittest fitness: " + population.getFittest().getFitness());
+			//TreeGraphView.displayTreeGraph(population.getFittest().getSchema(), "Fittest");
+			System.out.println(population.getFittest().getSchema().printFunction());
+		}
+		
         lineChart.setTitle("Guwno gandora");
                                 
         XYChart.Series series = new XYChart.Series();
         series.setName("Wykres");
         
-        series.getData().add(new XYChart.Data("Jan", 23));
-        series.getData().add(new XYChart.Data("Feb", 14));
-        series.getData().add(new XYChart.Data("Mar", 15));
-        series.getData().add(new XYChart.Data("Apr", 24));
-        series.getData().add(new XYChart.Data("May", 34));
-        series.getData().add(new XYChart.Data("Jun", 36));
-        series.getData().add(new XYChart.Data("Jul", 22));
-        series.getData().add(new XYChart.Data("Aug", 45));
-        series.getData().add(new XYChart.Data("Sep", 43));
-        series.getData().add(new XYChart.Data("Oct", 17));
-        series.getData().add(new XYChart.Data("Nov", 29));
-        series.getData().add(new XYChart.Data("Dec", 25));
+        Cartesian uno = new Cartesian();
+        for (int i = 0; i< uno.getBoard().size();i++) {
+        	
+        	series.getData().add(new XYChart.Data(uno.getBoard().get(i).getX(), uno.getBoard().get(i).getY()));
+        }
+        
         
         
         Scene scene  = new Scene(lineChart,800,600);

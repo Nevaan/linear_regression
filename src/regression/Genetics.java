@@ -179,7 +179,7 @@ public class Genetics {
 	}
 
 	// Node Search
-	private static TreeNode search(TreeNode base, TreeNode target) {
+	private static TreeNode search(TreeNode base, final TreeNode target) {
 
 		Comparable<Data> searchCriteria = new Comparable<Data>() {
 			@Override

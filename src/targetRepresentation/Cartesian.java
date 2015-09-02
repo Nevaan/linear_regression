@@ -32,8 +32,8 @@ public class Cartesian {
 	private void randomFill() {
 		Random r1 = new Random();
 		Random r2 = new Random();
-		for(int i = 0; i < 100; i++) {
-			board.add(new Point((r1.nextInt(60)), (r2.nextInt(60))));
+		for(int i = 0; i < 60; i++) {
+			board.add(new Point((i*0.8), (r2.nextInt(60))));
 		}
 	}
 
