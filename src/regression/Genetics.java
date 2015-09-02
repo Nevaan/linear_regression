@@ -53,13 +53,13 @@ public class Genetics {
 		TreeNode motherSubTree = mother.chooseRandomNode(mother.getSchema(), true, 0, 0);
 		TreeGraphView.displayTreeGraph(motherSubTree, "Mother SubTree");
 
-		//insertionPoint = motherSubTree.copyTree();
+		insertionPoint = motherSubTree.copyTree();
 		for (int i = 0; i < motherSubTree.getChildren().size(); i++) {
 			insertionPoint.getChildren().add(motherSubTree.getChildren().get(i));
 		}
-		//insertionPoint.setParent(temp.getParent());
+		insertionPoint.setParent(temp.getParent());
 
-		//TreeGraphView.displayTreeGraph(insertionPoint, "InsertionPoint after change");
+		TreeGraphView.displayTreeGraph(insertionPoint, "InsertionPoint after change");
 
 		TreeNode temp2 = temp.copyTree();
 		temp = search(child, temp);
@@ -71,7 +71,7 @@ public class Genetics {
 						temp.getParent().getChildren().set(i, motherSubTree);
 				}
 
-				//TreeGraphView.displayTreeGraph(child, "Changed child (normal)");
+				TreeGraphView.displayTreeGraph(child, "Changed child (normal)");
 				Chromosome offspring = new Chromosome();
 				offspring.copyIndividual(child);
 
