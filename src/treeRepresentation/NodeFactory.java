@@ -11,7 +11,7 @@ import treeElement.terminal.Variable;
 
 public class NodeFactory {
 
-	public static TreeNode getNode() {
+	public static TreeNode getNode() throws Exception{
 		Random random = new Random();
 		if (random.nextBoolean()) {
 			return getFunction();
@@ -20,7 +20,7 @@ public class NodeFactory {
 		}
 	}
 
-	public static TreeNode getFunction() {
+	public static TreeNode getFunction() throws Exception{
 		Random random = new Random();
 		int option = random.nextInt(4);
 		switch (option) {
