@@ -1,12 +1,12 @@
 package treeElement.function;
 
-import treeRepresentation.Data;
 import treeRepresentation.TreeNode;
 
 public class Multiply extends Function{
 
-	public Multiply(Data data) {
-		super(data);
+	public Multiply() {
+		super();
+		this.type = "*";
 
 	}
 

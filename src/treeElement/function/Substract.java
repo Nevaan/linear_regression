@@ -1,12 +1,12 @@
 package treeElement.function;
 
-import treeRepresentation.Data;
 import treeRepresentation.TreeNode;
 
 public class Substract extends Function{
 
-	public Substract(Data data) {
-		super(data);
+	public Substract() {
+		super();
+		this.type = "-";
 	}
 
 

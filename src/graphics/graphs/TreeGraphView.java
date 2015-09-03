@@ -36,7 +36,7 @@ public class TreeGraphView {
 		vv.getRenderContext().setVertexFillPaintTransformer(vertexPaint);
 		vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
 		vv.getRenderer().getVertexLabelRenderer()
-			.setPosition(Renderer.VertexLabel.Position.S);
+			.setPosition(Renderer.VertexLabel.Position.CNTR);
 
 		JFrame frame = new JFrame(title);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,7 +50,7 @@ public class TreeGraphView {
 		if(n instanceof Function)
 			return Color.RED;
 		else if (n instanceof Terminal)
-			return Color.BLUE;
+			return Color.ORANGE;
 		else
 			return null;
 	}

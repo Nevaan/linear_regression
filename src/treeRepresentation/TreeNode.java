@@ -4,25 +4,21 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import regression.Parameters;
 import treeElement.function.Add;
 import treeElement.function.Divide;
-import treeElement.function.Function;
 import treeElement.function.Multiply;
 import treeElement.function.Substract;
 import treeElement.terminal.Constant;
-import treeElement.terminal.Terminal;
 import treeElement.terminal.Variable;
 
 public class TreeNode implements Iterable<TreeNode> {
 
-	public Data data;
-	public TreeNode parent;
+	protected int id;
+	protected String type;
+	protected TreeNode parent;
 	public List<TreeNode> children;
-	public static Long IDENTIFIER = 0L;
-
-	public double getValue(double xValue) {
-		return 0;
-	};
+	protected int childAmount;
 
 	public boolean isRoot() {
 		return parent == null;
@@ -34,20 +30,15 @@ public class TreeNode implements Iterable<TreeNode> {
 
 	private List<TreeNode> elementsIndex;
 
-	public TreeNode(Data data) {
-		this.data = data;
+	public TreeNode() {
+		this.id = Parameters.IDENTIFIER++;
 		this.children = new LinkedList<TreeNode>();
 		this.elementsIndex = new LinkedList<TreeNode>();
 		this.elementsIndex.add(this);
-		this.data.setId(IDENTIFIER++);
-		if(this instanceof Function)
-			this.data.setChildAmount(2);
-		else if (this instanceof Terminal)
-			this.data.setChildAmount(0);
 	}
 
-	public TreeNode addChild(Data child) {
-		TreeNode childNode = selectSubClass(child);
+	public TreeNode addChild(TreeNode child) {
+		TreeNode childNode = child;
 		childNode.parent = this;
 		this.children.add(childNode);
 		this.registerChildForSearch(childNode);
@@ -61,23 +52,36 @@ public class TreeNode implements Iterable<TreeNode> {
 			return parent.getLevel() + 1;
 	}
 
-	private TreeNode selectSubClass(Data data) {
-		switch (data.getType()) {
-		case 10:
-			return new Add(data);
-		case 11:
-			return new Substract(data);
-		case 12:
-			return new Multiply(data);
-		case 13:
-			return new Divide(data);
-		case 20:
-			return new Constant(data);
-		case 21:
-			return new Variable(data);
-		default:
-			return null;
-		}
+	public int getChildAmount() {
+		return childAmount;
+	}
+
+	public void setChildAmount(int childAmount) {
+		this.childAmount = childAmount;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public TreeNode getParent() {
+		return parent;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public double getValue(double xValue) {
+		return 0;
 	}
 
 	private void registerChildForSearch(TreeNode node) {
@@ -86,10 +90,10 @@ public class TreeNode implements Iterable<TreeNode> {
 			parent.registerChildForSearch(node);
 	}
 
-	public TreeNode findTreeNode(Comparable<Data> cmp) {
+	public TreeNode findTreeNode(Comparable<Integer> cmp) {
 		for (TreeNode element : this.elementsIndex) {
-			Data elData = element.data;
-			if (cmp.compareTo(elData) == 0)
+			int elementId = element.id;
+			if (cmp.compareTo(elementId) == 0)
 				return element;
 		}
 
@@ -98,13 +102,30 @@ public class TreeNode implements Iterable<TreeNode> {
 
 	@Override
 	public String toString() {
-		return data != null ? data.toString() : "[data null]";
+		return new String(type + " " + id);
 	}
 
 	@Override
 	public Iterator<TreeNode> iterator() {
 		TreeNodeIter iter = new TreeNodeIter(this);
 		return iter;
+	}
+
+	private TreeNode selectChildType(String type) {
+		switch (type) {
+		case "+":
+			return new Add();
+		case "/":
+			return new Divide();
+		case "*":
+			return new Multiply();
+		case "-":
+			return new Substract();
+		case "x":
+			return new Variable();
+		default:
+			return new Constant();
+		}
 	}
 
 }

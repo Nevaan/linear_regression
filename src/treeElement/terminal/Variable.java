@@ -1,15 +1,14 @@
 package treeElement.terminal;
 
-import treeRepresentation.Data;
-
 public class Variable extends Terminal {
 
-	public Variable(Data data) {
-		super(data);
+	public Variable() {
+		super();
+		this.type = "x";
 	}
 
 	public double getValue(double xValue) {
-		return 3;
+		return xValue;
 	}
 
 }

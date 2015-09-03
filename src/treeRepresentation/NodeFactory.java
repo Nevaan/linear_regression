@@ -22,28 +22,28 @@ public class NodeFactory {
 
 	public static TreeNode getFunction() {
 		Random random = new Random();
-		int option = random.nextInt(3);
+		int option = random.nextInt(4);
 		switch (option) {
 		case 0:
-			return new Add(new Data(10));
+			return new Add();
 		case 1:
-			return new Divide(new Data(13));
+			return new Divide();
 		case 2:
-			return new Multiply(new Data(12));
-		case 4:
-			return new Substract(new Data(11));
+			return new Multiply();
+		case 3:
+			return new Substract();
 		}
 		return null;
 	}
 
 	public static TreeNode getTerminal() {
 		Random random = new Random();
-		int option = random.nextInt(3);
+		int option = random.nextInt(2);
 		switch (option) {
 		case 0:
-			return new Constant(new Data(20));
+			return new Constant();
 		case 1:
-			return new Variable(new Data(21));
+			return new Variable();
 		}
 		return null;
 	}

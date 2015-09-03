@@ -1,15 +1,24 @@
 package treeElement.terminal;
 
-import treeRepresentation.Data;
+import java.util.Random;
 
 public class Constant extends Terminal {
 
-	public Constant(Data data) {
-		super(data);
+	private double value;
+
+	public Constant() {
+		super();
+		Random random = new Random();
+		this.value = (double) (random.nextInt(20) - 10);
+		this.type = String.valueOf(value);
 	}
 
 	public double getValue(double xValue) {
-		return 4;
+		return value;
+	}
+
+	public void setValue(double value) {
+		this.value = value;
 	}
 
 }

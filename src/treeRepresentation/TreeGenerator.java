@@ -9,7 +9,7 @@ public class TreeGenerator {
 		TreeNode root;
 
 		if (maxDepth > 1) {
-			if(CAN_CHOOSE_TERMINAL) {
+			if (CAN_CHOOSE_TERMINAL) {
 				root = NodeFactory.getNode();
 			} else {
 				root = NodeFactory.getFunction();
@@ -19,9 +19,9 @@ public class TreeGenerator {
 			root = NodeFactory.getTerminal();
 		}
 
-		for (int i = 0; i < root.data.getChildAmount(); i++) {
-			root.addChild(new Data(root.data.getType()));
-			generateGrowTree(maxDepth - 1);
+		for (int i = 0; i < root.getChildAmount(); i++) {
+			root.addChild(generateGrowTree(maxDepth - 1));
+
 		}
 
 		return root;
