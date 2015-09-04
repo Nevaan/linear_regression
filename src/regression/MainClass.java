@@ -4,6 +4,7 @@ import graphics.graphs.TreeGraphView;
 import treeRepresentation.ClassToXML;
 import treeRepresentation.TreeGenerator;
 import treeRepresentation.TreeNode;
+import treeRepresentation.xmlConversion.ClassToXML;
 
 public class MainClass {
 

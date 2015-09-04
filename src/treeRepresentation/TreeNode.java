@@ -9,7 +9,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+<<<<<<< HEAD
 import javax.xml.bind.annotation.XmlTransient;
+=======
+>>>>>>> b8e687b2f934c2d9af445f58ac0f6ec083f3c27a
 
 import regression.Parameters;
 import treeElement.function.Add;
@@ -19,15 +22,24 @@ import treeElement.function.Substract;
 import treeElement.terminal.Constant;
 import treeElement.terminal.Variable;
 
+<<<<<<< HEAD
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
+=======
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement
+>>>>>>> b8e687b2f934c2d9af445f58ac0f6ec083f3c27a
 public class TreeNode implements Iterable<TreeNode> {
 
 	@XmlAttribute
 	protected int id;
 	@XmlElement
 	protected String type;
+<<<<<<< HEAD
 	@XmlTransient
+=======
+	@XmlElement
+>>>>>>> b8e687b2f934c2d9af445f58ac0f6ec083f3c27a
 	protected TreeNode parent;
 	@XmlElement
 	public List<TreeNode> children;
@@ -88,6 +100,10 @@ public class TreeNode implements Iterable<TreeNode> {
 
 	public TreeNode getParent() {
 		return parent;
+	}
+
+	public void setParent(TreeNode parent) {
+		this.parent = parent;
 	}
 
 	public void setType(String type) {

@@ -3,6 +3,8 @@ package graphics.graphs;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Paint;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
 
 import javax.swing.JFrame;
 
