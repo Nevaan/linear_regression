@@ -1,6 +1,7 @@
 /bin/
 /target/
 /xml/
+.classpath
 .project
 *.zip
 /.metadata/*
