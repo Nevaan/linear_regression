@@ -4,6 +4,13 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import regression.Parameters;
 import treeElement.function.Add;
 import treeElement.function.Divide;
@@ -12,12 +19,19 @@ import treeElement.function.Substract;
 import treeElement.terminal.Constant;
 import treeElement.terminal.Variable;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 public class TreeNode implements Iterable<TreeNode> {
 
+	@XmlAttribute
 	protected int id;
+	@XmlElement
 	protected String type;
+	@XmlTransient
 	protected TreeNode parent;
+	@XmlElement
 	public List<TreeNode> children;
+	@XmlElement
 	protected int childAmount;
 
 	public boolean isRoot() {

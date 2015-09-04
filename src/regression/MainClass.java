@@ -1,6 +1,7 @@
 package regression;
 
 import graphics.graphs.TreeGraphView;
+import treeRepresentation.ClassToXML;
 import treeRepresentation.TreeGenerator;
 import treeRepresentation.TreeNode;
 
@@ -16,6 +17,8 @@ public class MainClass {
 			System.out.println("ERROR: podczas generowania drzewa.");
 			e.printStackTrace();
 		}
+
+		ClassToXML.convert(testTree);
 
 		TreeGraphView.displayTreeGraph(testTree, "Test Tree");
 

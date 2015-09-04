@@ -3,5 +3,6 @@
 .classpath
 .project
 *.zip
+/xml/
 /.metadata/*
 /RemoteSystemsTempFiles/*
