@@ -4,7 +4,7 @@ import graphics.graphs.TreeGraphView;
 import treeRepresentation.ClassToXML;
 import treeRepresentation.TreeGenerator;
 import treeRepresentation.TreeNode;
-import treeRepresentation.xmlConversion.ClassToXML;
+import treeRepresentation.XMLtoClass;
 
 public class MainClass {
 
@@ -19,7 +19,10 @@ public class MainClass {
 			e.printStackTrace();
 		}
 
-		ClassToXML.convert(testTree);
+		//ClassToXML.convert(testTree);
+		TreeNode test = XMLtoClass.convert(1);
+
+		ClassToXML.convert(test);
 
 		TreeGraphView.displayTreeGraph(testTree, "Test Tree");
 

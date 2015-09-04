@@ -15,7 +15,7 @@ public class ClassToXML {
 	try {
 
 		File currentDir = new File(".");
-		File file = new File(currentDir + "/xml/" + String.valueOf(Parameters.FILE_NAME_ID++) + ".xml");
+		File file = new File(currentDir + "/xml/" + /*String.valueOf(Parameters.FILE_NAME_ID++)*/ "3" + ".xml");
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(TreeNode.class);
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
