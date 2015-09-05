@@ -1,6 +1,9 @@
 package regression;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import graphics.graphs.TreeGraphView;
 import treeRepresentation.ClassToXML;
@@ -34,6 +37,10 @@ public class MainClass {
 
 	
 	public static void directoryCleanUp(){
+		if(!Files.exists(Paths.get("./xml/"))){
+			new File("./xml/").mkdir();
+		}
+		
 		File folder = new File("./xml/");
 		File[] files = folder.listFiles();
 		if(files!=null){
