@@ -1,5 +1,7 @@
 package regression;
 
+import java.io.File;
+
 import graphics.graphs.TreeGraphView;
 import treeRepresentation.ClassToXML;
 import treeRepresentation.TreeGenerator;
@@ -18,8 +20,10 @@ public class MainClass {
 			System.out.println("ERROR: podczas generowania drzewa.");
 			e.printStackTrace();
 		}
-
-		//ClassToXML.convert(testTree);
+		
+		directoryCleanUp();
+		
+		ClassToXML.convert(testTree);
 		TreeNode test = XMLtoClass.convert(1);
 
 		ClassToXML.convert(test);
@@ -28,4 +32,14 @@ public class MainClass {
 
 	}
 
+	
+	public static void directoryCleanUp(){
+		File folder = new File("./xml/");
+		File[] files = folder.listFiles();
+		if(files!=null){
+			for(File f:files){
+				f.delete();
+			}
+		}
+	}
 }

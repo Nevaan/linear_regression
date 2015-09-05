@@ -1,6 +1,7 @@
 package treeRepresentation;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -8,6 +9,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.jdom2.Document;
+import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
 
@@ -36,13 +38,13 @@ public class XMLtoClass {
 
 	}
 
-	public static TreeNode search(String source, String criteria) throws JAXBException, XPathExpressionException {
+	public static TreeNode search(String source, String criteria) throws JAXBException, XPathExpressionException, JDOMException, IOException {
 
 		// read the XML into a JDOM2 document
 		SAXBuilder jdomBuilder = new SAXBuilder();
 		Document jdomDocument = jdomBuilder.build(source);
 
-
+		return new TreeNode();
 
 	}
 }
