@@ -2,6 +2,9 @@ package treeElement.terminal;
 
 import java.util.Random;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Constant extends Terminal {
 
 	private double value;

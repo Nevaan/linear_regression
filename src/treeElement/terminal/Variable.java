@@ -1,5 +1,8 @@
 package treeElement.terminal;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Variable extends Terminal {
 
 	public Variable() {

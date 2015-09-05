@@ -1,7 +1,10 @@
 package treeElement.function;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import treeRepresentation.TreeNode;
 
+@XmlRootElement
 public class Substract extends Function{
 
 	public Substract() {

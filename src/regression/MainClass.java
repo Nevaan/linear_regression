@@ -27,11 +27,13 @@ public class MainClass {
 		directoryCleanUp();
 		
 		ClassToXML.convert(testTree);
+		
 		TreeNode test = XMLtoClass.convert(1);
 
 		ClassToXML.convert(test);
 
 		TreeGraphView.displayTreeGraph(testTree, "Test Tree");
+		TreeGraphView.displayTreeGraph(test, "Test Tree");
 
 	}
 

@@ -12,6 +12,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Node;
 
 import regression.Parameters;
+import treeElement.function.Add;
+import treeElement.function.Divide;
+import treeElement.function.Multiply;
+import treeElement.function.Substract;
+import treeElement.terminal.Constant;
+import treeElement.terminal.Variable;
 
 public class ClassToXML {
 
@@ -23,7 +29,7 @@ public class ClassToXML {
 			File file = new File(currentDir + "/xml/"
 					+  String.valueOf(Parameters.FILE_NAME_ID++) /*"3"*/ + ".xml");
 
-			JAXBContext jaxbContext = JAXBContext.newInstance(TreeNode.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);

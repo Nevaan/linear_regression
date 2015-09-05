@@ -1,7 +1,10 @@
 package treeElement.function;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import treeRepresentation.TreeNode;
 
+@XmlRootElement
 public class Divide extends Function{
 
 	public Divide() {

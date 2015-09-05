@@ -12,6 +12,13 @@ import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
+import treeElement.function.Add;
+import treeElement.function.Divide;
+import treeElement.function.Multiply;
+import treeElement.function.Substract;
+import treeElement.terminal.Constant;
+import treeElement.terminal.Variable;
+
 
 public class XMLtoClass {
 
@@ -21,7 +28,7 @@ public class XMLtoClass {
 
 			File currentDir = new File(".");
 			File file = new File(currentDir + "/xml/" + String.valueOf(fileId) + ".xml");
-			JAXBContext jaxbContext = JAXBContext.newInstance(TreeNode.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			TreeNode treeNode = (TreeNode) jaxbUnmarshaller.unmarshal(file);
