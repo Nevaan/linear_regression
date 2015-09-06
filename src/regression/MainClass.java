@@ -34,6 +34,7 @@ public class MainClass {
 		
 		TreeGraphView.displayTreeGraph(testTree, "Test Tree");
 		TreeGraphView.displayTreeGraph(test, "Test ");
+		System.out.println(testTree.getValue(5));
 		System.out.println(test.getValue(5));
 	}
 
