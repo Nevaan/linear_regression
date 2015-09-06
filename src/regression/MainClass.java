@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import genetics.Population;
 import graphics.graphs.TreeGraphView;
 import treeRepresentation.ClassToXML;
 import treeRepresentation.TreeGenerator;
@@ -15,27 +16,22 @@ public class MainClass {
 
 	public static void main(String[] args) {
 
-		TreeNode testTree = null;
+		// Odkomentowaæ przy pierwszym odpaleniu - wrzuca do katalogu xml pierwsza populacje; potem mozna zakomentowac i zostawic to co jest nizej zeby zobaczyc,
+		// ze poprawnie wczytuje sie ta populacja
+		/*
+		directoryCleanUp();		
+		Population population = new Population();
+		population.initialize(0);
+		*/
+		
+		// Odkomentowac po min. jednokrotnym odpaleniu powyzszego - inaczej wywala error bo brakuje xmli 
+		/*
+		for (int i = 0; i<Parameters.POPULATION_SIZE; i++){
+			TreeNode loadedChromosome = XMLtoClass.convert(i,0);	
+			TreeGraphView.displayTreeGraph(loadedChromosome , "Test ");
+		}*/
+		
 
-		try {
-			testTree = TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH);
-		} catch (Exception e) {
-			System.out.println("ERROR: podczas generowania drzewa.");
-			e.printStackTrace();
-		}
-		
-		directoryCleanUp();
-		
-		ClassToXML.convert(testTree);
-		
-		TreeNode test = XMLtoClass.convert(1);
-		
-		ClassToXML.convert(test);
-		
-		TreeGraphView.displayTreeGraph(testTree, "Test Tree");
-		TreeGraphView.displayTreeGraph(test, "Test ");
-		System.out.println(testTree.getValue(5));
-		System.out.println(test.getValue(5));
 	}
 
 	

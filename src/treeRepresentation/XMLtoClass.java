@@ -22,12 +22,12 @@ import treeElement.terminal.Variable;
 
 public class XMLtoClass {
 
-	public static TreeNode convert(int fileId) {
+	public static TreeNode convert(int fileId, int generation) {
 
 		try {
 
 			File currentDir = new File(".");
-			File file = new File(currentDir + "/xml/" + String.valueOf(fileId) + ".xml");
+			File file = new File(currentDir + "/xml/Generation"+ generation + "Chromosome"+ String.valueOf(fileId) + ".xml");
 			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
