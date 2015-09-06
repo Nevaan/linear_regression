@@ -13,8 +13,9 @@ public class Constant extends Terminal {
 		super();
 		Random random = new Random();
 		this.value = (double) (random.nextInt(20) - 10);
-		this.type = String.valueOf(value);
+		this.type = "Constant";
 	}
+	
 
 	public double getValue(double xValue) {
 		return value;
@@ -22,6 +23,12 @@ public class Constant extends Terminal {
 
 	public void setValue(double value) {
 		this.value = value;
+	}
+
+
+	@Override
+	public String toString() {
+		return Double.toString(value);
 	}
 
 }

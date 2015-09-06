@@ -121,7 +121,7 @@ public class TreeNode implements Iterable<TreeNode> {
 
 	@Override
 	public String toString() {
-		return new String(type + " " + id);
+		return new String(type);
 	}
 
 	@Override
@@ -130,21 +130,6 @@ public class TreeNode implements Iterable<TreeNode> {
 		return iter;
 	}
 
-	private TreeNode selectChildType(String type) {
-		switch (type) {
-		case "+":
-			return new Add();
-		case "/":
-			return new Divide();
-		case "*":
-			return new Multiply();
-		case "-":
-			return new Substract();
-		case "x":
-			return new Variable();
-		default:
-			return new Constant();
-		}
-	}
 
 }
+
