@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import javax.xml.bind.annotation.XmlTransient;
 
+import genetics.SampleData;
 import regression.Parameters;
 import treeElement.function.Add;
 import treeElement.function.Divide;
@@ -119,6 +120,20 @@ public class TreeNode implements Iterable<TreeNode> {
 		return null;
 	}
 
+	public double getRawFitness(){
+		double sum = 0;
+		for (int i = 0; i < SampleData.sampleX.length ; i++) {
+			double residual = SampleData.sampleY[i] - this.getValue(SampleData.sampleX[i]);
+			sum += residual * residual;
+		}
+		return sum;
+	}
+	
+	public double getAdjustedFitness(){
+		double denominator = 1 + getRawFitness();
+		return 1/denominator;
+	}
+	
 	@Override
 	public String toString() {
 		return new String(type);

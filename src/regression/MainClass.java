@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import genetics.Genetics;
 import genetics.Population;
 import graphics.graphs.TreeGraphView;
 import treeRepresentation.ClassToXML;
@@ -18,11 +19,11 @@ public class MainClass {
 
 		// Odkomentowaæ przy pierwszym odpaleniu - wrzuca do katalogu xml pierwsza populacje; potem mozna zakomentowac i zostawic to co jest nizej zeby zobaczyc,
 		// ze poprawnie wczytuje sie ta populacja
-		/*
-		directoryCleanUp();		
-		Population population = new Population();
-		population.initialize(0);
-		*/
+		
+		//directoryCleanUp();		
+		//Population population = new Population();
+		//population.initialize(0);
+		
 		
 		// Odkomentowac po min. jednokrotnym odpaleniu powyzszego - inaczej wywala error bo brakuje xmli 
 		/*
@@ -31,6 +32,9 @@ public class MainClass {
 			TreeGraphView.displayTreeGraph(loadedChromosome , "Test ");
 		}*/
 		
+		
+		Genetics g = new Genetics();
+		g.evolve(1);
 
 	}
 
