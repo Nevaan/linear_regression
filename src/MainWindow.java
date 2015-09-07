@@ -2,6 +2,8 @@
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -56,9 +58,6 @@ public class MainWindow extends Application {
 		slider.setMinorTickCount(5);
 		slider.setBlockIncrement(1);
 		
-		
-		
-		
 		slider.valueProperty().addListener(new ChangeListener<Number>(){
 			@Override
 			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
@@ -71,8 +70,19 @@ public class MainWindow extends Application {
 		grid.add(slider,1,4);
 
 		Button showTree = new Button("Wyœwietl drzewo");
+		showTree.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
 		grid.add(showTree, 0, 5);
-
+		
+		showTree.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		        //
+		    	//Taki test tu ma byæ wyœwietlanie kurwa drzewa
+		    	
+		    	primaryStage.setTitle("Accepted");
+		        
+		        //wyswietl kurwa drzewo
+		    }
+		});
 
 		PasswordField pwBox = new PasswordField();
 		grid.add(pwBox, 1, 2);
