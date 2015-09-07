@@ -71,7 +71,7 @@ public class MainClass {
 
 		QueryXML process = new QueryXML();
 		try {
-			process.query();
+			//process.query(4);
 
 
 
@@ -83,9 +83,11 @@ public class MainClass {
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			Source source = new StreamSource(currentDir + "/xml/lol.xml");
 			TreeNode treeNode = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(file));
+			TreeNode treeNode0 = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(new File("./xml/Generation0Chromosome0.xml")));
 			System.out.println(treeNode);
 
 			TreeGraphView.displayTreeGraph(treeNode, "lol");
+			TreeGraphView.displayTreeGraph(treeNode0, "treeNode0");
 
 		} catch (Exception e) {
 			e.printStackTrace();

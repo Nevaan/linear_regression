@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
 
 public class QueryXML {
 
-	public void query() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
+	public void query(int id) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 
 		// read file first
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -42,7 +42,7 @@ public class QueryXML {
 		XPathFactory xFactory = XPathFactory.newInstance();
 		XPath xpath = xFactory.newXPath();
 
-		expr = xpath.compile("//children[@id='4']");
+		expr = xpath.compile("//children[@id='" + id + "'");
 
 		Object result = expr.evaluate(doc, XPathConstants.NODESET);
 

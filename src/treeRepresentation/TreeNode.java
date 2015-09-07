@@ -9,17 +9,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import javax.xml.bind.annotation.XmlTransient;
 
 import genetics.SampleData;
 import regression.Parameters;
-import treeElement.function.Add;
-import treeElement.function.Divide;
-import treeElement.function.Multiply;
-import treeElement.function.Substract;
-import treeElement.terminal.Constant;
-import treeElement.terminal.Variable;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
@@ -128,12 +121,12 @@ public class TreeNode implements Iterable<TreeNode> {
 		}
 		return sum;
 	}
-	
+
 	public double getAdjustedFitness(){
 		double denominator = 1 + getRawFitness();
 		return 1/denominator;
 	}
-	
+
 	@Override
 	public String toString() {
 		return new String(type);
