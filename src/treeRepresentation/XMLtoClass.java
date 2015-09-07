@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.xpath.XPathExpressionException;
 
@@ -44,15 +45,26 @@ public class XMLtoClass {
 		return null;
 
 	}
+	
+	public static TreeNode getSubtree(){
+		try {
+			File currentDir = new File(".");
+			File file = new File(currentDir + "/xml/CurrentSubtree.xml");
+			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
 
-	public static TreeNode search(String source, String criteria) throws JAXBException, XPathExpressionException, JDOMException, IOException {
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			TreeNode treeNode = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(file));
+			System.out.println(treeNode);
 
-		// read the XML into a JDOM2 document
-		SAXBuilder jdomBuilder = new SAXBuilder();
-		Document jdomDocument = jdomBuilder.build(source);
+			return treeNode;
 
-		return new TreeNode();
-
+		} catch (JAXBException e) {
+			System.out.println("ERROR while unmarshalling in convert()");
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
+
 }
 
