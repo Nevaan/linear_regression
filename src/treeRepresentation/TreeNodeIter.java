@@ -13,7 +13,7 @@ public class TreeNodeIter implements Iterator<TreeNode> {
 	public TreeNodeIter(TreeNode treeNode) {
 		this.treeNode = treeNode;
 		this.doNext = ProcessStages.ProcessParent;
-		this.childrenCurNodeIter = treeNode.getChildren().iterator();
+		this.childrenCurNodeIter = treeNode.children.iterator();
 	}
 
 	private ProcessStages doNext;
@@ -48,7 +48,8 @@ public class TreeNodeIter implements Iterator<TreeNode> {
 			if (childrenSubNodeIter.hasNext()) {
 				this.next = childrenSubNodeIter.next();
 				return true;
-			} else {
+			}
+			else {
 				this.next = null;
 				this.doNext = ProcessStages.ProcessChildCurNode;
 				return hasNext();
@@ -69,3 +70,4 @@ public class TreeNodeIter implements Iterator<TreeNode> {
 	}
 
 }
+

@@ -1,34 +1,36 @@
 package treeElement.terminal;
 
-import java.util.LinkedList;
 import java.util.Random;
 
-import treeRepresentation.Data;
-import treeRepresentation.TreeNode;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Constant extends Terminal {
+	
+	@XmlAttribute
+	private double value;
 
-	public Constant(Data data) {
-		super(data);
-		data.setChildAmount(0);
-		data.setType(20);
-		Random r = new Random();
-		data.setConstant((double) (r.nextInt(20) - 10));
+	public Constant() {
+		super();
+		Random random = new Random();
+		this.value = (double) (random.nextInt(20) - 10);
+		this.type = "Constant";
 	}
-
-	public Constant(Data data, TreeNode parent) {
-		super(data);
-        this.parent = parent;
-        this.children = new LinkedList<TreeNode>();
-        this.elementsIndex = new LinkedList<TreeNode>();
-        this.elementsIndex.add(this);
-        this.data.setId(IDENTIFIER++);
-        this.data.setChildAmount(0);
-
-    }
+	
 
 	public double getValue(double xValue) {
-		return (double) this.getData().getConstant();
+		return value;
+	}
+
+	public void setValue(double value) {
+		this.value = value;
+	}
+
+
+	@Override
+	public String toString() {
+		return Double.toString(value);
 	}
 
 }

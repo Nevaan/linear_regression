@@ -1,32 +1,20 @@
 package treeElement.function;
 
-import java.util.LinkedList;
+import javax.xml.bind.annotation.XmlRootElement;
 
-import treeRepresentation.Data;
 import treeRepresentation.TreeNode;
 
-public class Substract extends Function {
+@XmlRootElement
+public class Substract extends Function{
 
-	public Substract(Data data) {
-		super(data);
-		data.setChildAmount(2);
-		data.setType(11);
+	public Substract() {
+		super();
+		this.type = "-";
 	}
 
-	public Substract(Data data, TreeNode parent) {
-		super(data);
-        this.parent = parent;
-        this.children = new LinkedList<TreeNode>();
-        this.elementsIndex = new LinkedList<TreeNode>();
-        this.elementsIndex.add(this);
-        this.data.setId(IDENTIFIER++);
-        this.data.setChildAmount(2);
 
-    }
-
-	public double getValue(double xValue) {
-		return ((TreeNode) this.getChildren().get(0)).getValue(xValue)
-				- ((TreeNode) this.getChildren().get(1)).getValue(xValue);
+	public double getValue(double xValue){
+		return ((TreeNode) this.children.get(0)).getValue(xValue) - ((TreeNode)this.children.get(1)).getValue(xValue);
 	}
 
 }

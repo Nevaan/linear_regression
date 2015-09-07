@@ -19,8 +19,9 @@ public class TreeGenerator {
 			root = NodeFactory.getTerminal();
 		}
 
-		for (int i = 0; i < root.getData().getChildAmount(); i++) {
-			root.addChild(new Data(root.getData().getType()), generateGrowTree(maxDepth - 1),i);
+		for (int i = 0; i < root.getChildAmount(); i++) {
+			root.addChild(generateGrowTree(maxDepth - 1));
+
 		}
 
 		return root;
