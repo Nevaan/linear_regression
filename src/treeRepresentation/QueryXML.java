@@ -42,7 +42,7 @@ public class QueryXML {
 		XPathFactory xFactory = XPathFactory.newInstance();
 		XPath xpath = xFactory.newXPath();
 
-		expr = xpath.compile("//children[@id='" + id + "'");
+		expr = xpath.compile("//children[@id='" + id + "']");
 
 		Object result = expr.evaluate(doc, XPathConstants.NODESET);
 
@@ -73,7 +73,7 @@ public class QueryXML {
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
 			DOMSource source = new DOMSource(newXmlDocument);
-			StreamResult sresult = new StreamResult("./xml/lol.xml");
+			StreamResult sresult = new StreamResult("./xml/CurrentSubtree.xml");
 			transformer.transform(source, sresult);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -72,25 +72,12 @@ public class MainClass {
 
 		QueryXML process = new QueryXML();
 		try {
-			//process.query(4);
-
-
-
-
-			File currentDir = new File(".");
-			File file = new File(currentDir + "/xml/lol.xml");
-			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
-
-			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			//Source source = new StreamSource(currentDir + "/xml/lol.xml");
-			//TreeNode treeNode = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(file));
-			TreeNode treeNode0 = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(new File("./xml/Generation0Chromosome0.xml")));
-			//System.out.println(treeNode);
-			
+			process.query(6);
+			TreeNode treeNode = XMLtoClass.convert(0, 0);
 			TreeNode subtree = XMLtoClass.getSubtree();
 
-			//TreeGraphView.displayTreeGraph(treeNode, "lol");
-			TreeGraphView.displayTreeGraph(subtree, "treeNode0");
+			TreeGraphView.displayTreeGraph(treeNode, "lol");
+			TreeGraphView.displayTreeGraph(subtree, "treeNode");
 
 		} catch (Exception e) {
 			e.printStackTrace();

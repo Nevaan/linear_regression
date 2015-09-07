@@ -32,7 +32,7 @@ public class XMLtoClass {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			TreeNode treeNode = (TreeNode) jaxbUnmarshaller.unmarshal(file);
+			TreeNode treeNode = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(file));
 			System.out.println(treeNode);
 
 			return treeNode;
