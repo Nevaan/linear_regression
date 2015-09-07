@@ -42,7 +42,7 @@ public class QueryXML {
 		XPathFactory xFactory = XPathFactory.newInstance();
 		XPath xpath = xFactory.newXPath();
 
-		expr = xpath.compile("//children[@id='19']");
+		expr = xpath.compile("//children[@id='4']");
 
 		Object result = expr.evaluate(doc, XPathConstants.NODESET);
 
@@ -55,6 +55,7 @@ public class QueryXML {
 		Element root = newXmlDocument.getDocumentElement();
 		String namespaceURL = "http://www.w3.org/2001/XMLSchema-instance";
 	    Element messages = newXmlDocument.createElementNS(namespaceURL, "messages");
+
 		newXmlDocument.appendChild(newXmlDocument.importNode(nodes.item(0), true));
 		for (int i = 1; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);

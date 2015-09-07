@@ -5,8 +5,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
 
+import graphics.graphs.TreeGraphView;
 import treeElement.function.Add;
 import treeElement.function.Divide;
 import treeElement.function.Multiply;
@@ -56,8 +60,8 @@ public class MainClass {
 			e.printStackTrace();
 		}
 
-		//TreeGraphView.displayTreeGraph(testTree, "Test tree");
-		//TreeGraphView.displayTreeGraph(testTree2, "Test tree");
+		TreeGraphView.displayTreeGraph(testTree, "Test tree");
+		TreeGraphView.displayTreeGraph(testTree2, "Test tree");
 
 		ClassToXML.convert(testTree, 0);
 		ClassToXML.convert(testTree2, 0);*/
@@ -77,10 +81,11 @@ public class MainClass {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			TreeNode treeNode = (TreeNode) jaxbUnmarshaller.unmarshal(file);
+			Source source = new StreamSource(currentDir + "/xml/lol.xml");
+			TreeNode treeNode = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(file));
 			System.out.println(treeNode);
 
-
+			TreeGraphView.displayTreeGraph(treeNode, "lol");
 
 		} catch (Exception e) {
 			e.printStackTrace();
