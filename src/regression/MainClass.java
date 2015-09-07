@@ -19,6 +19,7 @@ import treeElement.terminal.Constant;
 import treeElement.terminal.Variable;
 import treeRepresentation.QueryXML;
 import treeRepresentation.TreeNode;
+import treeRepresentation.XMLtoClass;
 
 public class MainClass {
 
@@ -82,12 +83,14 @@ public class MainClass {
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			Source source = new StreamSource(currentDir + "/xml/lol.xml");
-			TreeNode treeNode = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(file));
+			//TreeNode treeNode = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(file));
 			TreeNode treeNode0 = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(new File("./xml/Generation0Chromosome0.xml")));
-			System.out.println(treeNode);
+			//System.out.println(treeNode);
+			
+			TreeNode subtree = XMLtoClass.getSubtree();
 
-			TreeGraphView.displayTreeGraph(treeNode, "lol");
-			TreeGraphView.displayTreeGraph(treeNode0, "treeNode0");
+			//TreeGraphView.displayTreeGraph(treeNode, "lol");
+			TreeGraphView.displayTreeGraph(subtree, "treeNode0");
 
 		} catch (Exception e) {
 			e.printStackTrace();
