@@ -45,7 +45,7 @@ public class XMLtoClass {
 		return null;
 
 	}
-	
+
 	public static TreeNode getSubtree(){
 		try {
 			File currentDir = new File(".");
@@ -62,7 +62,27 @@ public class XMLtoClass {
 			System.out.println("ERROR while unmarshalling in convert()");
 			e.printStackTrace();
 		}
-		
+
+		return null;
+	}
+
+	public static TreeNode getLolol(){
+		try {
+			File currentDir = new File(".");
+			File file = new File(currentDir + "/xml/lolol.xml");
+			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
+
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			TreeNode treeNode = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(file));
+			System.out.println(treeNode);
+
+			return treeNode;
+
+		} catch (JAXBException e) {
+			System.out.println("ERROR while unmarshalling in convert()");
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 

@@ -39,6 +39,12 @@ public class QueryXML {
 		File currentDir = new File(".");
 		doc = builder.parse(currentDir + "/xml/" + "Generation0Chromosome0.xml");
 
+		// read 2nd file
+		Document doc2 = null;
+		XPathExpression expr2 = null;
+		builder = factory.newDocumentBuilder();
+		doc2 = builder.parse(currentDir + "/xml/" + "Generation0Chromosome1.xml");
+
 		XPathFactory xFactory = XPathFactory.newInstance();
 		XPath xpath = xFactory.newXPath();
 
@@ -54,14 +60,17 @@ public class QueryXML {
 		Document newXmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 		Element root = newXmlDocument.getDocumentElement();
 		String namespaceURL = "http://www.w3.org/2001/XMLSchema-instance";
-	    Element messages = newXmlDocument.createElementNS(namespaceURL, "messages");
-
-		newXmlDocument.appendChild(newXmlDocument.importNode(nodes.item(0), true));
+	    //Element messages = newXmlDocument.createElementNS(namespaceURL, "messages");
+	    nodes.item(0).replaceChild(doc2.cloneNode(true), nodes.item(0));
 		for (int i = 1; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
 			Node copyNode = newXmlDocument.importNode(node, true);
 			root.appendChild(copyNode);
 		}
+
+		//doc.getParentNode().replaceChild(newXmlDocument, doc);
+
+
 
 		DOMImplementationLS domImpl = (DOMImplementationLS) newXmlDocument.getImplementation();
 		LSSerializer lsSerializer = domImpl.createLSSerializer();
@@ -73,8 +82,11 @@ public class QueryXML {
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
 			DOMSource source = new DOMSource(newXmlDocument);
+			DOMSource target = new DOMSource(doc);
 			StreamResult sresult = new StreamResult("./xml/CurrentSubtree.xml");
+			StreamResult sresult2 = new StreamResult("./xml/lolol.xml");
 			transformer.transform(source, sresult);
+			transformer.transform(target, sresult2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -74,10 +74,14 @@ public class MainClass {
 		try {
 			process.query(6);
 			TreeNode treeNode = XMLtoClass.convert(0, 0);
+			TreeNode treeNode2 = XMLtoClass.convert(1, 0);
 			TreeNode subtree = XMLtoClass.getSubtree();
+			TreeNode lolol = XMLtoClass.getLolol();
 
 			TreeGraphView.displayTreeGraph(treeNode, "lol");
-			TreeGraphView.displayTreeGraph(subtree, "treeNode");
+			TreeGraphView.displayTreeGraph(treeNode2, "tez lol");
+			TreeGraphView.displayTreeGraph(subtree, "subTree");
+			TreeGraphView.displayTreeGraph(lolol, "lolol");
 
 		} catch (Exception e) {
 			e.printStackTrace();
