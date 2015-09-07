@@ -23,7 +23,7 @@ import treeElement.terminal.Variable;
 
 public class XMLtoClass {
 
-	public static TreeNode convert(int fileId, int generation) {
+	public static TreeNode convert(int generation, int fileId) {
 
 		try {
 
