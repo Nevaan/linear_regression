@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
 
 public class QueryXML {
 
-	public void query(int id) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
+	public void query(int id, int generation, int chromosome) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 
 		// read file first
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -37,7 +37,7 @@ public class QueryXML {
 		XPathExpression expr = null;
 		builder = factory.newDocumentBuilder();
 		File currentDir = new File(".");
-		doc = builder.parse(currentDir + "/xml/" + "Generation0Chromosome0.xml");
+		doc = builder.parse(currentDir + "/xml/" + "Generation" +generation + "Chromosome"+ chromosome +".xml");
 
 		XPathFactory xFactory = XPathFactory.newInstance();
 		XPath xpath = xFactory.newXPath();

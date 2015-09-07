@@ -72,12 +72,12 @@ public class MainClass {
 
 		QueryXML process = new QueryXML();
 		try {
-			process.query(6);
-			TreeNode treeNode = XMLtoClass.convert(0, 0);
+			process.query(21,0,1);
+			TreeNode treeNode = XMLtoClass.convert(0, 1);
 			TreeNode subtree = XMLtoClass.getSubtree();
 
 			TreeGraphView.displayTreeGraph(treeNode, "lol");
-			TreeGraphView.displayTreeGraph(subtree, "treeNode");
+			TreeGraphView.displayTreeGraph(subtree, "subtree");
 
 		} catch (Exception e) {
 			e.printStackTrace();
