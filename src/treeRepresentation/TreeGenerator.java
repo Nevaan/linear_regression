@@ -1,5 +1,7 @@
 package treeRepresentation;
 
+import regression.Parameters;
+
 public class TreeGenerator {
 
 	public static boolean CAN_CHOOSE_TERMINAL = false;
@@ -23,7 +25,9 @@ public class TreeGenerator {
 			root.addChild(generateGrowTree(maxDepth - 1));
 
 		}
-
+		if(maxDepth==0) {
+			Parameters.IDENTIFIER = 0;
+		}
 		return root;
 	}
 
