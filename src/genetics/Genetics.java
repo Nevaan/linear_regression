@@ -32,4 +32,17 @@ public class Genetics {
 		}
 		return generation;
 	}
+	
+	
+	//Dzia³a w chuj !!
+	public TreeNode findChild(int id, TreeNode root) {
+		if (root.getId() == id) {
+			return root;
+		}
+		TreeNode result = null;
+		for(int i = 0; result==null && i< root.children.size(); i++) {
+			result = findChild( id, root.children.get(i));
+		}
+		return result;
+	}
 }

@@ -20,9 +20,9 @@ public class TreeNode implements Iterable<TreeNode> {
 
 	@XmlAttribute
 	protected int id;
-	@XmlElement
+	@XmlAttribute
 	protected String type;
-	@XmlElement
+	@XmlAttribute
 	protected int childAmount;
 	@XmlTransient
 	protected TreeNode parent;
