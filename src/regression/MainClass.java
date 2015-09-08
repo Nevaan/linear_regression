@@ -102,6 +102,8 @@ public class MainClass {
 			process.countNodes(0, 1);
 			*/
 			
+			process.setUniqueIdentifiers(0, 0);			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
