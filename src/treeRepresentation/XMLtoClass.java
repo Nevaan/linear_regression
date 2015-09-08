@@ -49,7 +49,7 @@ public class XMLtoClass {
 	public static TreeNode getSubtree(){
 		try {
 			File currentDir = new File(".");
-			File file = new File(currentDir + "/xml/CurrentSubtree.xml");
+			File file = new File(currentDir + "/xml/RandomSubtree.xml");
 			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
