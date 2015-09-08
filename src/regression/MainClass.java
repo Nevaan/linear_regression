@@ -17,6 +17,7 @@ import treeElement.function.Multiply;
 import treeElement.function.Substract;
 import treeElement.terminal.Constant;
 import treeElement.terminal.Variable;
+import treeRepresentation.ClassToXML;
 import treeRepresentation.QueryXML;
 import treeRepresentation.TreeNode;
 import treeRepresentation.XMLtoClass;
@@ -72,25 +73,17 @@ public class MainClass {
 
 		QueryXML process = new QueryXML();
 		try {
-<<<<<<< HEAD
-			process.query(6);
-			TreeNode treeNode = XMLtoClass.convert(0, 0);
-			TreeNode treeNode2 = XMLtoClass.convert(1, 0);
-=======
-			process.query(21,0,1);
-			TreeNode treeNode = XMLtoClass.convert(0, 1);
->>>>>>> beaec2bb9c01aa8d55951ad4a95a1e8aa7ed9fa6
-			TreeNode subtree = XMLtoClass.getSubtree();
-			TreeNode lolol = XMLtoClass.getLolol();
 
-			TreeGraphView.displayTreeGraph(treeNode, "lol");
-<<<<<<< HEAD
-			TreeGraphView.displayTreeGraph(treeNode2, "tez lol");
-			TreeGraphView.displayTreeGraph(subtree, "subTree");
-			TreeGraphView.displayTreeGraph(lolol, "lolol");
-=======
-			TreeGraphView.displayTreeGraph(subtree, "subtree");
->>>>>>> beaec2bb9c01aa8d55951ad4a95a1e8aa7ed9fa6
+			//process.query(21,0,1);
+			TreeNode tree1   = XMLtoClass.convert(0, 0);
+			TreeNode tree2   = XMLtoClass.convert(0, 1);
+			TreeNode subtree = XMLtoClass.getSubtree();
+		
+			TreeGraphView.displayTreeGraph(tree1, "Chromosome0");
+			TreeGraphView.displayTreeGraph(tree2, "Chromosome1");
+			TreeGraphView.displayTreeGraph(subtree, "Subtree from Chromosome1");
+		
+
 
 		} catch (Exception e) {
 			e.printStackTrace();

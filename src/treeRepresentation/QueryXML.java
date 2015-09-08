@@ -27,6 +27,20 @@ import org.xml.sax.SAXException;
 
 public class QueryXML {
 
+	
+	// Liczy tylko dzieci, wg taga "children" dlatego nie zadziala dobrze dla wycietego drzewa - doda jeden.
+	// dla zwyklego drzewa, wczytanego prosto z xmla poda liczbe nodow - 1 (bo root), czyli daj¹c IDki od zera mamy ideolo
+	public void countNodes(int generation, int chromosome) throws ParserConfigurationException, SAXException, IOException {
+		// read file first
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setNamespaceAware(true);
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		File currentDir = new File(".");
+		Document document = builder.parse(currentDir + "/xml/" + "Generation" +generation + "Chromosome"+ chromosome +".xml");
+		NodeList nodeList = document.getElementsByTagName("children");
+		System.out.println("Number of elements with tag name children : " + nodeList.getLength());
+	}
+	
 	public void query(int id, int generation, int chromosome) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 
 		// read file first
