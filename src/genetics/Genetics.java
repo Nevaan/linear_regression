@@ -142,8 +142,11 @@ public class Genetics {
 		TreeNode father = XMLtoClass.convert(generation, fatherId);
 		TreeNode mother = XMLtoClass.convert(generation, motherId);
 		
-		int randomFatherNodeNumber = random.nextInt(query.countNodes(generation, fatherId));
-		int randomMotherNodeNumber = random.nextInt(query.countNodes(generation, motherId));
+		
+		// Nie jestem pewny co do tego, czy powinno byæ + 1: teoretycznie moze byæ 0 (sam root) i wtedy tutaj nastepuje blad - argument nextInt 
+		// musi byc pozytywny. Jesli beda problemy to jest potencjalne miejsce, w ktorym moze sie jebac
+		int randomFatherNodeNumber = random.nextInt(query.countNodes(generation, fatherId) + 1);
+		int randomMotherNodeNumber = random.nextInt(query.countNodes(generation, motherId) + 1);
 		
 		TreeNode insertionNode = findChild(randomFatherNodeNumber , father);
 		TreeNode subTree = findChild(randomMotherNodeNumber , mother);

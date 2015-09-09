@@ -33,7 +33,6 @@ public class XMLtoClass {
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			TreeNode treeNode = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(file));
-			System.out.println(treeNode);
 
 			return treeNode;
 
