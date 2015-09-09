@@ -98,7 +98,7 @@ public class MainClass {
 			int insertionPointId = -3;
 			int subtreeId = -4;
 
-			insertionPointId = process.query(2,0,0);
+			insertionPointId = process.query(0,0,0);
 			subtreeId = process.query(13, 0, 1);
 			TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 0),"Homosom 0");
 			//TreeGraphView.displayTreeGraph(XMLtoClass.getSubtree(0),"Subtree 0");

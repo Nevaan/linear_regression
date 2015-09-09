@@ -273,7 +273,10 @@ public class QueryXML {
 
 		// magic
 		Node insertedSubtree = fatherDoc.importNode(motherSubtreeDoc.getFirstChild(), true);
-		nodes.item(0).getParentNode().replaceChild(insertedSubtree, nodes.item(0));
+		if(nodes.item(0).getParentNode() != null)
+			nodes.item(0).getParentNode().replaceChild(insertedSubtree, nodes.item(0));
+		else
+			fatherDoc = motherSubtreeDoc;
 
 		// updating document
 
