@@ -3,6 +3,7 @@ package regression;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Random;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBIntrospector;
@@ -27,100 +28,36 @@ public class MainClass {
 
 	public static void main(String[] args) {
 
-		// Odkomentowaæ przy pierwszym odpaleniu - wrzuca do katalogu xml pierwsza populacje; potem mozna zakomentowac i zostawic to co jest nizej zeby zobaczyc,
-		// ze poprawnie wczytuje sie ta populacja
-
-		//directoryCleanUp();
-		//Population population = new Population();
-		//population.initialize(0);
-
-
-		// Odkomentowac po min. jednokrotnym odpaleniu powyzszego - inaczej wywala error bo brakuje xmli
-
-		/*for (int i = 0; i<Parameters.POPULATION_SIZE; i++){
-			TreeNode loadedChromosome = XMLtoClass.convert(i,0);
-			TreeGraphView.displayTreeGraph(loadedChromosome , "Test ");
-		}
-
-
-		Genetics g = new Genetics();
-		g.evolve(1);*/
-
-
-
-		//**************************************************
-
-
-
-		/*TreeNode testTree = null;
-		TreeNode testTree2 = null;
-
-		try {
-			testTree = TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH);
-			testTree2 = TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH);
-		} catch (Exception e) {
-			System.out.println("Error while generating test tree.");
-			e.printStackTrace();
-		}
-
-		TreeGraphView.displayTreeGraph(testTree, "Test tree");
-		TreeGraphView.displayTreeGraph(testTree2, "Test tree");
-
-		ClassToXML.convert(testTree, 0);
-		ClassToXML.convert(testTree2, 0);*/
-
-
-		//**************************************************
-
 		QueryXML process = new QueryXML();
 		try {
-
-			//process.query(21,0,1);
-			//TreeNode tree1   = XMLtoClass.convert(0, 0);
-			//TreeNode tree2   = XMLtoClass.convert(0, 1);
-			//TreeNode subtree = XMLtoClass.getSubtree();
-
-			//TreeGraphView.displayTreeGraph(tree1, "Chromosome0");
-			//TreeGraphView.displayTreeGraph(tree2, "Chromosome1");
-			//TreeGraphView.displayTreeGraph(subtree, "Subtree from Chromosome1");
-
-		//~~~~~~~~~~~~~~~~~~ ODPALENIE TEGO POWODUJE ZNIKNIECIE PENIS ~~~~~~~~~~~~~~~~~~~//
-		// a tak serio to tylko dostaniesz raka i skasuja ci sie te fancy drzewka ktore generowales wczoraj, ale
-		// za to wygeneruja ci sie dwa piekne chromosomy z id zaczynajacymi sie od zera, konczacymi sie na wydrukowanych na koniec wartosciach
-			/*
+			for (int i = 0; i< 10000 ; i++){
+			Random random = new Random();
+			
 			directoryCleanUp();
 			TreeNode chromo0 = TreeGenerator.generateGrowTree(5);
 			TreeNode chromo1 = TreeGenerator.generateGrowTree(5);
 
 			ClassToXML.convert(chromo0, 0);
-			ClassToXML.convert(chromo1, 0); */
+			ClassToXML.convert(chromo1, 0); 
 
-			int insertionPointId = -3;
-			int subtreeId = -4;
+			process.setUniqueIdentifiers(0, 0);
+			process.setUniqueIdentifiers(0, 1);
+			
+			int insertionPointId;
+			int subtreeId;
 
-			insertionPointId = process.query(0,0,0);
-			subtreeId = process.query(13, 0, 1);
-			TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 0),"Homosom 0");
-			//TreeGraphView.displayTreeGraph(XMLtoClass.getSubtree(0),"Subtree 0");
-			//TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 1),"Homosom 1");
-			TreeGraphView.displayTreeGraph(XMLtoClass.getSubtree(1), "Subtree 1");
-
+			int randomInFather = random.nextInt(process.countNodes(0, 0) + 1);
+			int randomInMorher = random.nextInt(process.countNodes(0, 1) + 1);
+			
+			insertionPointId = process.query(randomInFather,0, 0);
+			subtreeId 		 = process.query(randomInMorher,0, 1);
+		
 			process.replaceSubtree(0, 0, 1, insertionPointId, subtreeId);
-			TreeGraphView.displayTreeGraph(XMLtoClass.getReplaced(), "Replaced");
+			
 			process.setUniqueIdentifiers("replaced");
 			process.setParentParameters("replaced");
-
-			//System.out.println(process.countNodes(0, 0));
-			//System.out.println(process.countNodes(0, 1));
-
-
-			//process.setUniqueIdentifiers(0, 0);
-			//process.setParentParameters(0, 0);
-			//process.setParentParameters(0, 1);
-
-			//process.getRandomNode(0, 0);
-
-
+			Parameters.FILE_NAME_ID = 0;
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
