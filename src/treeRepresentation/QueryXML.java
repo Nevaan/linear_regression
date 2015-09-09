@@ -67,6 +67,30 @@ public class QueryXML {
 		transformer.transform(source, result);
 	}
 
+	// more generic method (for subtrees, replaced trees and testing overall)
+	public void setUniqueIdentifiers(String fileName) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
+
+		File currentDir = new File(".");
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setNamespaceAware(true);
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document doc = builder.parse(currentDir + "/xml/" + fileName + ".xml");
+		XPath xpath = XPathFactory.newInstance().newXPath();
+		XPathExpression expr = xpath.compile("//*[@id]"); // wyciagnij wszystkie nody maj¹ce tag "id"
+		NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Node attribute = nodes.item(i).getAttributes().getNamedItem("id");
+			attribute.setTextContent(Integer.toString(i));
+		}
+
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		Transformer transformer = transformerFactory.newTransformer();
+		DOMSource source = new DOMSource(doc);
+		StreamResult result = new StreamResult(new File(currentDir + "/xml/" + fileName + ".xml"));
+		transformer.transform(source, result);
+	}
+
 	public void setParentParameters(int generation, int chromosome) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
 
 		// standard opening and parsing xml to DOM object
@@ -92,8 +116,34 @@ public class QueryXML {
 		DOMSource source = new DOMSource(doc);
 		StreamResult sresult = new StreamResult(new File(currentDir + "/xml/" + "Generation" + generation + "Chromosome" + chromosome + ".xml"));
 		transformer.transform(source, sresult);
+	}
 
+	// more generic method (for subtrees, replaced trees and testing overall)
+	public void setParentParameters(String fileName) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
 
+		// standard opening and parsing xml to DOM object
+		File currentDir = new File(".");
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setNamespaceAware(true);
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document doc = builder.parse(currentDir + "/xml/" + fileName + ".xml");
+
+		// magic time
+		NodeList nodeList = doc.getElementsByTagName("*");
+		if (nodeList.item(0).getNodeType() == Node.ELEMENT_NODE)
+			((Element)nodeList.item(0)).setAttribute("parentId", "-1");
+		for (int i = 1; i < nodeList.getLength(); i++) {
+			if(nodeList.item(i).getNodeType() == Node.ELEMENT_NODE) {
+				((Element)nodeList.item(i)).setAttribute("parentId", String.valueOf(nodeList.item(i).getParentNode().getAttributes().getNamedItem("id").getNodeValue()));
+			}
+		}
+
+		// updating document
+		Transformer transformer = TransformerFactory.newInstance().newTransformer();
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		DOMSource source = new DOMSource(doc);
+		StreamResult sresult = new StreamResult(new File(currentDir + "/xml/" + fileName + ".xml"));
+		transformer.transform(source, sresult);
 	}
 
 	public void getRandomNode(int generation, int chromosome) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException  {
@@ -143,14 +193,11 @@ public class QueryXML {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-
 	}
 
+	public int query(int id, int generation, int chromosome) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
+		int rootId = -5;
 
-	public void query(int id, int generation, int chromosome) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
-
-		// read file first
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setNamespaceAware(true);
 		DocumentBuilder builder;
@@ -160,38 +207,23 @@ public class QueryXML {
 		File currentDir = new File(".");
 		doc = builder.parse(currentDir + "/xml/" + "Generation" +generation + "Chromosome"+ chromosome +".xml");
 
-		// read 2nd file
-		Document doc2 = null;
-		XPathExpression expr2 = null;
-		builder = factory.newDocumentBuilder();
-		doc2 = builder.parse(currentDir + "/xml/" + "Generation0Chromosome1.xml");
-
 		XPathFactory xFactory = XPathFactory.newInstance();
 		XPath xpath = xFactory.newXPath();
-		//*[@id]
 		expr = xpath.compile("//*[@id='" + id + "']");
-
-		Object result = expr.evaluate(doc, XPathConstants.NODESET);
-
-		NodeList nodes = (NodeList) result;
-		for (int i = 0; i < nodes.getLength(); i++) {
-			System.out.println(nodes.item(i).getAttributes());
-		}
+		NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
 
 		Document newXmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 		Element root = newXmlDocument.getDocumentElement();
 		String namespaceURL = "http://www.w3.org/2001/XMLSchema-instance";
-	    //Element messages = newXmlDocument.createElementNS(namespaceURL, "messages");
-	    nodes.item(0).replaceChild(doc2.cloneNode(true), nodes.item(0));
+	    Element messages = newXmlDocument.createElementNS(namespaceURL, "messages");
+
+		newXmlDocument.appendChild(newXmlDocument.importNode(nodes.item(0), true));
+		rootId = Integer.valueOf(nodes.item(0).getAttributes().getNamedItem("id").getNodeValue());
 		for (int i = 1; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
 			Node copyNode = newXmlDocument.importNode(node, true);
 			root.appendChild(copyNode);
 		}
-
-		//doc.getParentNode().replaceChild(newXmlDocument, doc);
-
-
 
 		DOMImplementationLS domImpl = (DOMImplementationLS) newXmlDocument.getImplementation();
 		LSSerializer lsSerializer = domImpl.createLSSerializer();
@@ -203,14 +235,51 @@ public class QueryXML {
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
 			DOMSource source = new DOMSource(newXmlDocument);
-			DOMSource target = new DOMSource(doc);
-			StreamResult sresult = new StreamResult("./xml/CurrentSubtree.xml");
-			StreamResult sresult2 = new StreamResult("./xml/lolol.xml");
+			StreamResult sresult = new StreamResult("./xml/RandomSubtree" + chromosome + ".xml");
 			transformer.transform(source, sresult);
-			transformer.transform(target, sresult2);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		return rootId;
+	}
+
+	public void replaceSubtree(int fatherGeneration, int fatherChromosome, int motherSubtreeChromosome, int insertionPointId, int subtreeId) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
+		// factories and builders
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		docFactory.setNamespaceAware(true);
+		DocumentBuilder builder;
+		builder = docFactory.newDocumentBuilder();
+		File currentDir = new File(".");
+		XPathFactory xFactory = XPathFactory.newInstance();
+		XPath xpath = xFactory.newXPath();
+		Transformer transformer = TransformerFactory.newInstance().newTransformer();
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+		// loading father tree
+		Document fatherDoc = null;
+		fatherDoc = builder.parse(currentDir + "/xml/" + "Generation" + fatherGeneration + "Chromosome"+ fatherChromosome + ".xml");
+		XPathExpression fatherExpr = null;
+
+		// loading mother subtree
+		Document motherSubtreeDoc = null;
+		motherSubtreeDoc = builder.parse(currentDir + "/xml/" + "RandomSubtree" + motherSubtreeChromosome + ".xml");
+		XPathExpression motherSubtreeExpr = null;
+
+		// finding insertionPoint in father tree
+		fatherExpr = xpath.compile("//*[@id='" + insertionPointId + "']");
+		NodeList nodes = (NodeList) fatherExpr.evaluate(fatherDoc, XPathConstants.NODESET);
+
+		// magic
+		Node insertedSubtree = fatherDoc.importNode(motherSubtreeDoc.getFirstChild(), true);
+		nodes.item(0).getParentNode().replaceChild(insertedSubtree, nodes.item(0));
+
+		// updating document
+
+		DOMSource source = new DOMSource(fatherDoc);
+		StreamResult sresult = new StreamResult(new File(currentDir + "/xml/replaced.xml"));
+		transformer.transform(source, sresult);
 
 	}
 

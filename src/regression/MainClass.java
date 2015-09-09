@@ -93,19 +93,34 @@ public class MainClass {
 			TreeNode chromo1 = TreeGenerator.generateGrowTree(5);
 
 			ClassToXML.convert(chromo0, 0);
-			ClassToXML.convert(chromo1, 0);
+			ClassToXML.convert(chromo1, 0); */
 
+			int insertionPointId = -3;
+			int subtreeId = -4;
+
+			insertionPointId = process.query(2,0,0);
+			subtreeId = process.query(13, 0, 1);
 			TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 0),"Homosom 0");
-			TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 1),"Homosom 1");
-			*/
+			//TreeGraphView.displayTreeGraph(XMLtoClass.getSubtree(0),"Subtree 0");
+			//TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 1),"Homosom 1");
+			TreeGraphView.displayTreeGraph(XMLtoClass.getSubtree(1), "Subtree 1");
 
-			System.out.println(process.countNodes(0, 0));
-			System.out.println(process.countNodes(0, 1));
+			process.replaceSubtree(0, 0, 1, insertionPointId, subtreeId);
+			TreeGraphView.displayTreeGraph(XMLtoClass.getReplaced(), "Replaced");
+			process.setUniqueIdentifiers("replaced");
+			process.setParentParameters("replaced");
+
+			//System.out.println(process.countNodes(0, 0));
+			//System.out.println(process.countNodes(0, 1));
 
 
 			//process.setUniqueIdentifiers(0, 0);
-			process.setParentParameters(0, 0);
-			process.setParentParameters(0, 1);
+			//process.setParentParameters(0, 0);
+			//process.setParentParameters(0, 1);
+
+			//process.getRandomNode(0, 0);
+
+
 
 		} catch (Exception e) {
 			e.printStackTrace();

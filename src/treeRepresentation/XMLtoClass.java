@@ -46,10 +46,30 @@ public class XMLtoClass {
 
 	}
 
-	public static TreeNode getSubtree(){
+	public static TreeNode getSubtree(int chromosome){
 		try {
 			File currentDir = new File(".");
-			File file = new File(currentDir + "/xml/RandomSubtree.xml");
+			File file = new File(currentDir + "/xml/RandomSubtree" + chromosome + ".xml");
+			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
+
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			TreeNode treeNode = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(file));
+			System.out.println(treeNode);
+
+			return treeNode;
+
+		} catch (JAXBException e) {
+			System.out.println("ERROR while unmarshalling in convert()");
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public static TreeNode getReplaced(){
+		try {
+			File currentDir = new File(".");
+			File file = new File(currentDir + "/xml/replaced.xml");
 			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
