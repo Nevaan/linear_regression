@@ -57,8 +57,8 @@ public class Genetics {
 	}
 
 
-	/*//Dzia砤 w chuj !!
-	public TreeNode findChild(int id, TreeNode root) {
+	//Dzia砤 w chuj !!
+	public static TreeNode findChild(int id, TreeNode root) {
 		if (root.getId() == id) {
 			return root;
 		}
@@ -67,7 +67,7 @@ public class Genetics {
 			result = findChild( id, root.children.get(i));
 		}
 		return result;
-	}*/
+	}
 
 	public void crossover(int fatherGeneration, int fatherChromosome, int motherGeneration, int motherChromosome) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
 		// factories and builders
@@ -133,14 +133,14 @@ public class Genetics {
 	public TreeNode wszczyknij(TreeNode pacjent, TreeNode maryhu砤na, int gdzieWszczykn规, int ileGram) {
 		TreeNode 縴砤 = findChild(gdzieWszczykn规, pacjent);
 		TreeNode szczykawka = findChild(ileGram, maryhu砤na);
-		TreeGraphView.displayTreeGraph(縴砤,"縴砤");
-		TreeGraphView.displayTreeGraph(szczykawka,"szczykawka");
+		TreeGraphView.displayTreeGraph(縴砤,"miejsce w ktorym nastapi wklejenie");
+		TreeGraphView.displayTreeGraph(szczykawka,"wklejane subtree");
 		
 		
-		if(縴砤.getParent() == null) {
+		if(縴砤.getParentId() == -1) {
 			return szczykawka;
 		} else
-			縴砤.replace(gdzieWszczykn规, szczykawka);
+			縴砤.replace(gdzieWszczykn规, szczykawka, pacjent);
 			
 		return pacjent;
 	}

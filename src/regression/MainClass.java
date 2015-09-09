@@ -7,7 +7,10 @@ import java.nio.file.Paths;
 import genetics.Genetics;
 import genetics.Genetics;
 import graphics.graphs.TreeGraphView;
+import treeRepresentation.ClassToXML;
 import treeRepresentation.QueryXML;
+import treeRepresentation.TreeGenerator;
+import treeRepresentation.TreeNode;
 import treeRepresentation.XMLtoClass;
 
 public class MainClass {
@@ -18,7 +21,7 @@ public class MainClass {
 			QueryXML process = new QueryXML();
 			//directoryCleanUp();
 			//TreeNode chromo0 = TreeGenerator.generateGrowTree(5);
-			//TreeNode chromo1 = TreeGenerator.generateGrowTree(5);
+			TreeNode chromo1 = TreeGenerator.generateGrowTree(5);
 
 			//ClassToXML.convert(chromo0, 0);
 			//ClassToXML.convert(chromo1, 0);
@@ -26,15 +29,19 @@ public class MainClass {
 			//process.setUniqueIdentifiers(0, 0);
 			//process.setUniqueIdentifiers(0, 1);
 
-			//process.setParentParameters(0, 0);
-			//process.setParentParameters(0, 1);
+			process.setParentParameters(0, 0);
+			process.setParentParameters(0, 1);
 
 			TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 0), "Homosom 0");
 			TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 1),"Homosom 1");
 
+			
 			Genetics genetics = new Genetics();
-			genetics.crossover(0, 0, 0, 1);
-			TreeGraphView.displayTreeGraph(XMLtoClass.getReplaced(), "Replaced");
+			TreeNode replaced = genetics.wszczyknij(XMLtoClass.convert(0, 0), XMLtoClass.convert(0, 1), 1, 4);
+			ClassToXML.convert(replaced, 0);
+			TreeGraphView.displayTreeGraph(replaced,"Wszczykniety");
+			//genetics.crossover(0, 0, 0, 1);
+			//TreeGraphView.displayTreeGraph(XMLtoClass.getReplaced(), "Replaced");
 
 			//process.crossover(0, 0, 1);
 			//process.setUniqueIdentifiers(0, 1);	

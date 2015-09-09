@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import genetics.Genetics;
 import genetics.SampleData;
 import regression.Parameters;
 
@@ -26,6 +27,8 @@ public class TreeNode implements Iterable<TreeNode> {
 	protected int childAmount;
 	@XmlTransient
 	protected TreeNode parent;
+	@XmlAttribute
+	protected int parentId;
 	@XmlElement
 	public List<TreeNode> children;
 
@@ -138,8 +141,8 @@ public class TreeNode implements Iterable<TreeNode> {
 		return iter;
 	}
 
-	public void replace(int id, TreeNode newNode) {
-		TreeNode parent = this.getParent();
+	public void replace(int id, TreeNode newNode, TreeNode root) {
+		TreeNode parent = Genetics.findChild(this.getParentId(), root);
 		if (parent.children.get(0).getId() == id) {
 		parent.children.remove(0);
 		parent.children.add(0, newNode);
@@ -147,6 +150,14 @@ public class TreeNode implements Iterable<TreeNode> {
 			parent.children.remove(1);
 			parent.children.add(1, newNode);
 		}
+	}
+
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
 }
