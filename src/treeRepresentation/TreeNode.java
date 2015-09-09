@@ -138,6 +138,16 @@ public class TreeNode implements Iterable<TreeNode> {
 		return iter;
 	}
 
+	public void replace(int id, TreeNode newNode) {
+		TreeNode parent = this.getParent();
+		if (parent.children.get(0).getId() == id) {
+		parent.children.remove(0);
+		parent.children.add(0, newNode);
+		} else {
+			parent.children.remove(1);
+			parent.children.add(1, newNode);
+		}
+	}
 
 }
 

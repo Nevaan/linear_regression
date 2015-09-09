@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import genetics.Genetics;
+import genetics.Genetics;
 import graphics.graphs.TreeGraphView;
 import treeRepresentation.QueryXML;
 import treeRepresentation.XMLtoClass;
@@ -35,6 +36,17 @@ public class MainClass {
 			genetics.crossover(0, 0, 0, 1);
 			TreeGraphView.displayTreeGraph(XMLtoClass.getReplaced(), "Replaced");
 
+			//process.crossover(0, 0, 1);
+			//process.setUniqueIdentifiers(0, 1);	
+			//process.setUniqueIdentifiers(0, 1);
+			//for(int i=0; i<1000; i++){
+			//process.getRandomNode(0, 1);
+			//}
+			//TreeGraphView.displayTreeGraph(testTree,"Test tree");
+			//TreeGraphView.displayTreeGraph(XMLtoClass.getSubtree(),"RandomSubtree");
+			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

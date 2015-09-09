@@ -30,6 +30,7 @@ import org.xml.sax.SAXException;
 
 import graphics.graphs.TreeGraphView;
 import treeRepresentation.QueryXML;
+import treeElement.terminal.Terminal;
 import treeRepresentation.TreeNode;
 import treeRepresentation.XMLtoClass;
 
@@ -121,5 +122,26 @@ public class Genetics {
 		StreamResult sresult = new StreamResult(new File(currentDir + "/xml/replaced.xml"));
 		transformer.transform(source, sresult);
 
+	}
+	
+	
+	/* pacjent - father
+	 * maryhu砤na - matka
+	 * gdzieWszczykn规 - insertionPoint
+	 * ileGram - poddrzewo matki do wklejenia
+	 */
+	public TreeNode wszczyknij(TreeNode pacjent, TreeNode maryhu砤na, int gdzieWszczykn规, int ileGram) {
+		TreeNode 縴砤 = findChild(gdzieWszczykn规, pacjent);
+		TreeNode szczykawka = findChild(ileGram, maryhu砤na);
+		TreeGraphView.displayTreeGraph(縴砤,"縴砤");
+		TreeGraphView.displayTreeGraph(szczykawka,"szczykawka");
+		
+		
+		if(縴砤.getParent() == null) {
+			return szczykawka;
+		} else
+			縴砤.replace(gdzieWszczykn规, szczykawka);
+			
+		return pacjent;
 	}
 }
