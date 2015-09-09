@@ -29,30 +29,18 @@ public class MainClass {
 			//process.setUniqueIdentifiers(0, 0);
 			//process.setUniqueIdentifiers(0, 1);
 
-			process.setParentParameters(0, 0);
-			process.setParentParameters(0, 1);
+			//process.setParentParameters(0, 0);
+			//process.setParentParameters(0, 1);
 
-			TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 0), "Homosom 0");
-			TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 1),"Homosom 1");
+			//TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 0), "Homosom 0");
+			//TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 1),"Homosom 1");
 
 			
 			Genetics genetics = new Genetics();
-			TreeNode replaced = genetics.wszczyknij(XMLtoClass.convert(0, 0), XMLtoClass.convert(0, 1), 1, 4);
-			ClassToXML.convert(replaced, 0);
-			TreeGraphView.displayTreeGraph(replaced,"Wszczykniety");
-			//genetics.crossover(0, 0, 0, 1);
-			//TreeGraphView.displayTreeGraph(XMLtoClass.getReplaced(), "Replaced");
-
-			//process.crossover(0, 0, 1);
-			//process.setUniqueIdentifiers(0, 1);	
-			//process.setUniqueIdentifiers(0, 1);
-			//for(int i=0; i<1000; i++){
-			//process.getRandomNode(0, 1);
-			//}
-			//TreeGraphView.displayTreeGraph(testTree,"Test tree");
-			//TreeGraphView.displayTreeGraph(XMLtoClass.getSubtree(),"RandomSubtree");
-			
-			
+			for (int i = 0; i<10000; i++) {
+			genetics.crossover(0, 0, 1);
+			}
+			//TreeGraphView.displayTreeGraph(XMLtoClass.convert(1, 0), "Skrzyzowane drzewo");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

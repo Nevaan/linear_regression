@@ -29,6 +29,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import graphics.graphs.TreeGraphView;
+import regression.Parameters;
+import treeRepresentation.ClassToXML;
 import treeRepresentation.QueryXML;
 import treeElement.terminal.Terminal;
 import treeRepresentation.TreeNode;
@@ -68,7 +70,7 @@ public class Genetics {
 		}
 		return result;
 	}
-
+	/*
 	public void crossover(int fatherGeneration, int fatherChromosome, int motherGeneration, int motherChromosome) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
 		// factories and builders
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -123,25 +125,39 @@ public class Genetics {
 		transformer.transform(source, sresult);
 
 	}
+	*/
+
+	/* ------------------------------------- Podejscie javowe ------------------------------------- */
 	
-	
-	/* pacjent - father
-	 * maryhu³ana - matka
-	 * gdzieWszczykn¹æ - insertionPoint
-	 * ileGram - poddrzewo matki do wklejenia
+	/*	
+	 * 	ta metodka jest ju¿ na gotowo: pobiera trzy id: id generacji, id chromosomu - matki, id chromosomu - ojca,
+	 *  w wyniku jej dzialania powstaje skrzyzowane drzewo zapisane jako plik "Generation" + generacja+1 + "Chromosome" + Params.File_name_id
+	 *  przy czym trzeba pilnowac, zeby przy kazdej mutacji - tworzeniu nowej generacji zerowac ten params
 	 */
-	public TreeNode wszczyknij(TreeNode pacjent, TreeNode maryhu³ana, int gdzieWszczykn¹æ, int ileGram) {
-		TreeNode ¿y³a = findChild(gdzieWszczykn¹æ, pacjent);
-		TreeNode szczykawka = findChild(ileGram, maryhu³ana);
-		TreeGraphView.displayTreeGraph(¿y³a,"miejsce w ktorym nastapi wklejenie");
-		TreeGraphView.displayTreeGraph(szczykawka,"wklejane subtree");
+	public void crossover(int generation, int fatherId, int motherId) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
 		
+		QueryXML query= new QueryXML();
+		Random random = new Random();
 		
-		if(¿y³a.getParentId() == -1) {
-			return szczykawka;
-		} else
-			¿y³a.replace(gdzieWszczykn¹æ, szczykawka, pacjent);
-			
-		return pacjent;
+		TreeNode father = XMLtoClass.convert(generation, fatherId);
+		TreeNode mother = XMLtoClass.convert(generation, motherId);
+		
+		int randomFatherNodeNumber = random.nextInt(query.countNodes(generation, fatherId));
+		int randomMotherNodeNumber = random.nextInt(query.countNodes(generation, motherId));
+		
+		TreeNode insertionNode = findChild(randomFatherNodeNumber , father);
+		TreeNode subTree = findChild(randomMotherNodeNumber , mother);
+		
+		if(insertionNode.getParentId() == -1) {
+			ClassToXML.convert(subTree, generation+1);
+			return;
+		}
+		else {
+			insertionNode.replace(randomFatherNodeNumber, subTree, father);
+		}
+		
+		ClassToXML.convert(father, generation+1);
+		query.setUniqueIdentifiers(generation+1, Parameters.FILE_NAME_ID - 1);   // -1 dlatego, ze przy tworzeniu XMLa zaszla inkrementacja stalej
+		query.setParentParameters(generation+1, Parameters.FILE_NAME_ID - 1);	 // wiec aby dostac sie do ostatnio zapisanego pliku - trzeba zdekrementowac
 	}
 }

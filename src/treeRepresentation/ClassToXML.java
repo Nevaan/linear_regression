@@ -26,7 +26,8 @@ public class ClassToXML {
 		try {
 
 			File currentDir = new File(".");
-			File file = new File(currentDir + "/xml/Replaced.xml" );
+			File file = new File(currentDir + "/xml/Generation" + generation + "Chromosome"
+					+  String.valueOf(Parameters.FILE_NAME_ID++) + ".xml");
 
 			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -34,7 +35,6 @@ public class ClassToXML {
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 			jaxbMarshaller.marshal(tree, file);
-			jaxbMarshaller.marshal(tree, System.out);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
