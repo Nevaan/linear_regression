@@ -17,29 +17,14 @@ public class MainClass {
 
 	public static void main(String[] args) {
 
-		try {
-			QueryXML process = new QueryXML();
-			//directoryCleanUp();
-			//TreeNode chromo0 = TreeGenerator.generateGrowTree(5);
-			TreeNode chromo1 = TreeGenerator.generateGrowTree(5);
-
-			//ClassToXML.convert(chromo0, 0);
-			//ClassToXML.convert(chromo1, 0);
-
-			//process.setUniqueIdentifiers(0, 0);
-			//process.setUniqueIdentifiers(0, 1);
-
-			//process.setParentParameters(0, 0);
-			//process.setParentParameters(0, 1);
-
-			//TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 0), "Homosom 0");
-			//TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 1),"Homosom 1");
-
-			
+		try {			
 			Genetics genetics = new Genetics();
 			for (int i = 0; i<10000; i++) {
 			genetics.crossover(0, 0, 1);
+			Parameters.FILE_NAME_ID = 0;
 			}
+			//TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 0), "Homosom 0");
+			//TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 1),"Homosom 1");
 			//TreeGraphView.displayTreeGraph(XMLtoClass.convert(1, 0), "Skrzyzowane drzewo");
 			
 		} catch (Exception e) {
