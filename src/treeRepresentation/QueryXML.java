@@ -30,7 +30,7 @@ import org.xml.sax.SAXException;
 
 public class QueryXML {
 
-	
+
 	// Liczy tylko dzieci, wg taga "children" dlatego nie zadziala dobrze dla wycietego drzewa - doda jeden.
 	// dla zwyklego drzewa, wczytanego prosto z xmla poda liczbe nodow - 1 (bo root), czyli daj¹c IDki od zera mamy ideolo
 	public int countNodes(int generation, int chromosome) throws ParserConfigurationException, SAXException, IOException {
@@ -43,9 +43,9 @@ public class QueryXML {
 		NodeList nodeList = document.getElementsByTagName("children");
 		return nodeList.getLength();
 	}
-	
+
 	public void setUniqueIdentifiers(int generation, int chromosome) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
-		
+
 		File currentDir = new File(".");
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setNamespaceAware(true);
@@ -54,20 +54,49 @@ public class QueryXML {
 		XPath xpath = XPathFactory.newInstance().newXPath();
 		XPathExpression expr = xpath.compile("//*[@id]"); // wyciagnij wszystkie nody maj¹ce tag "id"
 		NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-		
+
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Node attribute = nodes.item(i).getAttributes().getNamedItem("id");
 			attribute.setTextContent(Integer.toString(i));
 		}
-		
+
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		DOMSource source = new DOMSource(doc);
 		StreamResult result = new StreamResult(new File(currentDir + "/xml/" + "Generation" +generation + "Chromosome"+ chromosome +".xml"));
 		transformer.transform(source, result);
 	}
-	
-	public void getRandomNode(int generation, int chromosome) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException  { 
+
+	public void setParentParameters(int generation, int chromosome) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
+
+		// standard opening and parsing xml to DOM object
+		File currentDir = new File(".");
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setNamespaceAware(true);
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document doc = builder.parse(currentDir + "/xml/" + "Generation" + generation + "Chromosome" + chromosome + ".xml");
+
+		// magic time
+		NodeList nodeList = doc.getElementsByTagName("*");
+		if (nodeList.item(0).getNodeType() == Node.ELEMENT_NODE)
+			((Element)nodeList.item(0)).setAttribute("parentId", "-1");
+		for (int i = 1; i < nodeList.getLength(); i++) {
+			if(nodeList.item(i).getNodeType() == Node.ELEMENT_NODE) {
+				((Element)nodeList.item(i)).setAttribute("parentId", String.valueOf(nodeList.item(i).getParentNode().getAttributes().getNamedItem("id").getNodeValue()));
+			}
+		}
+
+		// updating document
+		Transformer transformer = TransformerFactory.newInstance().newTransformer();
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		DOMSource source = new DOMSource(doc);
+		StreamResult sresult = new StreamResult(new File(currentDir + "/xml/" + "Generation" + generation + "Chromosome" + chromosome + ".xml"));
+		transformer.transform(source, sresult);
+
+
+	}
+
+	public void getRandomNode(int generation, int chromosome) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException  {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setNamespaceAware(true);
 		DocumentBuilder builder;
@@ -76,23 +105,23 @@ public class QueryXML {
 		builder = factory.newDocumentBuilder();
 		File currentDir = new File(".");
 		doc = builder.parse(currentDir + "/xml/" + "Generation" +generation + "Chromosome"+ chromosome +".xml");
-		
+
 		int nodeNumber = countNodes(generation, chromosome);
 		Random random = new Random();
-		int chosenNode = random.nextInt(nodeNumber);	
-		
+		int chosenNode = random.nextInt(nodeNumber);
+
 		XPathFactory xFactory = XPathFactory.newInstance();
-		XPath xpath = xFactory.newXPath();	
+		XPath xpath = xFactory.newXPath();
 		expr = xpath.compile("//*[@id='" + chosenNode + "']");
 		NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-		
+
 		Document newXmlDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 		Element root = newXmlDocument.getDocumentElement();
 		String namespaceURL = "http://www.w3.org/2001/XMLSchema-instance";
 	    Element messages = newXmlDocument.createElementNS(namespaceURL, "messages");
 
 		newXmlDocument.appendChild(newXmlDocument.importNode(nodes.item(0), true));
-		for (int i = 1; i < nodes.getLength(); i++) {		
+		for (int i = 1; i < nodes.getLength(); i++) {
 			Node node = nodes.item(i);
 			Node copyNode = newXmlDocument.importNode(node, true);
 			root.appendChild(copyNode);
@@ -110,15 +139,15 @@ public class QueryXML {
 			DOMSource source = new DOMSource(newXmlDocument);
 			StreamResult sresult = new StreamResult("./xml/RandomSubtree.xml");
 			transformer.transform(source, sresult);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		
+
 	}
-	
-	
+
+
 	public void query(int id, int generation, int chromosome) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 
 		// read file first

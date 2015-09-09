@@ -79,11 +79,11 @@ public class MainClass {
 			//TreeNode tree1   = XMLtoClass.convert(0, 0);
 			//TreeNode tree2   = XMLtoClass.convert(0, 1);
 			//TreeNode subtree = XMLtoClass.getSubtree();
-		
+
 			//TreeGraphView.displayTreeGraph(tree1, "Chromosome0");
 			//TreeGraphView.displayTreeGraph(tree2, "Chromosome1");
 			//TreeGraphView.displayTreeGraph(subtree, "Subtree from Chromosome1");
-		
+
 		//~~~~~~~~~~~~~~~~~~ ODPALENIE TEGO POWODUJE ZNIKNIECIE PENIS ~~~~~~~~~~~~~~~~~~~//
 		// a tak serio to tylko dostaniesz raka i skasuja ci sie te fancy drzewka ktore generowales wczoraj, ale
 		// za to wygeneruja ci sie dwa piekne chromosomy z id zaczynajacymi sie od zera, konczacymi sie na wydrukowanych na koniec wartosciach
@@ -91,19 +91,22 @@ public class MainClass {
 			directoryCleanUp();
 			TreeNode chromo0 = TreeGenerator.generateGrowTree(5);
 			TreeNode chromo1 = TreeGenerator.generateGrowTree(5);
-			
+
 			ClassToXML.convert(chromo0, 0);
 			ClassToXML.convert(chromo1, 0);
-			
-			TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 0),"Chromo 0");
-			TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 1),"Chromo 1");
 
-			process.countNodes(0, 0);
-			process.countNodes(0, 1);
+			TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 0),"Homosom 0");
+			TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 1),"Homosom 1");
 			*/
-			
-			process.setUniqueIdentifiers(0, 0);			
-			
+
+			System.out.println(process.countNodes(0, 0));
+			System.out.println(process.countNodes(0, 1));
+
+
+			//process.setUniqueIdentifiers(0, 0);
+			process.setParentParameters(0, 0);
+			process.setParentParameters(0, 1);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
