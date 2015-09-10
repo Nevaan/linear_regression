@@ -14,6 +14,7 @@ import org.xml.sax.SAXException;
 import regression.Parameters;
 import treeRepresentation.ClassToXML;
 import treeRepresentation.QueryXML;
+import treeRepresentation.TreeGenerator;
 import treeRepresentation.TreeNode;
 import treeRepresentation.XMLtoClass;
 
@@ -96,8 +97,7 @@ public class Genetics {
 			query.setParentParameters(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);			
 			return subTree;
 		} else {
-			insertionNode.replace(randomFatherNodeNumber, subTree, father);
-			
+			insertionNode.replace(randomFatherNodeNumber, subTree, father);			
 		}
 
 		ClassToXML.convert(father, generation + 1);
@@ -105,4 +105,31 @@ public class Genetics {
 		query.setParentParameters(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);
 		return father;
 	}
+	
+	public TreeNode mutate(int generation, int chromosomeId) throws Exception {
+		QueryXML query = new QueryXML();
+		Random random = new Random();
+		
+		TreeNode chromosome = XMLtoClass.convert(generation, chromosomeId);
+		int randomNodeNumber = random.nextInt(query.countNodes(generation, chromosomeId));
+		
+		TreeNode insertionNode = findChild(randomNodeNumber, chromosome);
+		
+		TreeNode randomSubtree = TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH);
+		
+		if (insertionNode.getParentId() == -1) {
+			ClassToXML.convert(randomSubtree, generation + 1);
+			query.setUniqueIdentifiers(generation + 1,Parameters.CURRENT_CHROMOSOME_ID);
+			query.setParentParameters(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);			
+			return randomSubtree;
+		}
+		else {
+			insertionNode.replace(randomNodeNumber, randomSubtree, chromosome);	
+		}
+		ClassToXML.convert(chromosome, generation + 1);
+		query.setUniqueIdentifiers(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);
+		query.setParentParameters(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);
+		return chromosome;
+	}
+	
 }
