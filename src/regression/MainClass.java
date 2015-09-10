@@ -6,6 +6,8 @@ import java.nio.file.Paths;
 
 import genetics.Genetics;
 import genetics.Population;
+import graphics.graphs.TreeGraphView;
+import treeRepresentation.XMLtoClass;
 
 public class MainClass {
 
@@ -26,6 +28,7 @@ public class MainClass {
 				System.out.println("~~~~~~~~~~~~~~~" + i + " Population ~~~~~~~~~~~~~~~~");
 				Parameters.CURRENT_CHROMOSOME_ID = 0;
 				Parameters.CURRENT_GENERATION_ID++;
+
 			}
 		} catch (Exception e) {
 			System.out.println("Error while executing main");

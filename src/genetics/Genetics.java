@@ -11,6 +11,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.xml.sax.SAXException;
 
+import graphics.graphs.TreeGraphView;
 import regression.Parameters;
 import treeRepresentation.ClassToXML;
 import treeRepresentation.QueryXML;
@@ -21,9 +22,22 @@ public class Genetics {
 
 	public Population evolve(final Population population) {
 		Population evolvedPopulation = new Population();
+		QueryXML query = new QueryXML();
+
+		// Reproduction
+		TreeNode fittestFromPreviousPop = population.getFittest();
+		ClassToXML.convert(fittestFromPreviousPop, Parameters.CURRENT_GENERATION_ID);
+		evolvedPopulation.saveChromosomeAt(0, fittestFromPreviousPop);
+		Parameters.CURRENT_CHROMOSOME_ID++;
+		try {
+			query.setUniqueIdentifiers(Parameters.CURRENT_GENERATION_ID, 0);
+			query.setParentParameters(Parameters.CURRENT_GENERATION_ID, 0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		// Crossover
-		for (int i = 0; i < Parameters.POPULATION_SIZE; i++) {
+		for (int i = 1; i < Parameters.POPULATION_SIZE; i++) {
 
 			// Select parents
 			int fatherChromosomeId = selectIndividual(population);
@@ -33,6 +47,7 @@ public class Genetics {
 				TreeNode child = crossover(Parameters.CURRENT_GENERATION_ID - 1, fatherChromosomeId, motherChromosomeId);
 				Parameters.CURRENT_CHROMOSOME_ID++;
 				evolvedPopulation.saveChromosomeAt(i, child);
+				// TreeGraphView.displayTreeGraph(child, String.valueOf(i));
 			} catch (Exception e) {
 				System.out.println("Error while performing crossover.");
 				e.printStackTrace();
@@ -92,12 +107,12 @@ public class Genetics {
 
 		if (insertionNode.getParentId() == -1) {
 			ClassToXML.convert(subTree, generation + 1);
-			query.setUniqueIdentifiers(generation + 1,Parameters.CURRENT_CHROMOSOME_ID);
-			query.setParentParameters(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);			
+			query.setUniqueIdentifiers(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);
+			query.setParentParameters(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);
 			return subTree;
 		} else {
 			insertionNode.replace(randomFatherNodeNumber, subTree, father);
-			
+
 		}
 
 		ClassToXML.convert(father, generation + 1);
