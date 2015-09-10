@@ -54,6 +54,17 @@ public class Genetics {
 				e.printStackTrace();
 			}
 		}
+
+		// Mutation
+		Random random = new Random();
+		for (int i = 1; i < Parameters.POPULATION_SIZE; i++) {
+			if (random.nextInt(100) < Parameters.MUTATION_RATE)
+				try {
+					mutate(Parameters.CURRENT_GENERATION_ID, i);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		}
 		return evolvedPopulation;
 	}
 
@@ -121,31 +132,30 @@ public class Genetics {
 		query.setParentParameters(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);
 		return father;
 	}
-	
+
 	public TreeNode mutate(int generation, int chromosomeId) throws Exception {
 		QueryXML query = new QueryXML();
 		Random random = new Random();
-		
+
 		TreeNode chromosome = XMLtoClass.convert(generation, chromosomeId);
-		int randomNodeNumber = random.nextInt(query.countNodes(generation, chromosomeId));
-		
+		int randomNodeNumber = random.nextInt(query.countNodes(generation, chromosomeId) + 1);
+
 		TreeNode insertionNode = findChild(randomNodeNumber, chromosome);
-		
+
 		TreeNode randomSubtree = TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH);
-		
+
 		if (insertionNode.getParentId() == -1) {
 			ClassToXML.convert(randomSubtree, generation + 1);
-			query.setUniqueIdentifiers(generation + 1,Parameters.CURRENT_CHROMOSOME_ID);
-			query.setParentParameters(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);			
+			query.setUniqueIdentifiers(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);
+			query.setParentParameters(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);
 			return randomSubtree;
-		}
-		else {
-			insertionNode.replace(randomNodeNumber, randomSubtree, chromosome);	
+		} else {
+			insertionNode.replace(randomNodeNumber, randomSubtree, chromosome);
 		}
 		ClassToXML.convert(chromosome, generation + 1);
 		query.setUniqueIdentifiers(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);
 		query.setParentParameters(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);
 		return chromosome;
 	}
-	
+
 }

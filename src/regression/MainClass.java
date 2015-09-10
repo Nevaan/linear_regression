@@ -28,8 +28,10 @@ public class MainClass {
 				System.out.println("~~~~~~~~~~~~~~~" + i + " Population ~~~~~~~~~~~~~~~~");
 				Parameters.CURRENT_CHROMOSOME_ID = 0;
 				Parameters.CURRENT_GENERATION_ID++;
-
+				TreeGraphView.displayTreeGraph(population.getFittest(), "fittest");
 			}
+
+
 		} catch (Exception e) {
 			System.out.println("Error while executing main");
 			e.printStackTrace();
