@@ -92,9 +92,12 @@ public class Genetics {
 
 		if (insertionNode.getParentId() == -1) {
 			ClassToXML.convert(subTree, generation + 1);
+			query.setUniqueIdentifiers(generation + 1,Parameters.CURRENT_CHROMOSOME_ID);
+			query.setParentParameters(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);			
 			return subTree;
 		} else {
 			insertionNode.replace(randomFatherNodeNumber, subTree, father);
+			
 		}
 
 		ClassToXML.convert(father, generation + 1);
