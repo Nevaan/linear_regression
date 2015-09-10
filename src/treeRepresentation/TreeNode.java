@@ -31,8 +31,6 @@ public class TreeNode implements Iterable<TreeNode> {
 	protected int parentId;
 	@XmlElement
 	public List<TreeNode> children;
-	@XmlAttribute
-	private int fileChromosomeID;
 
 	public boolean isRoot() {
 		return parent == null;
@@ -161,13 +159,4 @@ public class TreeNode implements Iterable<TreeNode> {
 	public void setParentId(int parentId) {
 		this.parentId = parentId;
 	}
-
-	public int getFileChromosomeID() {
-		return fileChromosomeID;
-	}
-
-	public void setFileChromosomeID(int fileChromosomeID) {
-		this.fileChromosomeID = fileChromosomeID;
-	}
-
 }

@@ -13,6 +13,8 @@ public class MainClass {
 
 		Genetics genetics = new Genetics();
 
+		directoryCleanUp();
+
 		try {
 			Population population = new Population();
 			population.initialize();

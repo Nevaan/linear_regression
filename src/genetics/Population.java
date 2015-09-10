@@ -33,7 +33,6 @@ public class Population {
 			try {
 
 				singleChromosome = TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH);
-				singleChromosome.setFileChromosomeID(i);
 
 				ClassToXML.convert(singleChromosome, Parameters.CURRENT_GENERATION_ID);
 				query.setUniqueIdentifiers(0, i);
