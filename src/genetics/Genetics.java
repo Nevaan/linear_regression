@@ -31,6 +31,7 @@ public class Genetics {
 
 			try {
 				TreeNode child = crossover(Parameters.CURRENT_GENERATION_ID - 1, fatherChromosomeId, motherChromosomeId);
+				Parameters.CURRENT_CHROMOSOME_ID++;
 				evolvedPopulation.saveChromosomeAt(i, child);
 			} catch (Exception e) {
 				System.out.println("Error while performing crossover.");
@@ -41,7 +42,7 @@ public class Genetics {
 	}
 
 	// Tournament Selection
-	public static int selectIndividual(Population population) {
+	public int selectIndividual(Population population) {
 		Population tournament = new Population();
 		Map<Integer, Double> map = new HashMap<Integer, Double>();
 		Map.Entry<Integer, Double> maxEntry = null;
@@ -75,8 +76,7 @@ public class Genetics {
 		return result;
 	}
 
-	public TreeNode crossover(int generation, int fatherId, int motherId) throws ParserConfigurationException,
-			SAXException, IOException, XPathExpressionException, TransformerException {
+	public TreeNode crossover(int generation, int fatherId, int motherId) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
 
 		QueryXML query = new QueryXML();
 		Random random = new Random();
@@ -91,15 +91,15 @@ public class Genetics {
 		TreeNode subTree = findChild(randomMotherNodeNumber, mother);
 
 		if (insertionNode.getParentId() == -1) {
-			ClassToXML.convertCrossovered(subTree, generation + 1);
+			ClassToXML.convert(subTree, generation + 1);
 			return subTree;
 		} else {
 			insertionNode.replace(randomFatherNodeNumber, subTree, father);
 		}
 
-		ClassToXML.convertCrossovered(father, generation + 1);
-		query.setUniqueIdentifiers(generation + 1, Parameters.CROSSOVERED_FILE_NAME_ID - 1);
-		query.setParentParameters(generation + 1, Parameters.CROSSOVERED_FILE_NAME_ID - 1);
+		ClassToXML.convert(father, generation + 1);
+		query.setUniqueIdentifiers(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);
+		query.setParentParameters(generation + 1, Parameters.CURRENT_CHROMOSOME_ID);
 		return father;
 	}
 }

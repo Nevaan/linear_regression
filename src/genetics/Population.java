@@ -31,27 +31,23 @@ public class Population {
 			TreeNode singleChromosome = null;
 
 			try {
-
 				singleChromosome = TreeGenerator.generateGrowTree(Parameters.GROW_TREE_MAX_DEPTH);
-
 				ClassToXML.convert(singleChromosome, Parameters.CURRENT_GENERATION_ID);
 				query.setUniqueIdentifiers(0, i);
 				query.setParentParameters(0, i);
 				population.add(XMLtoClass.convert(0, i));
+				Parameters.CURRENT_CHROMOSOME_ID++;
 
 			} catch (Exception e) {
 				System.out.println("ERROR while initializing population (Tree Generation).");
 				e.printStackTrace();
 			}
 		}
-
-		Parameters.FILE_NAME_ID = 0;
 	}
 
 	public void loadGeneration() {
 		File directory = new File("./xml/");
-		FileFilter fileFilter = new WildcardFileFilter(
-				"Generation" + Parameters.CURRENT_GENERATION_ID + "Chromosome*.xml");
+		FileFilter fileFilter = new WildcardFileFilter("Generation" + Parameters.CURRENT_GENERATION_ID + "Chromosome*.xml");
 		File[] files = directory.listFiles(fileFilter);
 
 		for (int i = 0; i < files.length; i++) {

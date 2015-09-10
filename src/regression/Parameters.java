@@ -14,8 +14,7 @@ public class Parameters {
 	public static final int TOURNAMENT_SIZE = 5;
 
 	// XML Conversion parameters
-	public static int FILE_NAME_ID = 0;
-	public static int CROSSOVERED_FILE_NAME_ID = 0;
+	public static int CURRENT_CHROMOSOME_ID = 0;
 	public static int CURRENT_GENERATION_ID = 0;
 
 }

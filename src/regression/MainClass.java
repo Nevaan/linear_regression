@@ -18,12 +18,13 @@ public class MainClass {
 		try {
 			Population population = new Population();
 			population.initialize();
+			Parameters.CURRENT_CHROMOSOME_ID = 0;
 			Parameters.CURRENT_GENERATION_ID++;
 
-			for(int i = 0; i < Parameters.GENERATIONS_AMOUNT; i++) {
+			for (int i = 0; i < Parameters.GENERATIONS_AMOUNT; i++) {
 				population = genetics.evolve(population);
 				System.out.println("~~~~~~~~~~~~~~~" + i + " Population ~~~~~~~~~~~~~~~~");
-				Parameters.CROSSOVERED_FILE_NAME_ID = 0;
+				Parameters.CURRENT_CHROMOSOME_ID = 0;
 				Parameters.CURRENT_GENERATION_ID++;
 			}
 		} catch (Exception e) {
