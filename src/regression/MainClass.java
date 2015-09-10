@@ -5,45 +5,29 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import genetics.Genetics;
-import genetics.Genetics;
-import graphics.graphs.TreeGraphView;
-import treeRepresentation.ClassToXML;
-import treeRepresentation.QueryXML;
-import treeRepresentation.TreeGenerator;
-import treeRepresentation.TreeNode;
-import treeRepresentation.XMLtoClass;
+import genetics.Population;
 
 public class MainClass {
 
 	public static void main(String[] args) {
 
-		QueryXML query = new QueryXML();
+		Genetics genetics = new Genetics();
 
 		try {
+			Population population = new Population();
+			population.initialize();
+			Parameters.CURRENT_GENERATION_ID++;
 
-			Genetics genetics = new Genetics();
-			for (int i = 0; i < 1; i++) {
-				System.out.println(i);
-				Parameters.FILE_NAME_ID = 0;
-				ClassToXML.convert(TreeGenerator.generateGrowTree(5), 0);
-				ClassToXML.convert(TreeGenerator.generateGrowTree(5), 0);
-
-				query.setUniqueIdentifiers(0, 0);
-				query.setUniqueIdentifiers(0, 1);
-				query.setParentParameters(0, 0);
-				query.setParentParameters(0, 1);
-
+			for(int i = 0; i < Parameters.GENERATIONS_AMOUNT; i++) {
+				population = genetics.evolve(population);
+				System.out.println("~~~~~~~~~~~~~~~" + i + " Population ~~~~~~~~~~~~~~~~");
 				Parameters.CROSSOVERED_FILE_NAME_ID = 0;
-				genetics.crossover(0, 0, 1);
+				Parameters.CURRENT_GENERATION_ID++;
 			}
-
 		} catch (Exception e) {
+			System.out.println("Error while executing main");
 			e.printStackTrace();
 		}
-
-		TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 0), "Homosom 0");
-		TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 1),"Homosom 1");
-		TreeGraphView.displayTreeGraph(XMLtoClass.convert(1, 0), "Skrzyzowane drzewo");
 
 	}
 

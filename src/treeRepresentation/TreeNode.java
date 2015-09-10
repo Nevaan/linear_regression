@@ -31,6 +31,8 @@ public class TreeNode implements Iterable<TreeNode> {
 	protected int parentId;
 	@XmlElement
 	public List<TreeNode> children;
+	@XmlAttribute
+	private int fileChromosomeID;
 
 	public boolean isRoot() {
 		return parent == null;
@@ -116,18 +118,18 @@ public class TreeNode implements Iterable<TreeNode> {
 		return null;
 	}
 
-	public double getRawFitness(){
+	public double getRawFitness() {
 		double sum = 0;
-		for (int i = 0; i < SampleData.sampleX.length ; i++) {
+		for (int i = 0; i < SampleData.sampleX.length; i++) {
 			double residual = SampleData.sampleY[i] - this.getValue(SampleData.sampleX[i]);
 			sum += residual * residual;
 		}
 		return sum;
 	}
 
-	public double getAdjustedFitness(){
+	public double getAdjustedFitness() {
 		double denominator = 1 + getRawFitness();
-		return 1/denominator;
+		return 1 / denominator;
 	}
 
 	@Override
@@ -144,8 +146,8 @@ public class TreeNode implements Iterable<TreeNode> {
 	public void replace(int id, TreeNode newNode, TreeNode root) {
 		TreeNode parent = Genetics.findChild(this.getParentId(), root);
 		if (parent.children.get(0).getId() == id) {
-		parent.children.remove(0);
-		parent.children.add(0, newNode);
+			parent.children.remove(0);
+			parent.children.add(0, newNode);
 		} else {
 			parent.children.remove(1);
 			parent.children.add(1, newNode);
@@ -160,5 +162,12 @@ public class TreeNode implements Iterable<TreeNode> {
 		this.parentId = parentId;
 	}
 
-}
+	public int getFileChromosomeID() {
+		return fileChromosomeID;
+	}
 
+	public void setFileChromosomeID(int fileChromosomeID) {
+		this.fileChromosomeID = fileChromosomeID;
+	}
+
+}

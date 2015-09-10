@@ -7,55 +7,56 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.filefilter.WildcardFileFilter;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import graphics.graphs.TreeGraphView;
 import regression.Parameters;
 import treeRepresentation.ClassToXML;
 import treeRepresentation.QueryXML;
-import treeElement.terminal.Terminal;
 import treeRepresentation.TreeNode;
 import treeRepresentation.XMLtoClass;
 
 public class Genetics {
 
-	public void evolve(int generation){
-		List<TreeNode> currentGeneration = new ArrayList<TreeNode>();
-		currentGeneration = loadGeneration(generation);
-		int i = 0;
-		for(TreeNode t : currentGeneration) {
-			TreeGraphView.displayTreeGraph(t ,"Generation: " + generation + " Chromosome: " + (i++) );
+	public Population evolve(final Population population) {
+		Population evolvedPopulation = new Population();
+
+		// Crossover
+		for(int i = 0; i < Parameters.POPULATION_SIZE; i++) {
+
+			// Select parents
+			TreeNode father = selectIndividual(population);
+			TreeNode mother = selectIndividual(population);
+
+			try {
+				TreeNode child = crossover(Parameters.CURRENT_GENERATION_ID - 1, father.getFileChromosomeID(), mother.getFileChromosomeID());
+				evolvedPopulation.saveChromosomeAt(i, child);
+			} catch (Exception e) {
+				System.out.println("Error while performing crossover.");
+				e.printStackTrace();
+			}
 		}
+		return evolvedPopulation;
 	}
 
-	private List<TreeNode> loadGeneration(int generationNumber){
-		List<TreeNode> generation = new ArrayList<TreeNode>();
-		File directory = new File("./xml/");
-		FileFilter fileFilter = new WildcardFileFilter("Generation" + generationNumber +"Chromosome*.xml");
-		File[] files = directory.listFiles(fileFilter);
-		for (int i=0; i<files.length; i++){
-			generation.add(XMLtoClass.convert(i, generationNumber));
+
+
+	// Tournament Selection
+	public static TreeNode selectIndividual(Population population) {
+		Population tournament = new Population();
+		Random random = new Random();
+		for (int i = 0; i < Parameters.TOURNAMENT_SIZE; i++) {
+			int index = random.nextInt(Parameters.POPULATION_SIZE);
+			tournament.saveChromosomeAt(i, population.getChromosomeAt(index));
 		}
-		return generation;
+
+		TreeNode bestIndividual = tournament.getFittest();
+		return bestIndividual;
 	}
 
 
@@ -134,7 +135,7 @@ public class Genetics {
 	 *  w wyniku jej dzialania powstaje skrzyzowane drzewo zapisane jako plik "Generation" + generacja+1 + "Chromosome" + Params.File_name_id
 	 *  przy czym trzeba pilnowac, zeby przy kazdej mutacji - tworzeniu nowej generacji zerowac ten params
 	 */
-	public void crossover(int generation, int fatherId, int motherId) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
+	public TreeNode crossover(int generation, int fatherId, int motherId) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
 
 		QueryXML query= new QueryXML();
 		Random random = new Random();
@@ -155,14 +156,16 @@ public class Genetics {
 
 		if(insertionNode.getParentId() == -1) {
 			ClassToXML.convertCrossovered(subTree, generation + 1);
-			return;
+			return subTree;
 		}
 		else {
 			insertionNode.replace(randomFatherNodeNumber, subTree, father);
 		}
 
+		father.setFileChromosomeID(Parameters.CROSSOVERED_FILE_NAME_ID - 1);
 		ClassToXML.convertCrossovered(father, generation + 1);
 		query.setUniqueIdentifiers(generation + 1, Parameters.CROSSOVERED_FILE_NAME_ID - 1);   // -1 dlatego, ze przy tworzeniu XMLa zaszla inkrementacja stalej
 		query.setParentParameters(generation + 1, Parameters.CROSSOVERED_FILE_NAME_ID - 1);	 // wiec aby dostac sie do ostatnio zapisanego pliku - trzeba zdekrementowac
+		return father;
 	}
 }
