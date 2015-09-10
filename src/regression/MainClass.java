@@ -16,41 +16,35 @@ import treeRepresentation.XMLtoClass;
 public class MainClass {
 
 	public static void main(String[] args) {
-		
-		
-		
-		QueryXML query = new QueryXML();
-		
-		try {			
 
-			
-			
+		QueryXML query = new QueryXML();
+
+		try {
+
 			Genetics genetics = new Genetics();
-			for (int i = 0; i<1; i++) {
+			for (int i = 0; i < 1; i++) {
 				System.out.println(i);
+				Parameters.FILE_NAME_ID = 0;
 				ClassToXML.convert(TreeGenerator.generateGrowTree(5), 0);
 				ClassToXML.convert(TreeGenerator.generateGrowTree(5), 0);
-				
+
 				query.setUniqueIdentifiers(0, 0);
-				query.setUniqueIdentifiers(0, 1);	
+				query.setUniqueIdentifiers(0, 1);
 				query.setParentParameters(0, 0);
 				query.setParentParameters(0, 1);
-				
-				
-				Parameters.FILE_NAME_ID = 0;
+
+				Parameters.CROSSOVERED_FILE_NAME_ID = 0;
 				genetics.crossover(0, 0, 1);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		
+
 		TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 0), "Homosom 0");
 		TreeGraphView.displayTreeGraph(XMLtoClass.convert(0, 1),"Homosom 1");
 		TreeGraphView.displayTreeGraph(XMLtoClass.convert(1, 0), "Skrzyzowane drzewo");
-		
+
 	}
 
 	public static void directoryCleanUp() {

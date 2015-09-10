@@ -65,8 +65,8 @@ public class Genetics {
 			return root;
 		}
 		TreeNode result = null;
-		for(int i = 0; result==null && i< root.children.size(); i++) {
-			result = findChild( id, root.children.get(i));
+		for(int i = 0; result == null && i < root.children.size(); i++) {
+			result = findChild(id, root.children.get(i));
 		}
 		return result;
 	}
@@ -128,39 +128,41 @@ public class Genetics {
 	*/
 
 	/* ------------------------------------- Podejscie javowe ------------------------------------- */
-	
-	/*	
+
+	/*
 	 * 	ta metodka jest ju¿ na gotowo: pobiera trzy id: id generacji, id chromosomu - matki, id chromosomu - ojca,
 	 *  w wyniku jej dzialania powstaje skrzyzowane drzewo zapisane jako plik "Generation" + generacja+1 + "Chromosome" + Params.File_name_id
 	 *  przy czym trzeba pilnowac, zeby przy kazdej mutacji - tworzeniu nowej generacji zerowac ten params
 	 */
 	public void crossover(int generation, int fatherId, int motherId) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
-		
+
 		QueryXML query= new QueryXML();
 		Random random = new Random();
-		
+
 		TreeNode father = XMLtoClass.convert(generation, fatherId);
 		TreeNode mother = XMLtoClass.convert(generation, motherId);
-		
-		
-		// Nie jestem pewny co do tego, czy powinno byæ + 1: teoretycznie moze byæ 0 (sam root) i wtedy tutaj nastepuje blad - argument nextInt 
+
+
+		// Nie jestem pewny co do tego, czy powinno byæ + 1: teoretycznie moze byæ 0 (sam root) i wtedy tutaj nastepuje blad - argument nextInt
 		// musi byc pozytywny. Jesli beda problemy to jest potencjalne miejsce, w ktorym moze sie jebac
 		int randomFatherNodeNumber = random.nextInt(query.countNodes(generation, fatherId) + 1);
 		int randomMotherNodeNumber = random.nextInt(query.countNodes(generation, motherId) + 1);
-		
+
 		TreeNode insertionNode = findChild(randomFatherNodeNumber , father);
+		//TreeGraphView.displayTreeGraph(insertionNode, "Insertion Node");
 		TreeNode subTree = findChild(randomMotherNodeNumber , mother);
-		
+		//TreeGraphView.displayTreeGraph(subTree, "Sub Tree");
+
 		if(insertionNode.getParentId() == -1) {
-			ClassToXML.convert(subTree, generation+1);
+			ClassToXML.convertCrossovered(subTree, generation + 1);
 			return;
 		}
 		else {
 			insertionNode.replace(randomFatherNodeNumber, subTree, father);
 		}
-		
-		ClassToXML.convert(father, generation+1);
-		query.setUniqueIdentifiers(generation+1, Parameters.FILE_NAME_ID - 1);   // -1 dlatego, ze przy tworzeniu XMLa zaszla inkrementacja stalej
-		query.setParentParameters(generation+1, Parameters.FILE_NAME_ID - 1);	 // wiec aby dostac sie do ostatnio zapisanego pliku - trzeba zdekrementowac
+
+		ClassToXML.convertCrossovered(father, generation + 1);
+		query.setUniqueIdentifiers(generation + 1, Parameters.CROSSOVERED_FILE_NAME_ID - 1);   // -1 dlatego, ze przy tworzeniu XMLa zaszla inkrementacja stalej
+		query.setParentParameters(generation + 1, Parameters.CROSSOVERED_FILE_NAME_ID - 1);	 // wiec aby dostac sie do ostatnio zapisanego pliku - trzeba zdekrementowac
 	}
 }
