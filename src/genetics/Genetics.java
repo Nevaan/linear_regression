@@ -45,7 +45,8 @@ public class Genetics {
 			int motherChromosomeId = selectIndividual(population);
 
 			try {
-				TreeNode child = crossover(Parameters.CURRENT_GENERATION_ID - 1, fatherChromosomeId, motherChromosomeId);
+				TreeNode child = crossover(Parameters.CURRENT_GENERATION_ID - 1, fatherChromosomeId,
+						motherChromosomeId);
 				Parameters.CURRENT_CHROMOSOME_ID++;
 				evolvedPopulation.saveChromosomeAt(i, child);
 				// TreeGraphView.displayTreeGraph(child, String.valueOf(i));
@@ -64,6 +65,11 @@ public class Genetics {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+		}
+		SampleData.dataF.clear();
+		for (int i = 0; i < evolvedPopulation.getPopulationSize(); i++) {
+			for (int k = 0; k < SampleData.dataX.size(); k++)
+				SampleData.dataF.add(evolvedPopulation.getChromosomeAt(i).getValue(k));
 		}
 		return evolvedPopulation;
 	}
@@ -103,7 +109,8 @@ public class Genetics {
 		return result;
 	}
 
-	public TreeNode crossover(int generation, int fatherId, int motherId) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, TransformerException {
+	public TreeNode crossover(int generation, int fatherId, int motherId) throws ParserConfigurationException,
+			SAXException, IOException, XPathExpressionException, TransformerException {
 
 		QueryXML query = new QueryXML();
 		Random random = new Random();

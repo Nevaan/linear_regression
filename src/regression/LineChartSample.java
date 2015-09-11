@@ -31,6 +31,19 @@ public class LineChartSample extends Application {
 		MainClass.directoryCleanUp();
 		TreeNode fittest = null;
 
+		lineChart.setTitle("Regresja");
+		XYChart.Series series = new XYChart.Series();
+		series.setName("Wykres");
+		XYChart.Series series2 = new XYChart.Series();
+		series2.setName("");
+
+		Scene scene = new Scene(lineChart, 800, 600);
+		scene.getStylesheets().add(this.getClass().getResource("../style.css").toExternalForm());
+
+		for (int i = 0; i < SampleData.sampleX.length; i++) {
+			series.getData().add(new XYChart.Data(SampleData.sampleX[i], SampleData.sampleY[i]));
+		}
+
 		try {
 			Population population = new Population();
 			population.initialize();
@@ -43,6 +56,15 @@ public class LineChartSample extends Application {
 				regression.Parameters.CURRENT_CHROMOSOME_ID = 0;
 				regression.Parameters.CURRENT_GENERATION_ID++;
 				fittest = population.getFittest();
+				for (int k = 0; k < SampleData.sampleX.length; k++) {
+					series2.getData().clear();
+					XYChart.Series<Number, Number> s = lineChart.getData().get(0);
+					series2.getData().add(new XYChart.Data(SampleData.sampleX[k], fittest.getValue(SampleData.sampleX[k])));
+				}
+				lineChart.getData().addAll(series, series2);
+
+				stage.setScene(scene);
+				stage.show();
 
 			}
 
@@ -51,27 +73,6 @@ public class LineChartSample extends Application {
 			System.out.println("Error while executing main");
 			e.printStackTrace();
 		}
-
-		lineChart.setTitle("Regresja");
-
-		XYChart.Series series = new XYChart.Series();
-		series.setName("Wykres");
-		XYChart.Series series2 = new XYChart.Series();
-		series2.setName("");
-
-		for (int i = 0; i < SampleData.sampleX.length; i++) {
-			series.getData().add(new XYChart.Data(SampleData.sampleX[i], SampleData.sampleY[i]));
-			series2.getData().add(new XYChart.Data(SampleData.sampleX[i], fittest.getValue(SampleData.sampleX[i])));
-		}
-
-		Scene scene = new Scene(lineChart, 800, 600);
-
-		scene.getStylesheets().clear();
-		scene.getStylesheets().add(this.getClass().getResource("../style.css").toExternalForm());
-		lineChart.getData().addAll(series, series2);
-
-		stage.setScene(scene);
-		stage.show();
 
 		// time log finish
 		long tEnd = System.currentTimeMillis();

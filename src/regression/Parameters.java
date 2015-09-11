@@ -3,7 +3,7 @@ package regression;
 public class Parameters {
 
 	// Main Class parameters
-	public static final int GENERATIONS_AMOUNT = 100;
+	public static final int GENERATIONS_AMOUNT = 20;
 
 	// Tree Generation parameters
 	public static final int GROW_TREE_MAX_DEPTH = 25;
