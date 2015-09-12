@@ -3,6 +3,7 @@ package regression;
 import treeRepresentation.XMLtoClass;
 import graphics.graphs.TreeGraphView;
 import javafx.application.Application;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
@@ -70,10 +71,12 @@ public class MainWindow extends Application {
 
 		grid.add(slider, 1, 4);
 
-		Button showTree = new Button("Wyswietl drzewo");
+
+		
+		final Button showTree = new Button("Wyswietl drzewo");
 		showTree.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
 		grid.add(showTree, 1, 5);
-
+		showTree.setDisable(true);
 		showTree.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -90,17 +93,20 @@ public class MainWindow extends Application {
 				Task<Integer> task = new Task<Integer>(){
 					@Override 
 					protected Integer call() {
+						showTree.setDisable(true);
 						MainClass.main(null);	
+						showTree.setDisable(false);
 						return 0;
 					}
 				};
-				new Thread(task).start();			
+				new Thread(task).start();	
+				
 			}
-		
+			
 		});
 		
 		grid.add(startAlgorithm,0,5);
-		
+
 		Scene scene = new Scene(grid, 500, 400);
 		primaryStage.setScene(scene);
 
