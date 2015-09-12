@@ -41,7 +41,7 @@ public class TreeGraphView {
 			.setPosition(Renderer.VertexLabel.Position.CNTR);
 
 		JFrame frame = new JFrame(title);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().add(vv);
 		frame.pack();
 		frame.setVisible(true);

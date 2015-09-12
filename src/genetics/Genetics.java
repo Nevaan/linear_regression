@@ -49,7 +49,6 @@ public class Genetics {
 						motherChromosomeId);
 				Parameters.CURRENT_CHROMOSOME_ID++;
 				evolvedPopulation.saveChromosomeAt(i, child);
-				// TreeGraphView.displayTreeGraph(child, String.valueOf(i));
 			} catch (Exception e) {
 				System.out.println("Error while performing crossover.");
 				e.printStackTrace();

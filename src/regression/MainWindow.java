@@ -1,8 +1,11 @@
 package regression;
 
+import treeRepresentation.XMLtoClass;
+import graphics.graphs.TreeGraphView;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -11,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -43,13 +48,13 @@ public class MainWindow extends Application {
 		Label chosenMutationLabel = new Label("Akutalnie wybrana generacja: ");
 		grid.add(chosenMutationLabel, 0, 3);
 
-		final Label chosenMutation = new Label();
+		final Label chosenMutation = new Label("1");
 		grid.add(chosenMutation, 1, 3);
 
 		Label searchedFunction = new Label("6x^3 + 2x^2 - 9x-7");
 		grid.add(searchedFunction, 1, 1);
 
-		final Slider slider = new Slider(1, regression.Parameters.MUTATION_NUMBER, 0);
+		final Slider slider = new Slider(1, regression.Parameters.GENERATIONS_AMOUNT, 0);
 		slider.setShowTickLabels(true);
 		slider.setShowTickMarks(true);
 		slider.setMajorTickUnit(10);
@@ -67,23 +72,35 @@ public class MainWindow extends Application {
 
 		Button showTree = new Button("Wyswietl drzewo");
 		showTree.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
-		grid.add(showTree, 0, 5);
+		grid.add(showTree, 1, 5);
 
 		showTree.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				//
-				// Taki test tu ma byc wyswietlanie kurwa drzewa
-
-				primaryStage.setTitle("Accepted");
-
-				// wyswietl kurwa drzewo
+				TreeGraphView.displayTreeGraph(XMLtoClass.convert((int) slider.getValue() - 1, MainClass.bestChromosomes.get((int) slider.getValue() - 1)), "Test");
 			}
 		});
 
-		PasswordField pwBox = new PasswordField();
-		grid.add(pwBox, 1, 2);
-
+		Button startAlgorithm = new Button("Start");
+		startAlgorithm.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
+		startAlgorithm.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				regression.Parameters.CURRENT_GENERATION_ID=0;		
+				Task<Integer> task = new Task<Integer>(){
+					@Override 
+					protected Integer call() {
+						MainClass.main(null);	
+						return 0;
+					}
+				};
+				new Thread(task).start();			
+			}
+		
+		});
+		
+		grid.add(startAlgorithm,0,5);
+		
 		Scene scene = new Scene(grid, 500, 400);
 		primaryStage.setScene(scene);
 

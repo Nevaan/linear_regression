@@ -18,7 +18,8 @@ public class LineChartSample extends Application {
 	public void start(Stage stage) throws Exception {
 		// time log start
 		long tStart = System.currentTimeMillis();
-
+		SampleData sampleData = new SampleData();
+		
 		stage.setTitle("Line Chart Sample");
 		final NumberAxis xAxis = new NumberAxis();
 		final NumberAxis yAxis = new NumberAxis();
