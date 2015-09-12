@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 
 import genetics.Genetics;
 import genetics.Population;
+import genetics.SampleData;
 import graphics.graphs.TreeGraphView;
 import treeRepresentation.XMLtoClass;
 
@@ -20,6 +21,7 @@ public class MainClass {
 		try {
 			Population population = new Population();
 			population.initialize();
+			SampleData dataInitializer = new SampleData();
 			Parameters.CURRENT_CHROMOSOME_ID = 0;
 			Parameters.CURRENT_GENERATION_ID++;
 
@@ -28,9 +30,9 @@ public class MainClass {
 				System.out.println("~~~~~~~~~~~~~~~" + i + " Population ~~~~~~~~~~~~~~~~");
 				Parameters.CURRENT_CHROMOSOME_ID = 0;
 				Parameters.CURRENT_GENERATION_ID++;
-				TreeGraphView.displayTreeGraph(population.getFittest(), "fittest");
+				
 			}
-
+			TreeGraphView.displayTreeGraph(population.getFittest(), "fittest");
 
 		} catch (Exception e) {
 			System.out.println("Error while executing main");
