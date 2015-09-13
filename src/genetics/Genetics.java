@@ -60,7 +60,7 @@ public class Genetics {
 		for (int i = 1; i < Parameters.POPULATION_SIZE; i++) {
 			if (random.nextInt(100) < Parameters.MUTATION_RATE)
 				try {
-					mutate(Parameters.CURRENT_GENERATION_ID, i);
+					evolvedPopulation.saveChromosomeAt(i, mutate(Parameters.CURRENT_GENERATION_ID, i));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
