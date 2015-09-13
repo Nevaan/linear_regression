@@ -103,6 +103,17 @@ public class MainWindow extends Application {
 		showTree.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
+				TreeGraphView.displayTreeGraph(XMLtoClass.convert((int) slider.getValue() - 1, (int) slider2.getValue() - 1), "Test");
+			}
+		});
+
+		final Button showFittestTree = new Button("Wyswietl drzewo najlepszego osobnika");
+		showFittestTree.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
+		grid.add(showFittestTree, 1, 9);
+		showFittestTree.setDisable(true);
+		showFittestTree.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
 				TreeGraphView.displayTreeGraph(XMLtoClass.convert((int) slider.getValue() - 1,
 						MainClass.bestChromosomes.get((int) slider.getValue() - 1)), "Test");
 			}
@@ -110,7 +121,7 @@ public class MainWindow extends Application {
 
 		final Button showFunction = new Button("Wyswietl funkcje");
 		showFunction.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
-		grid.add(showFunction, 1, 9);
+		grid.add(showFunction, 1, 10);
 		showFunction.setDisable(true);
 		showFunction.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -151,9 +162,9 @@ public class MainWindow extends Application {
 			}
 		});
 
-		final Button showFittest = new Button("Wyswietl najlepszego osobnika");
+		final Button showFittest = new Button("Wyswietl funkcje najlepszego osobnika");
 		showFittest.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
-		grid.add(showFittest, 1, 10);
+		grid.add(showFittest, 1, 11);
 		showFittest.setDisable(true);
 		showFittest.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -207,6 +218,7 @@ public class MainWindow extends Application {
 						showTree.setDisable(false);
 						showFunction.setDisable(false);
 						showFittest.setDisable(false);
+						showFittestTree.setDisable(false);
 						return 0;
 					}
 				};
