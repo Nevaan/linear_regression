@@ -122,8 +122,7 @@ public class MainWindow extends Application {
 		showFittestTree.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				TreeGraphView.displayTreeGraph(XMLtoClass.convert((int) slider.getValue() - 1,
-						MainClass.bestChromosomes.get((int) slider.getValue() - 1)), "Test");
+				TreeGraphView.displayTreeGraph(XMLtoClass.convertFittest((int) slider.getValue() - 1), "Test");
 			}
 		});
 
@@ -211,7 +210,7 @@ public class MainWindow extends Application {
 				stage.show();
 			}
 		});
-		
+
 		final ProgressBar progress = new ProgressBar(0);
 
 
@@ -230,7 +229,7 @@ public class MainWindow extends Application {
 						showFittest.setDisable(true);
 						showFittestTree.setDisable(true);
 						MainClass.main(null);
-										
+
 						Genetics genetics = new Genetics();
 
 						try {
@@ -257,15 +256,15 @@ public class MainWindow extends Application {
 							e.printStackTrace();
 						}
 
-						
-						
+
+
 						showTree.setDisable(false);
 						showFunction.setDisable(false);
 						showFittest.setDisable(false);
 						showFittestTree.setDisable(false);
 						return 0;
 					}
-					
+
 				};
 				progress.progressProperty().unbind();
 				progress.progressProperty().bind(task.progressProperty());
@@ -278,8 +277,8 @@ public class MainWindow extends Application {
 		grid.add(startAlgorithm, 0, 7);
 		grid.add(progress, 1, 7);
 
-		
-		
+
+
 		Scene scene = new Scene(grid, 800, 600);
 		primaryStage.setScene(scene);
 
@@ -291,7 +290,7 @@ public class MainWindow extends Application {
                 System.exit(0);
             }
 });
-		
+
 	}
 
 	public static void main(String[] args) {

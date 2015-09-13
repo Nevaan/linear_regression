@@ -12,7 +12,7 @@ public class Parameters {
 	//Genetics parameters
 	public static final int POPULATION_SIZE = 40;
 	public static final int TOURNAMENT_SIZE = 5;
-	public static final int MUTATION_RATE = 15; // %
+	public static final int MUTATION_RATE = 5; // %
 
 	// XML Conversion parameters
 	public static int CURRENT_CHROMOSOME_ID = 0;
