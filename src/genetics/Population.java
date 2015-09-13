@@ -21,8 +21,7 @@ public class Population {
 	public Population() {
 		population = new ArrayList<TreeNode>();
 	}
-
-	// should be used only once for 0 generation
+	
 	public void initialize() {
 		population = new ArrayList<TreeNode>();
 		QueryXML query = new QueryXML();

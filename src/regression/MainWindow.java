@@ -1,10 +1,17 @@
 package regression;
 
+import treeRepresentation.ClassToXML;
 import treeRepresentation.TreeNode;
 import treeRepresentation.XMLtoClass;
+
+import java.util.ArrayList;
+
+import genetics.Genetics;
+import genetics.Population;
 import genetics.SampleData;
 import graphics.graphs.TreeGraphView;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -28,6 +35,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class MainWindow extends Application {
 
@@ -98,7 +106,7 @@ public class MainWindow extends Application {
 
 		final Button showTree = new Button("Wyswietl drzewo");
 		showTree.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
-		grid.add(showTree, 1, 8);
+		grid.add(showTree, 0, 8);
 		showTree.setDisable(true);
 		showTree.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -109,7 +117,7 @@ public class MainWindow extends Application {
 
 		final Button showFittestTree = new Button("Wyswietl drzewo najlepszego osobnika");
 		showFittestTree.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
-		grid.add(showFittestTree, 1, 9);
+		grid.add(showFittestTree, 1, 8);
 		showFittestTree.setDisable(true);
 		showFittestTree.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -121,7 +129,7 @@ public class MainWindow extends Application {
 
 		final Button showFunction = new Button("Wyswietl funkcje");
 		showFunction.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
-		grid.add(showFunction, 1, 10);
+		grid.add(showFunction, 0, 9);
 		showFunction.setDisable(true);
 		showFunction.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -164,7 +172,7 @@ public class MainWindow extends Application {
 
 		final Button showFittest = new Button("Wyswietl funkcje najlepszego osobnika");
 		showFittest.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
-		grid.add(showFittest, 1, 11);
+		grid.add(showFittest, 1, 9);
 		showFittest.setDisable(true);
 		showFittest.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -203,6 +211,9 @@ public class MainWindow extends Application {
 				stage.show();
 			}
 		});
+		
+		final ProgressBar progress = new ProgressBar(0);
+
 
 		Button startAlgorithm = new Button("Start");
 		startAlgorithm.setStyle("-fx-font: 22 arial; -fx-base: #b6e7c9;");
@@ -213,15 +224,51 @@ public class MainWindow extends Application {
 				Task<Integer> task = new Task<Integer>() {
 					@Override
 					protected Integer call() {
+
 						showTree.setDisable(true);
+						showFunction.setDisable(true);
+						showFittest.setDisable(true);
+						showFittestTree.setDisable(true);
 						MainClass.main(null);
+										
+						Genetics genetics = new Genetics();
+
+						try {
+							Population population = new Population();
+							population.initialize();
+							ClassToXML.convertFittest(population.getFittest(), 0);
+							//SampleData dataInitializer = new SampleData();
+							regression.Parameters.CURRENT_CHROMOSOME_ID = 0;
+							regression.Parameters.CURRENT_GENERATION_ID++;
+
+							for (int i = 0; i < regression.Parameters.GENERATIONS_AMOUNT; i++) {
+								population = genetics.evolve(population);
+								ClassToXML.convertFittest(population.getFittest(), regression.Parameters.CURRENT_GENERATION_ID);
+								System.out.println("~~~~~~~~~~~~~~~" + i + " Population ~~~~~~~~~~~~~~~~");
+								regression.Parameters.CURRENT_CHROMOSOME_ID = 0;
+								regression.Parameters.CURRENT_GENERATION_ID++;
+								MainClass.bestChromosomes.add(i, population.getPopulation().indexOf(population.getFittest()));
+								updateProgress(regression.Parameters.CURRENT_GENERATION_ID + 1, regression.Parameters.GENERATIONS_AMOUNT);
+
+							}
+
+						} catch (Exception e) {
+							System.out.println("Error while executing main");
+							e.printStackTrace();
+						}
+
+						
+						
 						showTree.setDisable(false);
 						showFunction.setDisable(false);
 						showFittest.setDisable(false);
 						showFittestTree.setDisable(false);
 						return 0;
 					}
+					
 				};
+				progress.progressProperty().unbind();
+				progress.progressProperty().bind(task.progressProperty());
 				new Thread(task).start();
 
 			}
@@ -229,11 +276,22 @@ public class MainWindow extends Application {
 		});
 
 		grid.add(startAlgorithm, 0, 7);
+		grid.add(progress, 1, 7);
 
+		
+		
 		Scene scene = new Scene(grid, 800, 600);
 		primaryStage.setScene(scene);
 
 		primaryStage.show();
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+});
+		
 	}
 
 	public static void main(String[] args) {
