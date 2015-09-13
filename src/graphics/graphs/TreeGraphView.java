@@ -12,8 +12,11 @@ import org.apache.commons.collections15.Transformer;
 
 import edu.uci.ics.jung.algorithms.layout.TreeLayout;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
+import edu.uci.ics.jung.visualization.control.DefaultModalGraphMouse;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import edu.uci.ics.jung.visualization.renderers.Renderer;
+import edu.uci.ics.jung.visualization.control.*;
 import treeElement.function.Function;
 import treeElement.terminal.Terminal;
 import treeRepresentation.Edge;
@@ -25,7 +28,7 @@ public class TreeGraphView {
 
 		TreeGraphGenerator treeGraphGenerator = new TreeGraphGenerator(root);
 
-		BasicVisualizationServer<TreeNode, Edge> vv = new BasicVisualizationServer<TreeNode, Edge>
+		VisualizationViewer<TreeNode, Edge> vv = new VisualizationViewer<TreeNode, Edge>
 			(new TreeLayout<TreeNode, Edge>(treeGraphGenerator.getTreeGraph()), new Dimension(1100, 640));
 		vv.setPreferredSize(new Dimension(1100, 640));
 
@@ -40,6 +43,10 @@ public class TreeGraphView {
 		vv.getRenderer().getVertexLabelRenderer()
 			.setPosition(Renderer.VertexLabel.Position.CNTR);
 
+        DefaultModalGraphMouse gm = new DefaultModalGraphMouse();
+        gm.setMode(ModalGraphMouse.Mode.TRANSFORMING);
+        vv.setGraphMouse(gm);
+		
 		JFrame frame = new JFrame(title);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().add(vv);
