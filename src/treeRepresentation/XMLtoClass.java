@@ -20,7 +20,6 @@ import treeElement.function.Substract;
 import treeElement.terminal.Constant;
 import treeElement.terminal.Variable;
 
-
 public class XMLtoClass {
 
 	public static TreeNode convert(int generation, int fileId) {
@@ -28,8 +27,10 @@ public class XMLtoClass {
 		try {
 
 			File currentDir = new File(".");
-			File file = new File(currentDir + "/xml/Generation"+ generation + "Chromosome"+ String.valueOf(fileId) + ".xml");
-			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
+			File file = new File(
+					currentDir + "/xml/Generation" + generation + "Chromosome" + String.valueOf(fileId) + ".xml");
+			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class,
+					Constant.class, Variable.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			TreeNode treeNode = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(file));
@@ -45,15 +46,17 @@ public class XMLtoClass {
 
 	}
 
-	public static TreeNode getSubtree(int chromosome){
+	public static TreeNode convertFittest(int generation) {
+
 		try {
+
 			File currentDir = new File(".");
-			File file = new File(currentDir + "/xml/RandomSubtree" + chromosome + ".xml");
-			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
+			File file = new File(currentDir + "/xml/Generation" + generation + "Fittest.xml");
+			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class,
+					Constant.class, Variable.class);
 
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			TreeNode treeNode = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(file));
-			System.out.println(treeNode);
 
 			return treeNode;
 
@@ -63,27 +66,7 @@ public class XMLtoClass {
 		}
 
 		return null;
-	}
 
-	public static TreeNode getReplaced(){
-		try {
-			File currentDir = new File(".");
-			File file = new File(currentDir + "/xml/replaced.xml");
-			JAXBContext jaxbContext = JAXBContext.newInstance(Add.class, Divide.class, Multiply.class, Substract.class, Constant.class, Variable.class);
-
-			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			TreeNode treeNode = (TreeNode) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(file));
-			System.out.println(treeNode);
-
-			return treeNode;
-
-		} catch (JAXBException e) {
-			System.out.println("ERROR while unmarshalling in convert()");
-			e.printStackTrace();
-		}
-
-		return null;
 	}
 
 }
-

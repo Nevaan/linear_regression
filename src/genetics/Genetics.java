@@ -65,11 +65,6 @@ public class Genetics {
 					e.printStackTrace();
 				}
 		}
-		SampleData.dataF.clear();
-		for (int i = 0; i < evolvedPopulation.getPopulationSize(); i++) {
-			for (int k = 0; k < SampleData.dataX.size(); k++)
-				SampleData.dataF.add(evolvedPopulation.getChromosomeAt(i).getValue(k));
-		}
 		return evolvedPopulation;
 	}
 
