@@ -1,20 +1,19 @@
 package com.losek.regression.treeRepresentation;
 
+import com.losek.regression.regression.Chromosome;
+import com.losek.regression.treeElement.function.Add;
+import com.losek.regression.treeElement.function.Divide;
+import com.losek.regression.treeElement.function.Multiply;
+import com.losek.regression.treeElement.function.Substract;
+import com.losek.regression.treeElement.terminal.Constant;
+import com.losek.regression.treeElement.terminal.Terminal;
+import com.losek.regression.treeElement.terminal.Variable;
+
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-
-import regression.Chromosome;
-import treeElement.function.Add;
-import treeElement.function.Divide;
-import treeElement.function.Function;
-import treeElement.function.Multiply;
-import treeElement.function.Substract;
-import treeElement.terminal.Constant;
-import treeElement.terminal.Terminal;
-import treeElement.terminal.Variable;
+import java.util.function.Function;
 
 public class TreeNode implements Iterable<TreeNode> {
 

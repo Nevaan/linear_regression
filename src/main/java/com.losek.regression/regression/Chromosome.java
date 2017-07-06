@@ -1,13 +1,11 @@
 package com.losek.regression.regression;
 
-import java.util.Random;
-
-import targetRepresentation.Cartesian;
-import targetRepresentation.GPParameters;
-import treeElement.function.Function;
-import treeElement.terminal.Terminal;
-import treeRepresentation.TreeGenerator;
-import treeRepresentation.TreeNode;
+import com.losek.regression.targetRepresentation.Cartesian;
+import com.losek.regression.targetRepresentation.GPParameters;
+import com.losek.regression.treeElement.function.Function;
+import com.losek.regression.treeElement.terminal.Terminal;
+import com.losek.regression.treeRepresentation.TreeGenerator;
+import com.losek.regression.treeRepresentation.TreeNode;
 
 public class Chromosome {
 

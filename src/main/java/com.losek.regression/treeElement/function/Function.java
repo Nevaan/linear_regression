@@ -1,9 +1,9 @@
 package com.losek.regression.treeElement.function;
 
-import java.util.Random;
+import com.losek.regression.treeRepresentation.Data;
+import com.losek.regression.treeRepresentation.TreeNode;
 
-import treeRepresentation.Data;
-import treeRepresentation.TreeNode;
+import java.util.Random;
 
 public abstract class Function extends TreeNode {
 

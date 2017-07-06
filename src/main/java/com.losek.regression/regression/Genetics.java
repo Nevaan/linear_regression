@@ -1,11 +1,10 @@
 package com.losek.regression.regression;
 
-import java.util.Random;
+import com.losek.regression.targetRepresentation.GPParameters;
+import com.losek.regression.treeRepresentation.Data;
+import com.losek.regression.treeRepresentation.TreeNode;
 
-import graphics.graphs.TreeGraphView;
-import targetRepresentation.GPParameters;
-import treeRepresentation.Data;
-import treeRepresentation.TreeNode;
+import java.util.Random;
 
 public class Genetics {
 
@@ -47,11 +46,6 @@ public class Genetics {
 		Random r = new Random();
 		TreeNode child = father.getSchema().copyTree();
 		TreeNode m = mother.getSchema().copyTree();
-		TreeGraphView.displayTreeGraph(child, "Init Child");
-		TreeGraphView.displayTreeGraph(m, "Mother");
-		child.chooseRandomNodeMINE(child).replaceChild(r.nextInt(2),m);
-		//child.chooseRandomNodeNEW(child,true,0,0).replaceChild(r.nextInt(2),m);
-		TreeGraphView.displayTreeGraph(child, "Swapped");
 
 		return new Chromosome(child);
 	}

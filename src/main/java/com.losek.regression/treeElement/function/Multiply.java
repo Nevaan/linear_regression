@@ -1,9 +1,10 @@
 package com.losek.regression.treeElement.function;
 
-import java.util.LinkedList;
 
-import treeRepresentation.Data;
-import treeRepresentation.TreeNode;
+import com.losek.regression.treeRepresentation.Data;
+import com.losek.regression.treeRepresentation.TreeNode;
+
+import java.util.LinkedList;
 
 public class Multiply extends Function {
 

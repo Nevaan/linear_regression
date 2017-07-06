@@ -1,13 +1,14 @@
 package com.losek.regression.treeRepresentation;
 
-import java.util.Random;
 
-import treeElement.function.Add;
-import treeElement.function.Divide;
-import treeElement.function.Multiply;
-import treeElement.function.Substract;
-import treeElement.terminal.Constant;
-import treeElement.terminal.Variable;
+import com.losek.regression.treeElement.function.Add;
+import com.losek.regression.treeElement.function.Divide;
+import com.losek.regression.treeElement.function.Multiply;
+import com.losek.regression.treeElement.function.Substract;
+import com.losek.regression.treeElement.terminal.Constant;
+import com.losek.regression.treeElement.terminal.Variable;
+
+import java.util.Random;
 
 public class NodeFactory {
 

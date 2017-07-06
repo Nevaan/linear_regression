@@ -1,10 +1,9 @@
 package com.losek.regression.regression;
 
+import com.losek.regression.targetRepresentation.GPParameters;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import targetRepresentation.GPParameters;
-import treeRepresentation.TreeGenerator;
 
 public class Population {
 

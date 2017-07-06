@@ -1,10 +1,11 @@
 package com.losek.regression.treeElement.function;
 
+import com.losek.regression.treeRepresentation.Data;
+import com.losek.regression.treeRepresentation.TreeNode;
+
 import java.util.LinkedList;
 
-import treeElement.terminal.Terminal;
-import treeRepresentation.Data;
-import treeRepresentation.TreeNode;
+import static com.losek.regression.treeRepresentation.TreeNode.IDENTIFIER;
 
 public class Add extends Function {
 

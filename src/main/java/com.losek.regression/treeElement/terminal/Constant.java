@@ -1,10 +1,13 @@
 package com.losek.regression.treeElement.terminal;
 
+
+import com.losek.regression.treeRepresentation.Data;
+import com.losek.regression.treeRepresentation.TreeNode;
+
 import java.util.LinkedList;
 import java.util.Random;
 
-import treeRepresentation.Data;
-import treeRepresentation.TreeNode;
+import static com.losek.regression.treeRepresentation.TreeNode.IDENTIFIER;
 
 public class Constant extends Terminal {
 

@@ -1,9 +1,9 @@
 package com.losek.regression.treeElement.function;
 
-import java.util.LinkedList;
+import com.losek.regression.treeRepresentation.Data;
+import com.losek.regression.treeRepresentation.TreeNode;
 
-import treeRepresentation.Data;
-import treeRepresentation.TreeNode;
+import java.util.LinkedList;
 
 public class Substract extends Function {
 

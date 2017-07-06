@@ -1,7 +1,8 @@
 package com.losek.regression.treeElement.terminal;
 
-import treeRepresentation.Data;
-import treeRepresentation.TreeNode;
+
+import com.losek.regression.treeRepresentation.Data;
+import com.losek.regression.treeRepresentation.TreeNode;
 
 public abstract class Terminal extends TreeNode {
 
