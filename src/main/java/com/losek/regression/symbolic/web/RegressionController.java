@@ -1,4 +1,4 @@
-package com.losek.regression.web;
+package com.losek.regression.symbolic.web;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +10,7 @@ import java.util.Map;
 @RequestMapping("/")
 public class RegressionController {
 
-    @RequestMapping(path="index")
+    @RequestMapping(path = "index")
     public String index() {
         return "Hello regression!";
     }

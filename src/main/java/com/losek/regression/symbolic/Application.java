@@ -1,4 +1,4 @@
-package com.losek.regression;
+package com.losek.regression.symbolic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
