@@ -27,7 +27,7 @@ class ExpressionTreeTest extends GroovyTestCase {
 
     }
 
-    void testInorder() {
+    void testPrettyPrints() {
         Node root = new Node('+')
         Node left1 = new Node('*')
         Node right1 = new Node('4')
@@ -39,12 +39,28 @@ class ExpressionTreeTest extends GroovyTestCase {
         left1.left = left21
         left1.right = left22
 
-        def result = tree.inorder(root)
+        def result = tree.prettyPrint(root)
         assert result as String == '10*3+4'
     }
 
     void testConstructTree() {
         def expression = ['a', 'b', '+', 'e', 'f', '*', 'g', '*','-']
-        assert 'a+b-e*f*g' == tree.inorder(tree.constructTree(expression))
+        assert 'a+b-e*f*g' == tree.prettyPrint(tree.constructTree(expression))
     }
+
+    void testEvaluate() {
+        Node root = new Node('+')
+        Node left1 = new Node('*')
+        Node right1 = new Node('4')
+        Node left21 = new Node('10')
+        Node left22 = new Node('3')
+
+        root.left = left1
+        root.right = right1
+        left1.left = left21
+        left1.right = left22
+
+        assert tree.evaluate(root) == 34.0
+    }
+
 }

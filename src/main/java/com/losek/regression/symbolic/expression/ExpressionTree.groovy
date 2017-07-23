@@ -6,47 +6,61 @@ class ExpressionTree {
         c in ['+', '-', '*', '/','^']
     }
 
-    String inorder(Node t) {
-        t ? """${inorder(t.left)}${t.value}${inorder(t.right)}""" : ""
+    String prettyPrint(Node t) {
+        t ? """${prettyPrint(t.left)}${t.value}${prettyPrint(t.right)}""" : ""
     }
 
     Node constructTree(ArrayList<String> postfix) {
         Stack<Node> st = new Stack()
         Node t, t1, t2
 
-        // Traverse through every character of
-        // input expression
-        for (int i = 0; i < postfix.size(); i++) {
-
-            // If operand, simply push into stack
-            if (!isOperator(postfix[i])) {
-                t = new Node(postfix[i])
+        postfix.each { symbol ->
+            if(!isOperator(symbol)) {
+                t = new Node(symbol)
                 st.push(t)
-            } else // operator
-            {
-                t = new Node(postfix[i])
+            } else {
+                t = new Node(symbol)
 
-                // Pop two top nodes
-                // Store top
-                t1 = st.pop()      // Remove top
+                t1 = st.pop()
                 t2 = st.pop()
 
-                //  make them children
                 t.right = t1
                 t.left = t2
 
-                // System.out.println(t1 + "" + t2);
-                // Add this subexpression to stack
                 st.push(t)
             }
         }
-
-        //  only element will be root of expression
-        // tree
         t = st.peek()
         st.pop()
 
-        return t
+        t
+    }
+
+    Double evaluate(Node tree) {
+        if(tree) {
+            if (!isOperator(tree.value)) {
+                Double.parseDouble(tree.value)
+            } else {
+                def leftSubtree = evaluate(tree.left)
+                def rightSubtree = evaluate(tree.right)
+                applyOperator(tree.value, leftSubtree, rightSubtree)
+            }
+        }
+    }
+
+    Double applyOperator(String operator, Double leftVal, Double rightVal) {
+        switch(operator) {
+            case "+":
+                return leftVal + rightVal
+            case "-":
+                return leftVal - rightVal
+            case "*":
+                return leftVal * rightVal
+            case "/":
+                return leftVal / rightVal
+            case "^":
+                return Math.pow(leftVal,rightVal)
+        }
     }
 
 }
