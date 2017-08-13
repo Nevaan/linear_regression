@@ -45,6 +45,7 @@ class ExpressionTreeTest extends GroovyTestCase {
 
     void testConstructTree() {
         def expression = ['a', 'b', '+', 'e', 'f', '*', 'g', '*','-']
+
         assert 'a+b-e*f*g' == tree.prettyPrint(tree.constructTree(expression))
     }
 

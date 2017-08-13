@@ -1,8 +1,9 @@
 package com.losek.regression.symbolic.web;
 
-import com.losek.regression.symbolic.expression.ExpressionTree;
+import com.losek.regression.symbolic.genetics.Population;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -16,9 +17,11 @@ public class RegressionController {
         return "Hello regression!";
     }
 
-    @RequestMapping(path = "regression", consumes = "application/json", produces = "application/json")
+    @RequestMapping(method = RequestMethod.POST, path = "regression", consumes = "application/json", produces = "application/json")
     public Map<Double, Double> countSymbolicRegression(@RequestBody Map<Double, Double> dataset) {
-        ExpressionTree d;
+
+        Population population = new Population();
+
         return dataset;
     }
 

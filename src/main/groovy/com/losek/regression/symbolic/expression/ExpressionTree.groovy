@@ -2,15 +2,15 @@ package com.losek.regression.symbolic.expression
 
 class ExpressionTree {
 
-    boolean isOperator(String c) {
+    static boolean isOperator(String c) {
         c in ['+', '-', '*', '/','^']
     }
 
-    String prettyPrint(Node t) {
+    static String prettyPrint(Node t) {
         t ? """${prettyPrint(t.left)}${t.value}${prettyPrint(t.right)}""" : ""
     }
 
-    Node constructTree(ArrayList<String> postfix) {
+    static Node constructTree(ArrayList<String> postfix) {
         Stack<Node> st = new Stack()
         Node t, t1, t2
 
@@ -36,7 +36,7 @@ class ExpressionTree {
         t
     }
 
-    Double evaluate(Node tree) {
+    static Double evaluate(Node tree) {
         if(tree) {
             if (!isOperator(tree.value)) {
                 Double.parseDouble(tree.value)
@@ -48,7 +48,7 @@ class ExpressionTree {
         }
     }
 
-    Double applyOperator(String operator, Double leftVal, Double rightVal) {
+    static Double applyOperator(String operator, Double leftVal, Double rightVal) {
         switch(operator) {
             case "+":
                 return leftVal + rightVal
